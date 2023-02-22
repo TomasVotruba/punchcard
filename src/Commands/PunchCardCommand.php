@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace TomasVotruba\PunchCard\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class PunchCardCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'punchcard';
 
     public $description = 'My command';
 
