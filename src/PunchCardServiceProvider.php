@@ -18,8 +18,6 @@ class PunchCardServiceProvider extends PackageServiceProvider
         $package
             ->name('punchcard')
             ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_punchcard_table')
             ->hasCommand(PunchCardCommand::class);
     }
 }
