@@ -17,7 +17,9 @@
         "nunomaduro/larastan": "^2.0.1",
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan-phpunit": "^1.0",
-        "phpunit/phpunit": "^10.0"
+        "phpunit/phpunit": "^10.0",
+        "symplify/easy-ci": "11.2.0.72",
+        "symplify/easy-coding-standard": "^11.2"
     },
     "autoload": {
         "psr-4": {
@@ -33,7 +35,10 @@
         "phpstan": "php vendor/bin/phpstan"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
     },
     "extra": {
         "laravel": {
