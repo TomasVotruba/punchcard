@@ -9,6 +9,9 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Exceptions\Handler;
 use Illuminate\Foundation\Http\Kernel;
 
+/**
+ * @api
+ */
 final class PunchcardKernel
 {
     public function bootApplication(): void

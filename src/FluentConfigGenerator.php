@@ -40,6 +40,7 @@ final class FluentConfigGenerator
 
         // create basic class from this one :)
         $class = $this->configClassFactory->createClassFromParameterNames($parametersAndTypes, $fileName);
+
         return $this->phpNodesPrinter->prettyPrintFile([$class]) . PHP_EOL;
     }
 

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace TomasVotruba\PunchCard\PhpParser;
 
-use Nette\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\Expr\Array_;
+use PhpParser\Node\Stmt;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\PrettyPrinter\Standard;
 
@@ -52,28 +52,12 @@ final class PhpNodesPrinter extends Standard
     }
 
     /**
-     * @param mixed[] $nodes
-     * @param mixed[] $origNodes
-     * @param int|null $fixup
+     * @param Stmt[] $stmts
      */
-    protected function pArray(
-        array $nodes,
-        array $origNodes,
-        int &$pos,
-        int $indentAdjustment,
-        string $parentNodeType,
-        string $subNodeName,
-        $fixup
-    ): ?string {
-        $content = parent::pArray($nodes, $origNodes, $pos, $indentAdjustment, $parentNodeType, $subNodeName, $fixup);
+    public function prettyPrintFile(array $stmts): string
+    {
+        $content = parent::prettyPrintFile($stmts);
 
-        if ($content === null) {
-            return $content;
-        }
-
-        dump(str($content)->replaceMatches($content, self::EXTRA_SPACE_BEFORE_NOP_REGEX)->value());
-        die;
-
-        return str($content)->replaceMatches($content, self::EXTRA_SPACE_BEFORE_NOP_REGEX)->value();
+        return str($content)->replaceMatches(self::EXTRA_SPACE_BEFORE_NOP_REGEX, '')->value();
     }
 }

@@ -1,12 +1,6 @@
 <?php
 
-return [
-    'paths' => [__DIR__ . '/../resources/views'],
-];
-
-?>
------
-<?php
+namespace TomasVotruba\PunchCard;
 
 final class ViewConfig
 {
@@ -37,3 +31,4 @@ final class ViewConfig
         return ['paths' => $this->paths];
     }
 }
+

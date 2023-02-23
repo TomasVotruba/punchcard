@@ -4,19 +4,18 @@ declare(strict_types=1);
 
 namespace TomasVotruba\PunchCard\NodeFactory;
 
-use PhpParser\Builder\Method;
-use PhpParser\Builder\Property;
+use PhpParser\Comment\Doc;
 use PhpParser\Node\Expr\Array_;
-use PhpParser\Node\Expr\Assign;
 use PhpParser\Node\Expr\New_;
-use PhpParser\Node\Expr\PropertyFetch;
-use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Identifier;
 use PhpParser\Node\Name;
 use PhpParser\Node\Param;
+use PhpParser\Node\Stmt;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Nop;
+use PhpParser\Node\Stmt\Property;
+use PhpParser\Node\Stmt\PropertyProperty;
 use PhpParser\Node\Stmt\Return_;
 use TomasVotruba\PunchCard\Enum\ScalarType;
 use TomasVotruba\PunchCard\ValueObject\ParameterAndType;
@@ -24,6 +23,12 @@ use Webmozart\Assert\Assert;
 
 final class ConfigClassFactory
 {
+    public function __construct(
+        private readonly ToArrayClassMethodFactory $toArrayClassMethodFactory,
+        private readonly SetterClassMethodFactory $setterClassMethodFactory,
+    ) {
+    }
+
     /**
      * @param ParameterAndType[] $parameterAndTypes
      */
@@ -39,30 +44,38 @@ final class ConfigClassFactory
         // add static "create" method
         $classMethod = $this->createCreateStaticClassMethod();
 
-        $class->stmts = array_merge($properties, [new Nop()], [$classMethod], $classMethods);
+        $toArrayClassMethod = $this->toArrayClassMethodFactory->create($parameterAndTypes);
+
+        $classStmts = array_merge($properties, [$classMethod], $classMethods, [$toArrayClassMethod]);
+
+        // separate by newline to make it standard out of the box
+        $class->stmts = $this->separateStmtsByNewline($classStmts);
 
         return $class;
     }
 
     /**
      * @param ParameterAndType[] $parametersAndTypes
-     * @return \PhpParser\Node\Stmt\Property[]
+     * @return Property[]
      */
     private function createProperties(array $parametersAndTypes): array
     {
         $properties = [];
 
         foreach ($parametersAndTypes as $parameterAndType) {
-            $propertyBuilder = new Property($parameterAndType->getName());
-            $propertyBuilder->makePrivate();
-            $propertyBuilder->setType(new Identifier($parameterAndType->getType()));
+            $propertyProperty = new PropertyProperty($parameterAndType->getName());
+
+            $property = new Property(Class_::MODIFIER_PRIVATE, [$propertyProperty]);
+            $property->type = new Identifier($parameterAndType->getType());
 
             if ($parameterAndType->getType() === ScalarType::ARRAY) {
-                $propertyBuilder->setDefault(new Array_([]));
+                $property->props[0]->default = new Array_([]);
+
+                // so far just string[], improve later on with types
+                $property->setDocComment(new Doc("/**\n * @var string[]\n */"));
             }
 
-            // @todo types and defaults
-            $properties[] = $propertyBuilder->getNode();
+            $properties[] = $property;
         }
 
         return $properties;
@@ -77,22 +90,7 @@ final class ConfigClassFactory
         $classMethods = [];
 
         foreach ($parametersAndTypes as $parameterAndType) {
-            $methodBuilder = new Method($parameterAndType->getName());
-            $methodBuilder->makePublic();
-            $methodBuilder->setReturnType(new Name('self'));
-
-            $param = new Param(new Variable($parameterAndType->getName()));
-            $param->type = new Identifier($parameterAndType->getType());
-            $methodBuilder->addParam($param);
-
-            $propertyFetch = new PropertyFetch(new Variable('this'), $parameterAndType->getName());
-            $propertyAssign = new Assign($propertyFetch, new Variable($parameterAndType->getName()));
-
-            $returnThis = new Return_(new Variable('this'));
-
-            $methodBuilder->addStmts([$propertyAssign, $returnThis]);
-
-            $classMethods[] = $methodBuilder->getNode();
+            $classMethods[] = $this->setterClassMethodFactory->create($parameterAndType);
         }
 
         return $classMethods;
@@ -123,5 +121,23 @@ final class ConfigClassFactory
         $class->flags |= Class_::MODIFIER_FINAL;
 
         return $class;
+    }
+
+    /**
+     * @param Stmt[] $stmts
+     * @return Stmt[]
+     */
+    private function separateStmtsByNewline(array $stmts): array
+    {
+        $separatedStmts = [];
+
+        foreach ($stmts as $stmt) {
+            $separatedStmts[] = $stmt;
+            $separatedStmts[] = new Nop();
+        }
+
+        unset($separatedStmts[array_key_last($separatedStmts)]);
+
+        return $separatedStmts;
     }
 }
