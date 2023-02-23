@@ -4,29 +4,19 @@ declare(strict_types=1);
 
 namespace TomasVotruba\PunchCard\Kernel;
 
-use Illuminate\Contracts\Debug\ExceptionHandler;
-use Illuminate\Foundation\Application;
-use Illuminate\Foundation\Exceptions\Handler;
-use Illuminate\Foundation\Http\Kernel;
+use Illuminate\Foundation\Console\Kernel;
 
-/**
- * @api
- */
-final class PunchcardKernel
+final class PunchcardKernel extends Kernel
 {
-    public function bootApplication(): void
-    {
-        // provide project base path
-        $application = new Application(__DIR__ . '/../..');
-
-        // provide base exception handler - @todo how to minimize this one?
-        $application->singleton(
-            ExceptionHandler::class,
-            Handler::class,
-        );
-
-        /** @var Kernel $kernel */
-        $kernel = $application->make(Kernel::class);
-        $kernel->bootstrap();
-    }
+    ///**
+    // * @param InputInterface $input
+    // * @param OutputInterface $output
+    // */
+    //public function handle($input, $output = null): int
+    //{
+    //    $this->app->instance(InputInterface::class, $input);
+    //    $this->app->instance(OutputInterface::class, $output);
+    //
+    //    return parent::handle($input, $output);
+    //}
 }

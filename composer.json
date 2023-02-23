@@ -26,7 +26,7 @@
     },
     "autoload": {
         "psr-4": {
-            "TomasVotruba\\PunchCard\\": "src"
+            "TomasVotruba\\PunchCard\\": ["app", "src"]
         }
     },
     "autoload-dev": {

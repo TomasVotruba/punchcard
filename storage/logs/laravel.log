@@ -1,0 +1,421 @@
+[2023-02-23 23:52:39] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [] is not defined. at /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php:210)
+[stacktrace]
+#0 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(135): Illuminate\\Log\\LogManager->resolve()
+#1 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(122): Illuminate\\Log\\LogManager->get()
+#2 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(645): Illuminate\\Log\\LogManager->driver()
+#3 /var/www/punchcard/vendor/laravel-zero/foundation/src/Illuminate/Foundation/Exceptions/Handler.php(274): Illuminate\\Log\\LogManager->error()
+#4 /var/www/punchcard/vendor/nunomaduro/collision/src/Adapters/Laravel/ExceptionHandler.php(46): Illuminate\\Foundation\\Exceptions\\Handler->report()
+#5 /var/www/punchcard/vendor/laravel-zero/foundation/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(182): NunoMaduro\\Collision\\Adapters\\Laravel\\ExceptionHandler->report()
+#6 /var/www/punchcard/vendor/laravel-zero/foundation/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(250): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleException()
+#7 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}()
+#8 {main}
+"} 
+[2023-02-23 23:52:39] laravel.ERROR: Target [Illuminate\Contracts\Console\Kernel] is not instantiable. {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Target [Illuminate\\Contracts\\Console\\Kernel] is not instantiable. at /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php:1103)
+[stacktrace]
+#0 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(898): Illuminate\\Container\\Container->notInstantiable()
+#1 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(770): Illuminate\\Container\\Container->build()
+#2 /var/www/punchcard/vendor/laravel-zero/foundation/src/Illuminate/Foundation/Application.php(941): Illuminate\\Container\\Container->resolve()
+#3 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(706): Illuminate\\Foundation\\Application->resolve()
+#4 /var/www/punchcard/vendor/laravel-zero/foundation/src/Illuminate/Foundation/Application.php(926): Illuminate\\Container\\Container->make()
+#5 /var/www/punchcard/bin/punchcard.php(14): Illuminate\\Foundation\\Application->make()
+#6 {main}
+"} 
+[2023-02-23 23:53:40] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [] is not defined. at /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php:210)
+[stacktrace]
+#0 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(135): Illuminate\\Log\\LogManager->resolve()
+#1 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(122): Illuminate\\Log\\LogManager->get()
+#2 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(645): Illuminate\\Log\\LogManager->driver()
+#3 /var/www/punchcard/vendor/laravel-zero/foundation/src/Illuminate/Foundation/Exceptions/Handler.php(274): Illuminate\\Log\\LogManager->error()
+#4 /var/www/punchcard/vendor/nunomaduro/collision/src/Adapters/Laravel/ExceptionHandler.php(46): Illuminate\\Foundation\\Exceptions\\Handler->report()
+#5 /var/www/punchcard/vendor/laravel-zero/foundation/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(182): NunoMaduro\\Collision\\Adapters\\Laravel\\ExceptionHandler->report()
+#6 /var/www/punchcard/vendor/laravel-zero/foundation/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(250): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleException()
+#7 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}()
+#8 {main}
+"} 
+[2023-02-23 23:53:40] laravel.ERROR: Target [Illuminate\Contracts\Console\Kernel] is not instantiable. {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Target [Illuminate\\Contracts\\Console\\Kernel] is not instantiable. at /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php:1103)
+[stacktrace]
+#0 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(898): Illuminate\\Container\\Container->notInstantiable()
+#1 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(770): Illuminate\\Container\\Container->build()
+#2 /var/www/punchcard/vendor/laravel-zero/foundation/src/Illuminate/Foundation/Application.php(941): Illuminate\\Container\\Container->resolve()
+#3 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(706): Illuminate\\Foundation\\Application->resolve()
+#4 /var/www/punchcard/vendor/laravel-zero/foundation/src/Illuminate/Foundation/Application.php(926): Illuminate\\Container\\Container->make()
+#5 /var/www/punchcard/bin/punchcard.php(14): Illuminate\\Foundation\\Application->make()
+#6 {main}
+"} 
+[2023-02-23 23:53:50] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [] is not defined. at /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php:210)
+[stacktrace]
+#0 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(135): Illuminate\\Log\\LogManager->resolve()
+#1 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(122): Illuminate\\Log\\LogManager->get()
+#2 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(645): Illuminate\\Log\\LogManager->driver()
+#3 /var/www/punchcard/vendor/laravel-zero/foundation/src/Illuminate/Foundation/Exceptions/Handler.php(274): Illuminate\\Log\\LogManager->error()
+#4 /var/www/punchcard/vendor/nunomaduro/collision/src/Adapters/Laravel/ExceptionHandler.php(46): Illuminate\\Foundation\\Exceptions\\Handler->report()
+#5 /var/www/punchcard/vendor/laravel-zero/foundation/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(182): NunoMaduro\\Collision\\Adapters\\Laravel\\ExceptionHandler->report()
+#6 /var/www/punchcard/vendor/laravel-zero/foundation/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(250): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleException()
+#7 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}()
+#8 {main}
+"} 
+[2023-02-23 23:53:50] laravel.ERROR: Target [Illuminate\Contracts\Console\Kernel] is not instantiable. {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Target [Illuminate\\Contracts\\Console\\Kernel] is not instantiable. at /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php:1103)
+[stacktrace]
+#0 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(898): Illuminate\\Container\\Container->notInstantiable()
+#1 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(770): Illuminate\\Container\\Container->build()
+#2 /var/www/punchcard/vendor/laravel-zero/foundation/src/Illuminate/Foundation/Application.php(941): Illuminate\\Container\\Container->resolve()
+#3 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(706): Illuminate\\Foundation\\Application->resolve()
+#4 /var/www/punchcard/vendor/laravel-zero/foundation/src/Illuminate/Foundation/Application.php(926): Illuminate\\Container\\Container->make()
+#5 /var/www/punchcard/bin/punchcard.php(14): Illuminate\\Foundation\\Application->make()
+#6 {main}
+"} 
+[2023-02-23 23:59:18] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [] is not defined. at /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php:210)
+[stacktrace]
+#0 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(135): Illuminate\\Log\\LogManager->resolve()
+#1 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(122): Illuminate\\Log\\LogManager->get()
+#2 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(645): Illuminate\\Log\\LogManager->driver()
+#3 /var/www/punchcard/vendor/laravel-zero/foundation/src/Illuminate/Foundation/Exceptions/Handler.php(274): Illuminate\\Log\\LogManager->error()
+#4 /var/www/punchcard/vendor/nunomaduro/collision/src/Adapters/Laravel/ExceptionHandler.php(46): Illuminate\\Foundation\\Exceptions\\Handler->report()
+#5 /var/www/punchcard/vendor/laravel-zero/foundation/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(182): NunoMaduro\\Collision\\Adapters\\Laravel\\ExceptionHandler->report()
+#6 /var/www/punchcard/vendor/laravel-zero/foundation/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(250): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleException()
+#7 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}()
+#8 {main}
+"} 
+[2023-02-23 23:59:18] laravel.ERROR: Method Illuminate\Foundation\Application::getName does not exist. {"exception":"[object] (BadMethodCallException(code: 0): Method Illuminate\\Foundation\\Application::getName does not exist. at /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Macroable/Traits/Macroable.php:113)
+[stacktrace]
+#0 /var/www/punchcard/vendor/laravel-zero/framework/src/Kernel.php(125): Illuminate\\Foundation\\Application->__call()
+#1 /var/www/punchcard/vendor/laravel-zero/framework/src/Kernel.php(94): LaravelZero\\Framework\\Kernel->ensureDefaultCommand()
+#2 /var/www/punchcard/bin/punchcard.php(17): LaravelZero\\Framework\\Kernel->handle()
+#3 {main}
+"} 
+[2023-02-24 00:04:28] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [] is not defined. at /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php:210)
+[stacktrace]
+#0 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(135): Illuminate\\Log\\LogManager->resolve()
+#1 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(122): Illuminate\\Log\\LogManager->get()
+#2 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(645): Illuminate\\Log\\LogManager->driver()
+#3 /var/www/punchcard/vendor/laravel-zero/foundation/src/Illuminate/Foundation/Exceptions/Handler.php(274): Illuminate\\Log\\LogManager->error()
+#4 /var/www/punchcard/vendor/nunomaduro/collision/src/Adapters/Laravel/ExceptionHandler.php(46): Illuminate\\Foundation\\Exceptions\\Handler->report()
+#5 /var/www/punchcard/vendor/laravel-zero/foundation/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(182): NunoMaduro\\Collision\\Adapters\\Laravel\\ExceptionHandler->report()
+#6 /var/www/punchcard/vendor/laravel-zero/foundation/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(250): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleException()
+#7 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}()
+#8 {main}
+"} 
+[2023-02-24 00:04:28] laravel.ERROR: Method Illuminate\Foundation\Application::getName does not exist. {"exception":"[object] (BadMethodCallException(code: 0): Method Illuminate\\Foundation\\Application::getName does not exist. at /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Macroable/Traits/Macroable.php:113)
+[stacktrace]
+#0 /var/www/punchcard/vendor/laravel-zero/framework/src/Kernel.php(125): Illuminate\\Foundation\\Application->__call()
+#1 /var/www/punchcard/vendor/laravel-zero/framework/src/Kernel.php(94): LaravelZero\\Framework\\Kernel->ensureDefaultCommand()
+#2 /var/www/punchcard/bin/punchcard.php(21): LaravelZero\\Framework\\Kernel->handle()
+#3 {main}
+"} 
+[2023-02-24 00:17:05] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [] is not defined. at /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php:210)
+[stacktrace]
+#0 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(135): Illuminate\\Log\\LogManager->resolve()
+#1 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(122): Illuminate\\Log\\LogManager->get()
+#2 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(645): Illuminate\\Log\\LogManager->driver()
+#3 /var/www/punchcard/vendor/laravel-zero/foundation/src/Illuminate/Foundation/Exceptions/Handler.php(274): Illuminate\\Log\\LogManager->error()
+#4 /var/www/punchcard/vendor/nunomaduro/collision/src/Adapters/Laravel/ExceptionHandler.php(46): Illuminate\\Foundation\\Exceptions\\Handler->report()
+#5 /var/www/punchcard/vendor/laravel-zero/foundation/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(182): NunoMaduro\\Collision\\Adapters\\Laravel\\ExceptionHandler->report()
+#6 /var/www/punchcard/vendor/laravel-zero/foundation/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(250): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleException()
+#7 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}()
+#8 {main}
+"} 
+[2023-02-24 00:17:05] laravel.ERROR: Method Illuminate\Foundation\Application::getName does not exist. {"exception":"[object] (BadMethodCallException(code: 0): Method Illuminate\\Foundation\\Application::getName does not exist. at /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Macroable/Traits/Macroable.php:113)
+[stacktrace]
+#0 /var/www/punchcard/vendor/laravel-zero/framework/src/Kernel.php(125): Illuminate\\Foundation\\Application->__call()
+#1 /var/www/punchcard/vendor/laravel-zero/framework/src/Kernel.php(94): LaravelZero\\Framework\\Kernel->ensureDefaultCommand()
+#2 /var/www/punchcard/bin/punchcard.php(21): LaravelZero\\Framework\\Kernel->handle()
+#3 {main}
+"} 
+[2023-02-24 00:17:26] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [] is not defined. at /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php:210)
+[stacktrace]
+#0 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(135): Illuminate\\Log\\LogManager->resolve()
+#1 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(122): Illuminate\\Log\\LogManager->get()
+#2 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(645): Illuminate\\Log\\LogManager->driver()
+#3 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(274): Illuminate\\Log\\LogManager->error()
+#4 /var/www/punchcard/vendor/nunomaduro/collision/src/Adapters/Laravel/ExceptionHandler.php(46): Illuminate\\Foundation\\Exceptions\\Handler->report()
+#5 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(182): NunoMaduro\\Collision\\Adapters\\Laravel\\ExceptionHandler->report()
+#6 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(250): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleException()
+#7 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}()
+#8 {main}
+"} 
+[2023-02-24 00:17:26] laravel.ERROR: Target class [LaravelZero\Framework\Kernel] does not exist. {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Target class [LaravelZero\\Framework\\Kernel] does not exist. at /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php:891)
+[stacktrace]
+#0 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(770): Illuminate\\Container\\Container->build()
+#1 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(935): Illuminate\\Container\\Container->resolve()
+#2 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(296): Illuminate\\Foundation\\Application->resolve()
+#3 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(885): Illuminate\\Container\\Container->Illuminate\\Container\\{closure}()
+#4 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(770): Illuminate\\Container\\Container->build()
+#5 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(935): Illuminate\\Container\\Container->resolve()
+#6 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(706): Illuminate\\Foundation\\Application->resolve()
+#7 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(920): Illuminate\\Container\\Container->make()
+#8 /var/www/punchcard/bin/punchcard.php(17): Illuminate\\Foundation\\Application->make()
+#9 {main}
+
+[previous exception] [object] (ReflectionException(code: -1): Class \"LaravelZero\\Framework\\Kernel\" does not exist at /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php:889)
+[stacktrace]
+#0 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(889): ReflectionClass->__construct()
+#1 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(770): Illuminate\\Container\\Container->build()
+#2 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(935): Illuminate\\Container\\Container->resolve()
+#3 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(296): Illuminate\\Foundation\\Application->resolve()
+#4 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(885): Illuminate\\Container\\Container->Illuminate\\Container\\{closure}()
+#5 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(770): Illuminate\\Container\\Container->build()
+#6 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(935): Illuminate\\Container\\Container->resolve()
+#7 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(706): Illuminate\\Foundation\\Application->resolve()
+#8 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(920): Illuminate\\Container\\Container->make()
+#9 /var/www/punchcard/bin/punchcard.php(17): Illuminate\\Foundation\\Application->make()
+#10 {main}
+"} 
+[2023-02-24 00:20:20] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [] is not defined. at /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php:210)
+[stacktrace]
+#0 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(135): Illuminate\\Log\\LogManager->resolve()
+#1 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(122): Illuminate\\Log\\LogManager->get()
+#2 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(645): Illuminate\\Log\\LogManager->driver()
+#3 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(274): Illuminate\\Log\\LogManager->error()
+#4 /var/www/punchcard/vendor/nunomaduro/collision/src/Adapters/Laravel/ExceptionHandler.php(46): Illuminate\\Foundation\\Exceptions\\Handler->report()
+#5 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(182): NunoMaduro\\Collision\\Adapters\\Laravel\\ExceptionHandler->report()
+#6 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(250): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleException()
+#7 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}()
+#8 {main}
+"} 
+[2023-02-24 00:20:20] laravel.ERROR: Target class [LaravelZero\Framework\Kernel] does not exist. {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Target class [LaravelZero\\Framework\\Kernel] does not exist. at /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php:891)
+[stacktrace]
+#0 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(770): Illuminate\\Container\\Container->build()
+#1 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(935): Illuminate\\Container\\Container->resolve()
+#2 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(296): Illuminate\\Foundation\\Application->resolve()
+#3 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(885): Illuminate\\Container\\Container->Illuminate\\Container\\{closure}()
+#4 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(770): Illuminate\\Container\\Container->build()
+#5 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(935): Illuminate\\Container\\Container->resolve()
+#6 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(706): Illuminate\\Foundation\\Application->resolve()
+#7 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(920): Illuminate\\Container\\Container->make()
+#8 /var/www/punchcard/bin/punchcard.php(17): Illuminate\\Foundation\\Application->make()
+#9 {main}
+
+[previous exception] [object] (ReflectionException(code: -1): Class \"LaravelZero\\Framework\\Kernel\" does not exist at /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php:889)
+[stacktrace]
+#0 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(889): ReflectionClass->__construct()
+#1 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(770): Illuminate\\Container\\Container->build()
+#2 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(935): Illuminate\\Container\\Container->resolve()
+#3 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(296): Illuminate\\Foundation\\Application->resolve()
+#4 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(885): Illuminate\\Container\\Container->Illuminate\\Container\\{closure}()
+#5 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(770): Illuminate\\Container\\Container->build()
+#6 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(935): Illuminate\\Container\\Container->resolve()
+#7 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(706): Illuminate\\Foundation\\Application->resolve()
+#8 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(920): Illuminate\\Container\\Container->make()
+#9 /var/www/punchcard/bin/punchcard.php(17): Illuminate\\Foundation\\Application->make()
+#10 {main}
+"} 
+[2023-02-24 00:20:23] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [] is not defined. at /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php:210)
+[stacktrace]
+#0 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(135): Illuminate\\Log\\LogManager->resolve()
+#1 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(122): Illuminate\\Log\\LogManager->get()
+#2 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(645): Illuminate\\Log\\LogManager->driver()
+#3 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(274): Illuminate\\Log\\LogManager->error()
+#4 /var/www/punchcard/vendor/nunomaduro/collision/src/Adapters/Laravel/ExceptionHandler.php(46): Illuminate\\Foundation\\Exceptions\\Handler->report()
+#5 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(182): NunoMaduro\\Collision\\Adapters\\Laravel\\ExceptionHandler->report()
+#6 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(250): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleException()
+#7 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}()
+#8 {main}
+"} 
+[2023-02-24 00:20:23] laravel.ERROR: Target class [LaravelZero\Framework\Kernel] does not exist. {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Target class [LaravelZero\\Framework\\Kernel] does not exist. at /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php:891)
+[stacktrace]
+#0 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(770): Illuminate\\Container\\Container->build()
+#1 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(935): Illuminate\\Container\\Container->resolve()
+#2 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(296): Illuminate\\Foundation\\Application->resolve()
+#3 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(885): Illuminate\\Container\\Container->Illuminate\\Container\\{closure}()
+#4 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(770): Illuminate\\Container\\Container->build()
+#5 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(935): Illuminate\\Container\\Container->resolve()
+#6 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(706): Illuminate\\Foundation\\Application->resolve()
+#7 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(920): Illuminate\\Container\\Container->make()
+#8 /var/www/punchcard/bin/punchcard.php(17): Illuminate\\Foundation\\Application->make()
+#9 {main}
+
+[previous exception] [object] (ReflectionException(code: -1): Class \"LaravelZero\\Framework\\Kernel\" does not exist at /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php:889)
+[stacktrace]
+#0 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(889): ReflectionClass->__construct()
+#1 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(770): Illuminate\\Container\\Container->build()
+#2 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(935): Illuminate\\Container\\Container->resolve()
+#3 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(296): Illuminate\\Foundation\\Application->resolve()
+#4 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(885): Illuminate\\Container\\Container->Illuminate\\Container\\{closure}()
+#5 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(770): Illuminate\\Container\\Container->build()
+#6 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(935): Illuminate\\Container\\Container->resolve()
+#7 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(706): Illuminate\\Foundation\\Application->resolve()
+#8 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(920): Illuminate\\Container\\Container->make()
+#9 /var/www/punchcard/bin/punchcard.php(17): Illuminate\\Foundation\\Application->make()
+#10 {main}
+"} 
+[2023-02-24 00:22:00] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [] is not defined. at /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php:210)
+[stacktrace]
+#0 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(135): Illuminate\\Log\\LogManager->resolve()
+#1 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(122): Illuminate\\Log\\LogManager->get()
+#2 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(645): Illuminate\\Log\\LogManager->driver()
+#3 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(274): Illuminate\\Log\\LogManager->error()
+#4 /var/www/punchcard/vendor/nunomaduro/collision/src/Adapters/Laravel/ExceptionHandler.php(46): Illuminate\\Foundation\\Exceptions\\Handler->report()
+#5 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(182): NunoMaduro\\Collision\\Adapters\\Laravel\\ExceptionHandler->report()
+#6 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(250): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleException()
+#7 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}()
+#8 {main}
+"} 
+[2023-02-24 00:22:00] laravel.ERROR: Target [Illuminate\Contracts\Console\Kernel] is not instantiable. {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Target [Illuminate\\Contracts\\Console\\Kernel] is not instantiable. at /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php:1103)
+[stacktrace]
+#0 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(898): Illuminate\\Container\\Container->notInstantiable()
+#1 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(292): Illuminate\\Container\\Container->build()
+#2 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(885): Illuminate\\Container\\Container->Illuminate\\Container\\{closure}()
+#3 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(770): Illuminate\\Container\\Container->build()
+#4 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(935): Illuminate\\Container\\Container->resolve()
+#5 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(706): Illuminate\\Foundation\\Application->resolve()
+#6 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(920): Illuminate\\Container\\Container->make()
+#7 /var/www/punchcard/bin/punchcard.php(17): Illuminate\\Foundation\\Application->make()
+#8 {main}
+"} 
+[2023-02-24 00:22:08] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [] is not defined. at /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php:210)
+[stacktrace]
+#0 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(135): Illuminate\\Log\\LogManager->resolve()
+#1 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(122): Illuminate\\Log\\LogManager->get()
+#2 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(645): Illuminate\\Log\\LogManager->driver()
+#3 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(274): Illuminate\\Log\\LogManager->error()
+#4 /var/www/punchcard/vendor/nunomaduro/collision/src/Adapters/Laravel/ExceptionHandler.php(46): Illuminate\\Foundation\\Exceptions\\Handler->report()
+#5 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(454): NunoMaduro\\Collision\\Adapters\\Laravel\\ExceptionHandler->report()
+#6 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(157): Illuminate\\Foundation\\Console\\Kernel->reportException()
+#7 /var/www/punchcard/bin/punchcard.php(21): Illuminate\\Foundation\\Console\\Kernel->handle()
+#8 {main}
+"} 
+[2023-02-24 00:22:08] laravel.ERROR: Command "config/app.php" is not defined. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): Command \"config/app.php\" is not defined. at /var/www/punchcard/vendor/symfony/console/Application.php:702)
+[stacktrace]
+#0 /var/www/punchcard/vendor/symfony/console/Application.php(256): Symfony\\Component\\Console\\Application->find()
+#1 /var/www/punchcard/vendor/symfony/console/Application.php(168): Symfony\\Component\\Console\\Application->doRun()
+#2 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Console/Application.php(102): Symfony\\Component\\Console\\Application->run()
+#3 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(155): Illuminate\\Console\\Application->run()
+#4 /var/www/punchcard/bin/punchcard.php(21): Illuminate\\Foundation\\Console\\Kernel->handle()
+#5 {main}
+"} 
+[2023-02-24 00:22:24] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [] is not defined. at /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php:210)
+[stacktrace]
+#0 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(135): Illuminate\\Log\\LogManager->resolve()
+#1 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(122): Illuminate\\Log\\LogManager->get()
+#2 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(645): Illuminate\\Log\\LogManager->driver()
+#3 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(274): Illuminate\\Log\\LogManager->error()
+#4 /var/www/punchcard/vendor/nunomaduro/collision/src/Adapters/Laravel/ExceptionHandler.php(46): Illuminate\\Foundation\\Exceptions\\Handler->report()
+#5 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(454): NunoMaduro\\Collision\\Adapters\\Laravel\\ExceptionHandler->report()
+#6 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(157): Illuminate\\Foundation\\Console\\Kernel->reportException()
+#7 /var/www/punchcard/bin/punchcard.php(21): Illuminate\\Foundation\\Console\\Kernel->handle()
+#8 {main}
+"} 
+[2023-02-24 00:22:24] laravel.ERROR: Command "config/app.php" is not defined. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): Command \"config/app.php\" is not defined. at /var/www/punchcard/vendor/symfony/console/Application.php:702)
+[stacktrace]
+#0 /var/www/punchcard/vendor/symfony/console/Application.php(256): Symfony\\Component\\Console\\Application->find()
+#1 /var/www/punchcard/vendor/symfony/console/Application.php(168): Symfony\\Component\\Console\\Application->doRun()
+#2 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Console/Application.php(102): Symfony\\Component\\Console\\Application->run()
+#3 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(155): Illuminate\\Console\\Application->run()
+#4 /var/www/punchcard/bin/punchcard.php(21): Illuminate\\Foundation\\Console\\Kernel->handle()
+#5 {main}
+"} 
+[2023-02-24 00:22:33] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [] is not defined. at /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php:210)
+[stacktrace]
+#0 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(135): Illuminate\\Log\\LogManager->resolve()
+#1 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(122): Illuminate\\Log\\LogManager->get()
+#2 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(645): Illuminate\\Log\\LogManager->driver()
+#3 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(274): Illuminate\\Log\\LogManager->error()
+#4 /var/www/punchcard/vendor/nunomaduro/collision/src/Adapters/Laravel/ExceptionHandler.php(46): Illuminate\\Foundation\\Exceptions\\Handler->report()
+#5 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(454): NunoMaduro\\Collision\\Adapters\\Laravel\\ExceptionHandler->report()
+#6 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(157): Illuminate\\Foundation\\Console\\Kernel->reportException()
+#7 /var/www/punchcard/bin/punchcard.php(21): Illuminate\\Foundation\\Console\\Kernel->handle()
+#8 {main}
+"} 
+[2023-02-24 00:22:33] laravel.ERROR: Not enough arguments (missing: "paths:"). {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): Not enough arguments (missing: \"paths:\"). at /var/www/punchcard/vendor/symfony/console/Input/Input.php:70)
+[stacktrace]
+#0 /var/www/punchcard/vendor/symfony/console/Command/Command.php(307): Symfony\\Component\\Console\\Input\\Input->validate()
+#1 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Console/Command.php(164): Symfony\\Component\\Console\\Command\\Command->run()
+#2 /var/www/punchcard/vendor/symfony/console/Application.php(1022): Illuminate\\Console\\Command->run()
+#3 /var/www/punchcard/vendor/symfony/console/Application.php(314): Symfony\\Component\\Console\\Application->doRunCommand()
+#4 /var/www/punchcard/vendor/symfony/console/Application.php(168): Symfony\\Component\\Console\\Application->doRun()
+#5 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Console/Application.php(102): Symfony\\Component\\Console\\Application->run()
+#6 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(155): Illuminate\\Console\\Application->run()
+#7 /var/www/punchcard/bin/punchcard.php(21): Illuminate\\Foundation\\Console\\Kernel->handle()
+#8 {main}
+"} 
+[2023-02-24 00:22:36] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [] is not defined. at /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php:210)
+[stacktrace]
+#0 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(135): Illuminate\\Log\\LogManager->resolve()
+#1 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(122): Illuminate\\Log\\LogManager->get()
+#2 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(645): Illuminate\\Log\\LogManager->driver()
+#3 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(274): Illuminate\\Log\\LogManager->error()
+#4 /var/www/punchcard/vendor/nunomaduro/collision/src/Adapters/Laravel/ExceptionHandler.php(46): Illuminate\\Foundation\\Exceptions\\Handler->report()
+#5 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(454): NunoMaduro\\Collision\\Adapters\\Laravel\\ExceptionHandler->report()
+#6 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(157): Illuminate\\Foundation\\Console\\Kernel->reportException()
+#7 /var/www/punchcard/bin/punchcard.php(21): Illuminate\\Foundation\\Console\\Kernel->handle()
+#8 {main}
+"} 
+[2023-02-24 00:22:36] laravel.ERROR: The "paths" argument does not exist. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\InvalidArgumentException(code: 0): The \"paths\" argument does not exist. at /var/www/punchcard/vendor/symfony/console/Input/Input.php:92)
+[stacktrace]
+#0 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Console/Concerns/InteractsWithIO.php(84): Symfony\\Component\\Console\\Input\\Input->getArgument()
+#1 /var/www/punchcard/app/Console/Commands/PunchCardCommand.php(25): Illuminate\\Console\\Command->argument()
+#2 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): TomasVotruba\\PunchCard\\Console\\Commands\\PunchCardCommand->handle()
+#3 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#4 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure()
+#5 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(37): Illuminate\\Container\\BoundMethod::callBoundMethod()
+#6 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(661): Illuminate\\Container\\BoundMethod::call()
+#7 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Console/Command.php(194): Illuminate\\Container\\Container->call()
+#8 /var/www/punchcard/vendor/symfony/console/Command/Command.php(312): Illuminate\\Console\\Command->execute()
+#9 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Console/Command.php(164): Symfony\\Component\\Console\\Command\\Command->run()
+#10 /var/www/punchcard/vendor/symfony/console/Application.php(1022): Illuminate\\Console\\Command->run()
+#11 /var/www/punchcard/vendor/symfony/console/Application.php(314): Symfony\\Component\\Console\\Application->doRunCommand()
+#12 /var/www/punchcard/vendor/symfony/console/Application.php(168): Symfony\\Component\\Console\\Application->doRun()
+#13 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Console/Application.php(102): Symfony\\Component\\Console\\Application->run()
+#14 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(155): Illuminate\\Console\\Application->run()
+#15 /var/www/punchcard/bin/punchcard.php(21): Illuminate\\Foundation\\Console\\Kernel->handle()
+#16 {main}
+"} 
+[2023-02-24 00:24:25] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [] is not defined. at /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php:210)
+[stacktrace]
+#0 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(135): Illuminate\\Log\\LogManager->resolve()
+#1 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(122): Illuminate\\Log\\LogManager->get()
+#2 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(645): Illuminate\\Log\\LogManager->driver()
+#3 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(274): Illuminate\\Log\\LogManager->error()
+#4 /var/www/punchcard/vendor/nunomaduro/collision/src/Adapters/Laravel/ExceptionHandler.php(46): Illuminate\\Foundation\\Exceptions\\Handler->report()
+#5 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(454): NunoMaduro\\Collision\\Adapters\\Laravel\\ExceptionHandler->report()
+#6 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(157): Illuminate\\Foundation\\Console\\Kernel->reportException()
+#7 /var/www/punchcard/bin/punchcard.php(21): Illuminate\\Foundation\\Console\\Kernel->handle()
+#8 {main}
+"} 
+[2023-02-24 00:24:25] laravel.ERROR: The "paths" argument does not exist. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\InvalidArgumentException(code: 0): The \"paths\" argument does not exist. at /var/www/punchcard/vendor/symfony/console/Input/Input.php:92)
+[stacktrace]
+#0 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Console/Concerns/InteractsWithIO.php(84): Symfony\\Component\\Console\\Input\\Input->getArgument()
+#1 /var/www/punchcard/app/Console/Commands/PunchCardCommand.php(25): Illuminate\\Console\\Command->argument()
+#2 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): TomasVotruba\\PunchCard\\Console\\Commands\\PunchCardCommand->handle()
+#3 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#4 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure()
+#5 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(37): Illuminate\\Container\\BoundMethod::callBoundMethod()
+#6 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Container/Container.php(661): Illuminate\\Container\\BoundMethod::call()
+#7 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Console/Command.php(194): Illuminate\\Container\\Container->call()
+#8 /var/www/punchcard/vendor/symfony/console/Command/Command.php(312): Illuminate\\Console\\Command->execute()
+#9 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Console/Command.php(164): Symfony\\Component\\Console\\Command\\Command->run()
+#10 /var/www/punchcard/vendor/symfony/console/Application.php(1022): Illuminate\\Console\\Command->run()
+#11 /var/www/punchcard/vendor/symfony/console/Application.php(314): Symfony\\Component\\Console\\Application->doRunCommand()
+#12 /var/www/punchcard/vendor/symfony/console/Application.php(168): Symfony\\Component\\Console\\Application->doRun()
+#13 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Console/Application.php(102): Symfony\\Component\\Console\\Application->run()
+#14 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(155): Illuminate\\Console\\Application->run()
+#15 /var/www/punchcard/bin/punchcard.php(21): Illuminate\\Foundation\\Console\\Kernel->handle()
+#16 {main}
+"} 
+[2023-02-24 00:24:35] laravel.EMERGENCY: Unable to create configured logger. Using emergency logger. {"exception":"[object] (InvalidArgumentException(code: 0): Log [] is not defined. at /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php:210)
+[stacktrace]
+#0 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(135): Illuminate\\Log\\LogManager->resolve()
+#1 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(122): Illuminate\\Log\\LogManager->get()
+#2 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Log/LogManager.php(645): Illuminate\\Log\\LogManager->driver()
+#3 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(274): Illuminate\\Log\\LogManager->error()
+#4 /var/www/punchcard/vendor/nunomaduro/collision/src/Adapters/Laravel/ExceptionHandler.php(46): Illuminate\\Foundation\\Exceptions\\Handler->report()
+#5 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(454): NunoMaduro\\Collision\\Adapters\\Laravel\\ExceptionHandler->report()
+#6 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(157): Illuminate\\Foundation\\Console\\Kernel->reportException()
+#7 /var/www/punchcard/bin/punchcard.php(21): Illuminate\\Foundation\\Console\\Kernel->handle()
+#8 {main}
+"} 
+[2023-02-24 00:24:35] laravel.ERROR: Too many arguments to "generate" command, expected arguments "paths". {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): Too many arguments to \"generate\" command, expected arguments \"paths\". at /var/www/punchcard/vendor/symfony/console/Input/ArgvInput.php:190)
+[stacktrace]
+#0 /var/www/punchcard/vendor/symfony/console/Input/ArgvInput.php(83): Symfony\\Component\\Console\\Input\\ArgvInput->parseArgument()
+#1 /var/www/punchcard/vendor/symfony/console/Input/ArgvInput.php(68): Symfony\\Component\\Console\\Input\\ArgvInput->parseToken()
+#2 /var/www/punchcard/vendor/symfony/console/Input/Input.php(52): Symfony\\Component\\Console\\Input\\ArgvInput->parse()
+#3 /var/www/punchcard/vendor/symfony/console/Command/Command.php(271): Symfony\\Component\\Console\\Input\\Input->bind()
+#4 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Console/Command.php(164): Symfony\\Component\\Console\\Command\\Command->run()
+#5 /var/www/punchcard/vendor/symfony/console/Application.php(1022): Illuminate\\Console\\Command->run()
+#6 /var/www/punchcard/vendor/symfony/console/Application.php(314): Symfony\\Component\\Console\\Application->doRunCommand()
+#7 /var/www/punchcard/vendor/symfony/console/Application.php(168): Symfony\\Component\\Console\\Application->doRun()
+#8 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Console/Application.php(102): Symfony\\Component\\Console\\Application->run()
+#9 /var/www/punchcard/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(155): Illuminate\\Console\\Application->run()
+#10 /var/www/punchcard/bin/punchcard.php(21): Illuminate\\Foundation\\Console\\Kernel->handle()
+#11 {main}
+"} 
