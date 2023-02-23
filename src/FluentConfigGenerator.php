@@ -1,59 +1,37 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TomasVotruba\PunchCard;
 
-use PhpParser\Node\Stmt\Class_;
-use PhpParser\ParserFactory;
+use PhpParser\Node\Expr\Array_;
+use PhpParser\Node\Expr\ArrayItem;
+use PhpParser\Node\Scalar\String_;
+use PhpParser\Node\Stmt;
+use PhpParser\Node\Stmt\Return_;
+use TomasVotruba\PunchCard\Enum\ScalarType;
+use TomasVotruba\PunchCard\Exception\NotImplementedYetException;
+use TomasVotruba\PunchCard\NodeFactory\ConfigClassFactory;
+use TomasVotruba\PunchCard\PhpParser\PhpNodesPrinter;
+use TomasVotruba\PunchCard\PhpParser\StrictPhpParser;
+use TomasVotruba\PunchCard\ValueObject\ParameterAndType;
+use Webmozart\Assert\Assert;
 
+/**
+ * @api
+ */
 final class FluentConfigGenerator
 {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    public function generate(array $configuration): Class_
-=======
-=======
-    private \PhpParser\Parser $parser;
-
-    public function __construct()
-    {
-        $parserFactory = new ParserFactory();
-        $this->parser = $parserFactory->create(ParserFactory::PREFER_PHP7);
-    }
-
->>>>>>> 9c24d58 (misc)
-    public function generate(string $configFileContents): string
->>>>>>> 02b7b98 (misc)
-    {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        // @todo
-=======
-        $parserFactory = new ParserFactory();
-        $this->parser = $parserFactory->create(ParserFactory::PREFER_PHP7);
-    }
-
-    public function generate(string $configFileContents): string
-    {
-
-        // @todo parse to build schema :)
-        // generate class form schema
-=======
-    private readonly \PhpParser\Parser $parser;
-
     public function __construct(
         private readonly ConfigClassFactory $configClassFactory,
+        private readonly StrictPhpParser $strictPhpParser,
         private readonly PhpNodesPrinter $phpNodesPrinter,
     ) {
-        $parserFactory = new ParserFactory();
-        $this->parser = $parserFactory->create(ParserFactory::PREFER_PHP7);
     }
 
-    public function generate(string $configFileContents): ?string
+    public function generate(string $configFileContents, string $fileName): ?string
     {
-        $configStmts = $this->parser->parse($configFileContents);
-        Assert::allIsInstanceOf($configStmts, Stmt::class);
+        $configStmts = $this->strictPhpParser->parse($configFileContents);
 
         $parametersAndTypes = $this->resolveMainParameterNames($configStmts);
         if ($parametersAndTypes === []) {
@@ -62,49 +40,6 @@ final class FluentConfigGenerator
 
         // create basic class from this one :)
         $class = $this->configClassFactory->createClassFromParameterNames($parametersAndTypes, $fileName);
->>>>>>> 4628eda (fixup! misc)
-
-        $configStmts = $this->parser->parse($configFileContents);
-        Assert::allIsInstanceOf($configStmts, Stmt::class);
-
-        ///** @var Stmt $configStmts */
-        //foreach ($configStmts as $configStmt) {
-        //    if (! $configStmt instanceof Stmt\Return_) {
-        //        continue;
-        //    }
-        //
-        //    if (! $configStmt->expr instanceof Array_) {
-        //        continue;
-        //    }
-        //
-        //    /** @var Array_ $configArray */
-        //    $configArray = $configStmt->expr;
-        //
-        //    $mainParameterNames = [];
-        //
-        //
-        //    foreach ($configArray->items as $arrayItem) {
-        //        Assert::isInstanceOf($arrayItem, ArrayItem::class);
-        //
-        //        // collect keys and value types :)
-        //        if (! $arrayItem->key instanceof String_) {
-        //            continue;
-        //        }
-        //
-        //        $mainParameterNames[] = $arrayItem->key->value;
-        //    }
-        //}
-
-        // create basic class from this one :)
-<<<<<<< HEAD
-
-
-        dump($mainParameterNames);
-        die;
->>>>>>> 18c8cbf (fixup! misc)
-=======
-        $class = $this->configClassFactory->createClassFromParameterNames($mainParameterNames, $fileName);
-
         return $this->phpNodesPrinter->prettyPrintFile([$class]) . PHP_EOL;
     }
 
@@ -158,27 +93,8 @@ final class FluentConfigGenerator
             return ScalarType::ARRAY;
         }
 
-<<<<<<< HEAD
         throw new NotImplementedYetException(
-            sprintf('The "%s" type is not implemented yet', get_class($arrayItem->value))
+            sprintf('The "%s" type is not implemented yet', $arrayItem->value::class)
         );
->>>>>>> 4628eda (fixup! misc)
-=======
-        dump($mainParameterNames);
-        die;
->>>>>>> 18c8cbf (fixup! misc)
-=======
-=======
-
->>>>>>> 050beac (misc)
-        // @todo parse to build schema :)
-        // generate class form schema
-        dump($configFileContents);
-
-        $configStmts = $this->parser->parse($configFileContents);
-        dump($configStmts);
-        die;
->>>>>>> 4379e2d (misc)
->>>>>>> 02b7b98 (misc)
     }
 }

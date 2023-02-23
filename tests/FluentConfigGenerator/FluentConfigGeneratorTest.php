@@ -1,33 +1,46 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TomasVotruba\PunchCard\Tests\FluentConfigGenerator;
 
-use PHPUnit\Framework\TestCase;
+use Nette\Utils\FileSystem;
 use TomasVotruba\PunchCard\FluentConfigGenerator;
+use TomasVotruba\PunchCard\Tests\AbstractTestCase;
 
-final class FluentConfigGeneratorTest extends TestCase
+final class FluentConfigGeneratorTest extends AbstractTestCase
 {
     private FluentConfigGenerator $fluentConfigGenerator;
 
     protected function setUp(): void
     {
-        $this->fluentConfigGenerator = new FluentConfigGenerator();
+        parent::setUp();
+
+        $this->fluentConfigGenerator = app()->make(FluentConfigGenerator::class);
     }
 
     public function test(): void
     {
+        /** @var string[] $fixtureFilesPaths */
         $fixtureFilesPaths = glob(__DIR__ . '/Fixture/*.php.inc');
+
         foreach ($fixtureFilesPaths as $fixtureFilePath) {
-            $fixtureFileContents = file_get_contents($fixtureFilePath);
+            $fixtureFileContents = FileSystem::read($fixtureFilePath);
 
-            $parts = str($fixtureFileContents)->split('#\-\-\-\-\-#');
+            [$inputConfigContents, $expectedConfigClassContents] = $this->split($fixtureFileContents);
 
-            $inputConfigContents = $parts[0];
-            $expectedConfigClassContents = $parts[1];
-
-            $configClassContents = $this->fluentConfigGenerator->generate($inputConfigContents);
+            $configClassContents = $this->fluentConfigGenerator->generate($inputConfigContents, $fixtureFilePath);
 
             $this->assertSame($expectedConfigClassContents, $configClassContents);
         }
+    }
+
+    /**
+     * @return array{string, string}
+     */
+    private function split(string $fileContents): array
+    {
+        $parts = str($fileContents)->split('#\-\-\-\-\-\n#');
+        return [$parts[0], $parts[1]];
     }
 }

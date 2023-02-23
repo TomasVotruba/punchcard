@@ -8,8 +8,7 @@ return [
 -----
 <?php
 
-
-final class TemplateConfig
+final class ViewConfig
 {
     /**
      * @var string[]
@@ -40,5 +39,3 @@ final class TemplateConfig
         ];
     }
 }
-
-?>
