@@ -9,7 +9,7 @@ final class ViewConfig
      */
     private array $paths = [];
 
-    public static function create()
+    public static function create(): self
     {
         return new self();
     }
@@ -28,7 +28,9 @@ final class ViewConfig
      */
     public function toArray(): array
     {
-        return ['paths' => $this->paths];
+        return [
+            'paths' => $this->paths,
+        ];
     }
 }
 

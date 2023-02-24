@@ -6,9 +6,11 @@ namespace TomasVotruba\PunchCard\PhpParser;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\Array_;
+use PhpParser\Node\Expr\ArrayItem;
 use PhpParser\Node\Stmt;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\PrettyPrinter\Standard;
+use Webmozart\Assert\Assert;
 
 final class PhpNodesPrinter extends Standard
 {
@@ -25,11 +27,22 @@ final class PhpNodesPrinter extends Standard
      */
     private const EXTRA_SPACE_BEFORE_NOP_REGEX = '#^[ \t]+$#m';
 
+    /**
+     * Short [] by default
+     */
     protected function pExpr_Array(Array_ $array): string
     {
-        // short [] by default
-        $array->setAttribute('kind', Array_::KIND_SHORT);
-        return parent::pExpr_Array($array);
+        Assert::allIsInstanceOf($array->items, ArrayItem::class);
+
+        // newline per elemnt
+        if ($array->items === []) {
+            return '[]';
+        }
+
+        $printedArray = '[';
+        $printedArray .= $this->pCommaSeparatedMultiline($array->items, true);
+
+        return $printedArray . ($this->nl . ']');
     }
 
     /**

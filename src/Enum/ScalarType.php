@@ -10,4 +10,9 @@ final class ScalarType
      * @var string
      */
     public const ARRAY = 'array';
+
+    /**
+     * @var string
+     */
+    public const STRING = 'string';
 }

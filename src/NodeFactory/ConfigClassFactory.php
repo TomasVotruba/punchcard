@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace TomasVotruba\PunchCard\NodeFactory;
 
-use PhpParser\Comment\Doc;
-use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\New_;
-use PhpParser\Node\Identifier;
 use PhpParser\Node\Name;
 use PhpParser\Node\Param;
 use PhpParser\Node\Stmt;
@@ -15,9 +12,7 @@ use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Nop;
 use PhpParser\Node\Stmt\Property;
-use PhpParser\Node\Stmt\PropertyProperty;
 use PhpParser\Node\Stmt\Return_;
-use TomasVotruba\PunchCard\Enum\ScalarType;
 use TomasVotruba\PunchCard\ValueObject\ParameterAndType;
 use Webmozart\Assert\Assert;
 
@@ -26,6 +21,7 @@ final class ConfigClassFactory
     public function __construct(
         private readonly ToArrayClassMethodFactory $toArrayClassMethodFactory,
         private readonly SetterClassMethodFactory $setterClassMethodFactory,
+        private readonly PropertyFactory $propertyFactory,
     ) {
     }
 
@@ -63,19 +59,7 @@ final class ConfigClassFactory
         $properties = [];
 
         foreach ($parametersAndTypes as $parameterAndType) {
-            $propertyProperty = new PropertyProperty($parameterAndType->getName());
-
-            $property = new Property(Class_::MODIFIER_PRIVATE, [$propertyProperty]);
-            $property->type = new Identifier($parameterAndType->getType());
-
-            if ($parameterAndType->getType() === ScalarType::ARRAY) {
-                $property->props[0]->default = new Array_([]);
-
-                // so far just string[], improve later on with types
-                $property->setDocComment(new Doc("/**\n * @var string[]\n */"));
-            }
-
-            $properties[] = $property;
+            $properties[] = $this->propertyFactory->create($parameterAndType);
         }
 
         return $properties;
@@ -101,6 +85,7 @@ final class ConfigClassFactory
         $classMethod = new ClassMethod('create');
         $classMethod->flags |= Class_::MODIFIER_STATIC;
         $classMethod->flags |= Class_::MODIFIER_PUBLIC;
+        $classMethod->returnType = new Name('self');
 
         $newSelfReturn = new Return_(new New_(new Name('self')));
 

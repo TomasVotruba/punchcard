@@ -7,6 +7,7 @@ use Symplify\EasyCodingStandard\ValueObject\Set\SetList;
 
 return function (ECSConfig $ecsConfig): void {
     $ecsConfig->paths([
+        __DIR__ . '/bin',
         __DIR__ . '/ecs.php',
         __DIR__ . '/config',
         __DIR__ . '/src',

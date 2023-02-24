@@ -2,6 +2,9 @@
     "name": "tomasvotruba/punchcard",
     "description": "Lazy and strict way to configure your Laravel projects",
     "keywords": ["laravel", "config", "punchcard"],
+    "bin": [
+        "bin/punchcard.php"
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.1",
@@ -9,20 +12,21 @@
         "illuminate/container": "^10.0",
         "illuminate/http": "^10.0",
         "illuminate/support": "^10.0",
-        "laravel/framework": "^10.1",
+        "nette/utils": "^4.0",
         "nikic/php-parser": "^4.15.3",
         "webmozart/assert": "^1.11"
     },
     "require-dev": {
         "nunomaduro/collision": "^7.0",
-        "phpstan/extension-installer": "^1.2",
-        "phpstan/phpstan-phpunit": "^1.3",
-        "phpstan/phpstan": "^1.10",
         "php-parallel-lint/php-parallel-lint": "^1.3",
+        "phpstan/extension-installer": "^1.2",
+        "phpstan/phpstan": "^1.10",
+        "phpstan/phpstan-phpunit": "^1.3",
         "phpunit/phpunit": "^10.0",
-        "symplify/easy-ci": "^11.2",
         "rector/rector": "^0.15.18",
-        "symplify/easy-coding-standard": "^11.2"
+        "symplify/easy-ci": "^11.2",
+        "symplify/easy-coding-standard": "^11.2",
+        "symplify/phpstan-extensions": "^11.2"
     },
     "autoload": {
         "psr-4": {
@@ -35,7 +39,7 @@
         }
     },
     "scripts": {
-        "phpstan": "php vendor/bin/phpstan",
+        "phpstan": "vendor/bin/phpstan analyze --error-format symplify",
         "check-cs": "vendor/bin/ecs check --ansi",
         "fix-cs": "vendor/bin/ecs check --fix --ansi",
         "rector": "vendor/bin/rector --dry-run --ansi"
