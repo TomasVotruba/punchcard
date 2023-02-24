@@ -4,36 +4,30 @@ declare(strict_types=1);
 
 namespace TomasVotruba\PunchCard\Kernel;
 
-use Illuminate\Contracts\Debug\ExceptionHandler;
-use Illuminate\Foundation\Application;
-use Illuminate\Foundation\Exceptions\Handler;
-use Illuminate\Foundation\Http\Kernel;
-use TomasVotruba\PunchCard\Console\ConsoleKernel;
+use Illuminate\Console\Application;
+use Illuminate\Container\Container;
+use Illuminate\Events\Dispatcher;
+use TomasVotruba\PunchCard\Console\Commands\PunchCardCommand;
 
 /**
  * @api
  */
 final class ApplicationFactory
 {
+    /**
+     * @see https://stackoverflow.com/questions/43623227/is-there-a-version-of-laravel-for-console-app-only
+     */
     public function create(): Application
     {
         // provide project base path
-        $application = new Application(__DIR__ . '/../..');
+        $container = new Container();
+        $dispatcher = new Dispatcher();
 
-        // provide base exception handler - @todo how to minimize this one?
-        $application->singleton(
-            ExceptionHandler::class,
-            Handler::class,
-        );
+        $application = new Application($container, $dispatcher, '1.0');
 
-        $application->singleton(
-            \Illuminate\Contracts\Console\Kernel::class,
-            ConsoleKernel::class,
-        );
-
-        /** @var Kernel $kernel */
-        $kernel = $application->make(Kernel::class);
-        $kernel->bootstrap();
+        /** @var PunchCardCommand $punchCardCommand */
+        $punchCardCommand = $container->make(PunchCardCommand::class);
+        $application->add($punchCardCommand);
 
         return $application;
     }

@@ -9,8 +9,6 @@ use PhpParser\Node\Expr\ArrayItem;
 use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Stmt;
 use PhpParser\Node\Stmt\Return_;
-use TomasVotruba\PunchCard\Enum\ScalarType;
-use TomasVotruba\PunchCard\Exception\NotImplementedYetException;
 use TomasVotruba\PunchCard\NodeFactory\ConfigClassFactory;
 use TomasVotruba\PunchCard\PhpParser\PhpNodesPrinter;
 use TomasVotruba\PunchCard\PhpParser\StrictPhpParser;
@@ -26,6 +24,7 @@ final class FluentConfigGenerator
         private readonly ConfigClassFactory $configClassFactory,
         private readonly StrictPhpParser $strictPhpParser,
         private readonly PhpNodesPrinter $phpNodesPrinter,
+        private readonly ParameterTypeResolver $parameterTypeResolver,
     ) {
     }
 
@@ -76,26 +75,11 @@ final class FluentConfigGenerator
                 $parameterName = $arrayItem->key->value;
 
                 // how to resolve type here?
-                $scalarType = $this->resolveScalarType($arrayItem);
-
+                $scalarType = $this->parameterTypeResolver->resolveExpr($arrayItem->value);
                 $parametersAndTypes[] = new ParameterAndType($parameterName, $scalarType);
             }
         }
 
         return $parametersAndTypes;
-    }
-
-    /**
-     * @return ScalarType::*
-     */
-    private function resolveScalarType(ArrayItem $arrayItem): string
-    {
-        if ($arrayItem->value instanceof Array_) {
-            return ScalarType::ARRAY;
-        }
-
-        throw new NotImplementedYetException(
-            sprintf('The "%s" type is not implemented yet', $arrayItem->value::class)
-        );
     }
 }

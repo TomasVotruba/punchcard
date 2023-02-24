@@ -4,14 +4,19 @@ declare(strict_types=1);
 
 namespace TomasVotruba\PunchCard\Tests;
 
+use Illuminate\Container\Container;
 use PHPUnit\Framework\TestCase;
-use TomasVotruba\PunchCard\Kernel\ApplicationFactory;
 
 abstract class AbstractTestCase extends TestCase
 {
-    protected function setUp(): void
+    /**
+     * @template TType as object
+     * @param class-string<TType> $class
+     * @return TType
+     */
+    protected function make(string $class): object
     {
-        $applicationFactory = new ApplicationFactory();
-        $applicationFactory->create();
+        $container = new Container();
+        return $container->make($class);
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TomasVotruba\PunchCard\Tests\FluentConfigGenerator;
 
+use Nette\Utils\FileSystem;
 use TomasVotruba\PunchCard\FluentConfigGenerator;
 use TomasVotruba\PunchCard\Tests\AbstractTestCase;
 
@@ -15,7 +16,7 @@ final class FluentConfigGeneratorTest extends AbstractTestCase
     {
         parent::setUp();
 
-        $this->fluentConfigGenerator = app()->make(FluentConfigGenerator::class);
+        $this->fluentConfigGenerator = $this->make(FluentConfigGenerator::class);
     }
 
     public function test(): void
@@ -24,7 +25,7 @@ final class FluentConfigGeneratorTest extends AbstractTestCase
         $fixtureFilesPaths = glob(__DIR__ . '/Fixture/*.php.inc');
 
         foreach ($fixtureFilesPaths as $fixtureFilePath) {
-            $fixtureFileContents = file_get_contents($fixtureFilePath);
+            $fixtureFileContents = FileSystem::read($fixtureFilePath);
 
             [$inputConfigContents, $expectedConfigClassContents] = $this->split($fixtureFileContents);
 
@@ -40,6 +41,7 @@ final class FluentConfigGeneratorTest extends AbstractTestCase
     private function split(string $fileContents): array
     {
         $parts = str($fileContents)->split('#\-\-\-\-\-\n#');
+
         return [$parts[0], $parts[1]];
     }
 }
