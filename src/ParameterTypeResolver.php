@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace TomasVotruba\PunchCard;
 
-use PhpParser\Node\Expr\MethodCall;
-use PhpParser\Node\Expr\Cast;
-use PhpParser\Node\Expr\Cast\Bool_;
 use PhpParser\ConstExprEvaluator;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\BinaryOp\Concat;
+use PhpParser\Node\Expr\Cast;
+use PhpParser\Node\Expr\Cast\Bool_;
 use PhpParser\Node\Expr\FuncCall;
+use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Scalar;
 use PhpParser\Node\Scalar\DNumber;
 use PhpParser\Node\Scalar\LNumber;
