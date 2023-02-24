@@ -12,7 +12,10 @@
         "illuminate/console": "^10.0",
         "illuminate/container": "^10.0",
         "illuminate/http": "^10.0",
-        "nikic/php-parser": "^4.15.3"
+        "illuminate/support": "^10.0",
+        "laravel/framework": "^10.1",
+        "nikic/php-parser": "^4.15.3",
+        "webmozart/assert": "^1.11"
     },
     "require-dev": {
         "nunomaduro/collision": "^6.4",
@@ -24,7 +27,7 @@
     },
     "autoload": {
         "psr-4": {
-            "TomasVotruba\\PunchCard\\": "src"
+            "TomasVotruba\\PunchCard\\": ["src", "app"]
         }
     },
     "autoload-dev": {
