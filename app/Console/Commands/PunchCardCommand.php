@@ -12,7 +12,7 @@ final class PunchCardCommand extends Command
      * @see https://laravel.com/docs/10.x/artisan#input-arrays
      * @var string
      */
-    public $signature = 'generate {paths*}';
+    public $signature = 'generate {paths}';
 
     /**
      * @var string
@@ -22,8 +22,8 @@ final class PunchCardCommand extends Command
     public function handle(): int
     {
         // generate fluent config classes
-
         $paths = $this->argument('paths');
+
         dump($paths);
         die;
 
