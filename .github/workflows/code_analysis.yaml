@@ -46,24 +46,24 @@ jobs:
 
                     -
                         name: 'Bare CLI run'
-                        run: bin/punchcard --ansi
+                        run: bin/punchcard --ansi --help
 
                     -
                         name: 'Run on Laravel Skeleton'
                         run:
-                            bin/punchcard app:generate https://raw.githubusercontent.com/laravel/laravel/10.x/config/view.php
+                            bin/punchcard https://raw.githubusercontent.com/laravel/laravel/10.x/config/view.php
 
-                            bin/punchcard app:generate https://raw.githubusercontent.com/laravel/laravel/10.x/config/session.php --ansi
+                            bin/punchcard https://raw.githubusercontent.com/laravel/laravel/10.x/config/session.php --ansi
 
-                            bin/punchcard app:generate https://raw.githubusercontent.com/laravel/laravel/10.x/config/auth.php --ansi
+                            bin/punchcard https://raw.githubusercontent.com/laravel/laravel/10.x/config/auth.php --ansi
 
-                            bin/punchcard app:generate https://raw.githubusercontent.com/laravel/laravel/10.x/config/app.php --ansi
+                            bin/punchcard https://raw.githubusercontent.com/laravel/laravel/10.x/config/app.php --ansi
 
-                            bin/punchcard app:generate https://raw.githubusercontent.com/laravel/laravel/10.x/config/cache.php --ansi
+                            bin/punchcard https://raw.githubusercontent.com/laravel/laravel/10.x/config/cache.php --ansi
 
-                            bin/punchcard app:generate https://raw.githubusercontent.com/laravel/laravel/10.x/config/mail.php --ansi
+                            bin/punchcard https://raw.githubusercontent.com/laravel/laravel/10.x/config/mail.php --ansi
 
-                            bin/punchcard app:generate https://raw.githubusercontent.com/laravel/laravel/10.x/config/queue.php --ansi
+                            bin/punchcard https://raw.githubusercontent.com/laravel/laravel/10.x/config/queue.php --ansi
 
         name: ${{ matrix.actions.name }}
         runs-on: ubuntu-latest

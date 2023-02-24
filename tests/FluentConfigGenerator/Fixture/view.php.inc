@@ -2,6 +2,10 @@
 
 return [
     'paths' => [__DIR__ . '/../resources/views'],
+    'compiled' => env(
+        'VIEW_COMPILED_PATH',
+        realpath(storage_path('framework/views'))
+    ),
 ];
 
 ?>
@@ -17,6 +21,8 @@ final class ViewConfig
      */
     private array $paths = [];
 
+    private string $compiled;
+
     public static function make(): self
     {
         return new self();
@@ -31,6 +37,12 @@ final class ViewConfig
         return $this;
     }
 
+    public function compiled(string $compiled): self
+    {
+        $this->compiled = $compiled;
+        return $this;
+    }
+
     /**
      * @return array<string, mixed[]>
      */
@@ -38,6 +50,7 @@ final class ViewConfig
     {
         return [
             'paths' => $this->paths,
+            'compiled' => $this->compiled,
         ];
     }
 }
