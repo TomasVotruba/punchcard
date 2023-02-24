@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TomasVotruba\PunchCard\Tests\FluentConfigGenerator;
 
 use Nette\Utils\FileSystem;
+use PHPUnit\Framework\Attributes\DataProvider;
 use TomasVotruba\PunchCard\FluentConfigGenerator;
 use TomasVotruba\PunchCard\Tests\AbstractTestCase;
 
@@ -19,19 +20,24 @@ final class FluentConfigGeneratorTest extends AbstractTestCase
         $this->fluentConfigGenerator = $this->make(FluentConfigGenerator::class);
     }
 
-    public function test(): void
+    #[DataProvider('provideData')]
+    public function test(string $fixtureFilePath): void
+    {
+        $fixtureFileContents = FileSystem::read($fixtureFilePath);
+
+        [$inputConfigContents, $expectedConfigClassContents] = $this->split($fixtureFileContents);
+
+        $configClassContents = $this->fluentConfigGenerator->generate($inputConfigContents, $fixtureFilePath);
+
+        $this->assertSame($expectedConfigClassContents, $configClassContents);
+    }
+
+    public static function provideData(): \Iterator
     {
         /** @var string[] $fixtureFilesPaths */
         $fixtureFilesPaths = glob(__DIR__ . '/Fixture/*.php.inc');
-
-        foreach ($fixtureFilesPaths as $fixtureFilePath) {
-            $fixtureFileContents = FileSystem::read($fixtureFilePath);
-
-            [$inputConfigContents, $expectedConfigClassContents] = $this->split($fixtureFileContents);
-
-            $configClassContents = $this->fluentConfigGenerator->generate($inputConfigContents, $fixtureFilePath);
-
-            $this->assertSame($expectedConfigClassContents, $configClassContents);
+        foreach ($fixtureFilesPaths as $fixtureFilesPath) {
+            yield [$fixtureFilesPath];
         }
     }
 
