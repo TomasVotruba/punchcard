@@ -201,11 +201,6 @@ return [
 ];
 
 ?>
-
-
-
-
-
 -----
 <?php
 
@@ -217,7 +212,7 @@ final class SessionConfig
 
     private int $lifetime;
 
-    private bool $expire_on_close;
+    private bool $expireOnClose;
 
     private bool $encrypt;
 
@@ -242,9 +237,9 @@ final class SessionConfig
 
     private string $secure;
 
-    private bool $http_only;
+    private bool $httpOnly;
 
-    private string $same_site;
+    private string $sameSite;
 
     public static function make(): self
     {
@@ -263,9 +258,9 @@ final class SessionConfig
         return $this;
     }
 
-    public function expire_on_close(bool $expire_on_close): self
+    public function expireOnClose(bool $expire_on_close): self
     {
-        $this->expire_on_close = $expire_on_close;
+        $this->expireOnClose = $expireOnClose;
         return $this;
     }
 
@@ -332,7 +327,7 @@ final class SessionConfig
         return $this;
     }
 
-    public function httpOnly(bool $httpOnly): self
+    public function httpOnly(bool $http_only): self
     {
         $this->httpOnly = $httpOnly;
         return $this;
@@ -340,7 +335,7 @@ final class SessionConfig
 
     public function sameSite(string $same_site): self
     {
-        $this->same_site = $same_site;
+        $this->sameSite = $sameSite;
         return $this;
     }
 
@@ -352,7 +347,7 @@ final class SessionConfig
         return [
             'driver' => $this->driver,
             'lifetime' => $this->lifetime,
-            'expire_on_close' => $this->expire_on_close,
+            'expire_on_close' => $this->expireOnClose,
             'encrypt' => $this->encrypt,
             'files' => $this->files,
             'connection' => $this->connection,

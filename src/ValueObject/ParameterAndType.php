@@ -21,4 +21,9 @@ final class ParameterAndType
     {
         return $this->type;
     }
+
+    public function getVariableName(): string
+    {
+        return str($this->name)->camel()->value();
+    }
 }

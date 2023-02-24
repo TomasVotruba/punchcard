@@ -13,7 +13,7 @@ return [
 
 namespace TomasVotruba\PunchCard;
 
-final class Complex_viewConfig
+final class ViewConfig
 {
     private string $compiled;
 

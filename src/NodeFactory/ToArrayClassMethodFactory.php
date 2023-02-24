@@ -31,7 +31,7 @@ final class ToArrayClassMethodFactory
         $array = new Array_();
         foreach ($parametersAndTypes as $parameterAndType) {
             $array->items[] = new ArrayItem(
-                new PropertyFetch(new Variable('this'), $parameterAndType->getName()),
+                new PropertyFetch(new Variable('this'), $parameterAndType->getVariableName()),
                 new String_($parameterAndType->getName())
             );
         }

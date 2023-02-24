@@ -23,7 +23,7 @@ final class SetterClassMethodFactory
 {
     public function create(ParameterAndType $parameterAndType): ClassMethod
     {
-        $classMethod = new ClassMethod($parameterAndType->getName());
+        $classMethod = new ClassMethod($parameterAndType->getVariableName());
         $classMethod->flags |= Class_::MODIFIER_PUBLIC;
         $classMethod->returnType = new Name('self');
 
@@ -42,8 +42,8 @@ final class SetterClassMethodFactory
      */
     private function createClassMethodStmts(ParameterAndType $parameterAndType): array
     {
-        $propertyFetch = new PropertyFetch(new Variable('this'), $parameterAndType->getName());
-        $propertyAssign = new Assign($propertyFetch, new Variable($parameterAndType->getName()));
+        $propertyFetch = new PropertyFetch(new Variable('this'), $parameterAndType->getVariableName());
+        $propertyAssign = new Assign($propertyFetch, new Variable($parameterAndType->getVariableName()));
 
         $return = new Return_(new Variable('this'));
 
@@ -60,7 +60,6 @@ final class SetterClassMethodFactory
 
     private function decorateDocBlock(ClassMethod $classMethod, ParameterAndType $parameterAndType): void
     {
-        // add docblocks
         if ($parameterAndType->getType() === ScalarType::ARRAY) {
             $classMethod->setDocComment(new Doc("/**\n * @param string[] $" . $parameterAndType->getName() . "\n */"));
         }
