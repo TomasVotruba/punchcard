@@ -4,3 +4,6 @@
 # composer
 /vendor
 composer.lock
+
+
+bootstrap/cache/*
