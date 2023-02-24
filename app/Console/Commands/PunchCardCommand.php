@@ -6,7 +6,6 @@ namespace TomasVotruba\PunchCard\Console\Commands;
 
 use Illuminate\Console\Command;
 use Nette\Utils\FileSystem;
-use TomasVotruba\PunchCard\Exception\NotImplementedYetException;
 use TomasVotruba\PunchCard\FluentConfigGenerator;
 
 final class PunchCardCommand extends Command
@@ -29,7 +28,7 @@ final class PunchCardCommand extends Command
         parent::__construct();
     }
 
-    public function handle(): void
+    public function handle(): int
     {
         /** @var string[] $paths */
         $paths = $this->argument('paths');
@@ -40,12 +39,14 @@ final class PunchCardCommand extends Command
             $fluentConfigContents = $this->fluentConfigGenerator->generate($fileContents, $path);
 
             if ($fluentConfigContents === null) {
-                throw new NotImplementedYetException();
+                $this->error('Not implemented yet for %s', $path);
+                return self::FAILURE;
             }
 
             $this->line(sprintf('File generated: "%s"', PHP_EOL . PHP_EOL . $path));
         }
 
         $this->info('All done');
+        return self::SUCCESS;
     }
 }
