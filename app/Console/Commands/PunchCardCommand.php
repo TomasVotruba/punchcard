@@ -28,7 +28,7 @@ final class PunchCardCommand extends Command
         parent::__construct();
     }
 
-    public function handle(): void
+    public function handle(): int
     {
         /** @var string[] $paths */
         $paths = $this->argument('paths');
@@ -36,10 +36,18 @@ final class PunchCardCommand extends Command
         foreach ($paths as $path) {
             $fileContents = FileSystem::read($path);
 
-            $fluentConfigContents = $this->fluentConfigGenerator->generate($fileContents, $path);
-            dump($fluentConfigContents);
+            try {
+                $fluentConfigContents = $this->fluentConfigGenerator->generate($fileContents, $path);
+            } catch (\Throwable $throwable) {
+                $errorMessage = sprintf('Not implemented yet for %s: %s', $path, $throwable->getMessage());
+                $this->error($errorMessage);
+                return self::FAILURE;
+            }
+
+            $this->line(sprintf('File generated: "%s"', PHP_EOL . PHP_EOL . $fluentConfigContents));
         }
 
         $this->info('All done');
+        return self::SUCCESS;
     }
 }
