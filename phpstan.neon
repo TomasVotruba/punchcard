@@ -5,3 +5,7 @@ parameters:
         - src
         - config
         - tests
+
+    ignoreErrors:
+        # trust file_get_contents()
+        - '#Parameter \#1 \$fileContents of method (.*?) expects string, string\|false given#'
