@@ -17,7 +17,7 @@ final class PropertyFactory
 {
     public function create(ParameterAndType $parameterAndType): Property
     {
-        $propertyProperty = new PropertyProperty($parameterAndType->getName());
+        $propertyProperty = new PropertyProperty($parameterAndType->getVariableName());
 
         $property = new Property(Class_::MODIFIER_PRIVATE, [$propertyProperty]);
         $property->type = new Identifier($parameterAndType->getType());

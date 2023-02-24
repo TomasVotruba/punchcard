@@ -96,11 +96,7 @@ final class ConfigClassFactory
 
     private function createClass(string $fileName): Class_
     {
-        $shortFileName = str($fileName)
-            ->match('#\/(?<name>[\w]+)\.php#')
-            ->value();
-
-        $configClassName = ucfirst(($shortFileName) . 'Config');
+        $configClassName = $this->resolveClassName($fileName);
 
         $class = new Class_($configClassName);
         $class->flags |= Class_::MODIFIER_FINAL;
@@ -124,5 +120,14 @@ final class ConfigClassFactory
         unset($separatedStmts[array_key_last($separatedStmts)]);
 
         return $separatedStmts;
+    }
+
+    private function resolveClassName(string $fileName): string
+    {
+        $shortFileName = str($fileName)
+            ->match('#(?<name>[A-Za-z]+)\.php#')
+            ->value();
+
+        return ucfirst(($shortFileName) . 'Config');
     }
 }

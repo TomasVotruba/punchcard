@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TomasVotruba\PunchCard\Tests\FluentConfigGenerator;
 
+use Iterator;
 use Nette\Utils\FileSystem;
 use PHPUnit\Framework\Attributes\DataProvider;
 use TomasVotruba\PunchCard\FluentConfigGenerator;
@@ -29,15 +30,21 @@ final class FluentConfigGeneratorTest extends AbstractTestCase
 
         $configClassContents = $this->fluentConfigGenerator->generate($inputConfigContents, $fixtureFilePath);
 
+        // update tests
+        if (getenv('UT')) {
+            FileSystem::write($fixtureFilePath, rtrim($inputConfigContents) . "\n-----\n" . $configClassContents);
+            $expectedConfigClassContents = $configClassContents;
+        }
+
         $this->assertSame($expectedConfigClassContents, $configClassContents);
     }
 
-    public static function provideData(): \Iterator
+    public static function provideData(): Iterator
     {
         /** @var string[] $fixtureFilesPaths */
         $fixtureFilesPaths = glob(__DIR__ . '/Fixture/*.php.inc');
-        foreach ($fixtureFilesPaths as $fixtureFilesPath) {
-            yield [$fixtureFilesPath];
+        foreach ($fixtureFilesPaths as $fixtureFilePath) {
+            yield [$fixtureFilePath];
         }
     }
 
@@ -46,7 +53,7 @@ final class FluentConfigGeneratorTest extends AbstractTestCase
      */
     private function split(string $fileContents): array
     {
-        $parts = str($fileContents)->split('#\-\-\-\-\-\n#');
+        $parts = str($fileContents)->split('#^\-\-\-\-\-\n#m');
 
         return [$parts[0], $parts[1]];
     }

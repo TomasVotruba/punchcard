@@ -1,6 +1,8 @@
 parameters:
     level: 8
 
+    reportUnmatchedIgnoredErrors: false
+
     paths:
         - bin
         - src
@@ -9,4 +11,4 @@ parameters:
 
     ignoreErrors:
         # false posistive
-        - '#Method TomasVotruba\\PunchCard\\ParameterTypeResolver::resolveTypeFromFuncCall\(\) never (.*?) so it can be removed from the return type#'
+        - '#Method TomasVotruba\\PunchCard\\ParameterTypeResolver::(.*?) never (.*?) so it can be removed from the return type#'

@@ -15,4 +15,19 @@ final class ScalarType
      * @var string
      */
     public const STRING = 'string';
+
+    /**
+     * @var string
+     */
+    public const INTEGER = 'int';
+
+    /**
+     * @var string
+     */
+    public const BOOLEAN = 'bool';
+
+    /**
+     * @var string
+     */
+    public const FLOAT = 'float';
 }
