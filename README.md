@@ -8,7 +8,17 @@ composer require tomasvotruba/punchcard
 
 ## Usage
 
+Create a fluent config from provided array config file:
+
+```
+vendor/bin/punchcard config/mail.php
+```
+
+This will print a config fluent class cointents:
+
+```php
 @todo
+```
 
 
 

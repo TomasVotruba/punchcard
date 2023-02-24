@@ -258,7 +258,7 @@ final class SessionConfig
         return $this;
     }
 
-    public function expireOnClose(bool $expire_on_close): self
+    public function expireOnClose(bool $expireOnClose): self
     {
         $this->expireOnClose = $expireOnClose;
         return $this;
@@ -327,13 +327,13 @@ final class SessionConfig
         return $this;
     }
 
-    public function httpOnly(bool $http_only): self
+    public function httpOnly(bool $httpOnly): self
     {
         $this->httpOnly = $httpOnly;
         return $this;
     }
 
-    public function sameSite(string $same_site): self
+    public function sameSite(string $sameSite): self
     {
         $this->sameSite = $sameSite;
         return $this;

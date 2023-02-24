@@ -52,7 +52,7 @@ final class SetterClassMethodFactory
 
     private function createParam(ParameterAndType $parameterAndType): Param
     {
-        $param = new Param(new Variable($parameterAndType->getName()));
+        $param = new Param(new Variable($parameterAndType->getVariableName()));
         $param->type = new Identifier($parameterAndType->getType());
 
         return $param;
