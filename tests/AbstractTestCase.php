@@ -11,7 +11,7 @@ abstract class AbstractTestCase extends TestCase
 {
     protected function setUp(): void
     {
-        $applicationBootloader = new ApplicationFactory();
-        $applicationBootloader->create();
+        $applicationFactory = new ApplicationFactory();
+        $applicationFactory->create();
     }
 }
