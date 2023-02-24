@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace TomasVotruba\PunchCard;
 
+use PhpParser\Node\Expr\MethodCall;
+use PhpParser\Node\Expr\Cast;
+use PhpParser\Node\Expr\Cast\Bool_;
 use PhpParser\ConstExprEvaluator;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\Array_;
@@ -38,6 +41,16 @@ final class ParameterTypeResolver
         }
 
         $constExprEvaluator = new ConstExprEvaluator();
+
+        if ($expr instanceof MethodCall) {
+            // @todo resolve later
+            return ScalarType::MIXED;
+        }
+
+        if ($expr instanceof Cast && $expr instanceof Bool_) {
+            return ScalarType::BOOLEAN;
+        }
+
         $realValue = $constExprEvaluator->evaluateDirectly($expr);
         if ($realValue === false || $realValue === true) {
             return ScalarType::BOOLEAN;

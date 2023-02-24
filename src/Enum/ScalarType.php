@@ -30,4 +30,9 @@ final class ScalarType
      * @var string
      */
     public const FLOAT = 'float';
+
+    /**
+     * @var string
+     */
+    public const MIXED = 'mixed';
 }
