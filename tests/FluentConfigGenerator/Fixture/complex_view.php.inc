@@ -11,6 +11,8 @@ return [
 -----
 <?php
 
+namespace TomasVotruba\PunchCard;
+
 final class Complex_viewConfig
 {
     private string $compiled;

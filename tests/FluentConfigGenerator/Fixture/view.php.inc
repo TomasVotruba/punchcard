@@ -8,6 +8,8 @@ return [
 -----
 <?php
 
+namespace TomasVotruba\PunchCard;
+
 final class ViewConfig
 {
     /**

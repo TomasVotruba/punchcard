@@ -6,8 +6,10 @@ namespace TomasVotruba\PunchCard;
 
 use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\ArrayItem;
+use PhpParser\Node\Name;
 use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Stmt;
+use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\Node\Stmt\Return_;
 use TomasVotruba\PunchCard\NodeFactory\ConfigClassFactory;
 use TomasVotruba\PunchCard\PhpParser\PhpNodesPrinter;
@@ -40,7 +42,11 @@ final class FluentConfigGenerator
         // create basic class from this one :)
         $class = $this->configClassFactory->createClassFromParameterNames($parametersAndTypes, $fileName);
 
-        return $this->phpNodesPrinter->prettyPrintFile([$class]) . PHP_EOL;
+        $namespace = new Namespace_(new Name('TomasVotruba\PunchCard'), [
+            $class,
+        ]);
+
+        return $this->phpNodesPrinter->prettyPrintFile([$namespace]) . PHP_EOL;
     }
 
     /**

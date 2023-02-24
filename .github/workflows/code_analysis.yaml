@@ -45,10 +45,15 @@ jobs:
                         run: vendor/bin/easy-ci check-active-class config src --ansi
 
                     -
+                        name: 'Bare CLI run'
+                        run: bin/punchcard --ansi
+
+                    -
                         name: 'Run on Laravel Skeleton'
                         run:
-                            # @todo make run directly with single command
-                            php bin/punchcard.php app:generate https://raw.githubusercontent.com/laravel/laravel/10.x/config/view.php
+                            bin/punchcard app:generate https://raw.githubusercontent.com/laravel/laravel/10.x/config/view.php
+
+                            bin/punchcard app:generate https://github.com/laravel/laravel/blob/10.x/config/session.php --ansi
 
         name: ${{ matrix.actions.name }}
         runs-on: ubuntu-latest
