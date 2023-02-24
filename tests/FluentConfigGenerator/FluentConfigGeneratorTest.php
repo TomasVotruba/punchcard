@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace TomasVotruba\PunchCard\Tests\FluentConfigGenerator;
 
-use Nette\Utils\FileSystem;
+use Illuminate\Support\Facades\Storage;
 use TomasVotruba\PunchCard\FluentConfigGenerator;
 use TomasVotruba\PunchCard\Tests\AbstractTestCase;
 
@@ -25,7 +25,7 @@ final class FluentConfigGeneratorTest extends AbstractTestCase
         $fixtureFilesPaths = glob(__DIR__ . '/Fixture/*.php.inc');
 
         foreach ($fixtureFilesPaths as $fixtureFilePath) {
-            $fixtureFileContents = FileSystem::read($fixtureFilePath);
+            $fixtureFileContents = Storage::read($fixtureFilePath);
 
             [$inputConfigContents, $expectedConfigClassContents] = $this->split($fixtureFileContents);
 
