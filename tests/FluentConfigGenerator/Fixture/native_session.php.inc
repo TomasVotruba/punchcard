@@ -211,7 +211,7 @@ return [
 
 namespace TomasVotruba\PunchCard;
 
-final class Native_sessionConfig
+final class SessionConfig
 {
     private string $driver;
 
@@ -332,13 +332,13 @@ final class Native_sessionConfig
         return $this;
     }
 
-    public function http_only(bool $http_only): self
+    public function httpOnly(bool $httpOnly): self
     {
-        $this->http_only = $http_only;
+        $this->httpOnly = $httpOnly;
         return $this;
     }
 
-    public function same_site(string $same_site): self
+    public function sameSite(string $same_site): self
     {
         $this->same_site = $same_site;
         return $this;
@@ -363,8 +363,8 @@ final class Native_sessionConfig
             'path' => $this->path,
             'domain' => $this->domain,
             'secure' => $this->secure,
-            'http_only' => $this->http_only,
-            'same_site' => $this->same_site,
+            'http_only' => $this->httpOnly,
+            'same_site' => $this->sameSite,
         ];
     }
 }
