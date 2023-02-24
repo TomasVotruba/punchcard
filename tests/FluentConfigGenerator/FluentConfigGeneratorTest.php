@@ -29,6 +29,12 @@ final class FluentConfigGeneratorTest extends AbstractTestCase
 
         $configClassContents = $this->fluentConfigGenerator->generate($inputConfigContents, $fixtureFilePath);
 
+        // update tests
+        if (getenv('UT')) {
+            FileSystem::write($fixtureFilePath, $inputConfigContents . "\n-----\n" . $configClassContents);
+            $expectedConfigClassContents = $configClassContents;
+        }
+
         $this->assertSame($expectedConfigClassContents, $configClassContents);
     }
 
@@ -36,8 +42,8 @@ final class FluentConfigGeneratorTest extends AbstractTestCase
     {
         /** @var string[] $fixtureFilesPaths */
         $fixtureFilesPaths = glob(__DIR__ . '/Fixture/*.php.inc');
-        foreach ($fixtureFilesPaths as $fixtureFilesPath) {
-            yield [$fixtureFilesPath];
+        foreach ($fixtureFilesPaths as $fixtureFilePath) {
+            yield [$fixtureFilePath];
         }
     }
 
@@ -46,7 +52,7 @@ final class FluentConfigGeneratorTest extends AbstractTestCase
      */
     private function split(string $fileContents): array
     {
-        $parts = str($fileContents)->split('#\-\-\-\-\-\n#');
+        $parts = str($fileContents)->split('#^\-\-\-\-\-\n#m');
 
         return [$parts[0], $parts[1]];
     }

@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace TomasVotruba\PunchCard;
 
+use PhpParser\ConstExprEvaluator;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\Array_;
 use PhpParser\Node\Expr\FuncCall;
+use PhpParser\Node\Scalar\LNumber;
+use PhpParser\Node\Scalar\String_;
 use TomasVotruba\PunchCard\Enum\ScalarType;
 use TomasVotruba\PunchCard\Exception\NotImplementedYetException;
 use TomasVotruba\PunchCard\Exception\ShouldNotHappenException;
@@ -18,6 +21,10 @@ final class ParameterTypeResolver
      */
     public function resolveExpr(Expr $expr): string
     {
+        if ($expr instanceof String_) {
+            return ScalarType::STRING;
+        }
+
         if ($expr instanceof Array_) {
             return ScalarType::ARRAY;
         }
@@ -25,6 +32,12 @@ final class ParameterTypeResolver
         // @todo func call?
         if ($expr instanceof FuncCall) {
             return $this->resolveTypeFromFuncCall($expr);
+        }
+
+        $constExprEvaluator = new ConstExprEvaluator();
+        $realValue = $constExprEvaluator->evaluateDirectly($expr);
+        if ($realValue === false || $realValue === true) {
+            return ScalarType::BOOLEAN;
         }
 
         throw new NotImplementedYetException(
@@ -51,8 +64,10 @@ final class ParameterTypeResolver
         if ($funcCallName === 'env') {
             // look into 2nd argument as default, to get the type
             $args = $funcCall->getArgs();
+
             if (! isset($args[1])) {
-                throw new NotImplementedYetException('Second arg is needed to resolve type');
+                // fallback to most common type - @todo narrow by name if needed
+                return ScalarType::STRING;
             }
 
             $secondArgValue = $args[1]->value;
@@ -64,8 +79,25 @@ final class ParameterTypeResolver
                     return ScalarType::STRING;
                 }
             }
+
+            if ($secondArgValue instanceof String_) {
+                return ScalarType::STRING;
+            }
+
+            if ($secondArgValue instanceof LNumber) {
+                return ScalarType::INTEGER;
+            }
+
+            if ($secondArgValue instanceof Expr\BinaryOp\Concat) {
+                return ScalarType::STRING;
+            }
         }
 
-        throw new NotImplementedYetException('Unable to resolve type from func call');
+        if ($funcCallName === 'storage_path') {
+            return ScalarType::STRING;
+        }
+
+        $errorMessage = sprintf('Unable to resolve type from "%s" func call', $funcCallName);
+        throw new NotImplementedYetException($errorMessage);
     }
 }

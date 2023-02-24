@@ -201,12 +201,170 @@ return [
 ];
 
 ?>
+
+
+
+
+
 -----
 <?php
 
 namespace TomasVotruba\PunchCard;
 
-final class SessionConfig
+final class Native_sessionConfig
 {
-    // ...
+    private string $driver;
+
+    private int $lifetime;
+
+    private bool $expire_on_close;
+
+    private bool $encrypt;
+
+    private string $files;
+
+    private string $connection;
+
+    private string $table;
+
+    private string $store;
+
+    /**
+     * @var string[]
+     */
+    private array $lottery = [];
+
+    private string $cookie;
+
+    private string $path;
+
+    private string $domain;
+
+    private string $secure;
+
+    private bool $http_only;
+
+    private string $same_site;
+
+    public static function make(): self
+    {
+        return new self();
+    }
+
+    public function driver(string $driver): self
+    {
+        $this->driver = $driver;
+        return $this;
+    }
+
+    public function lifetime(int $lifetime): self
+    {
+        $this->lifetime = $lifetime;
+        return $this;
+    }
+
+    public function expire_on_close(bool $expire_on_close): self
+    {
+        $this->expire_on_close = $expire_on_close;
+        return $this;
+    }
+
+    public function encrypt(bool $encrypt): self
+    {
+        $this->encrypt = $encrypt;
+        return $this;
+    }
+
+    public function files(string $files): self
+    {
+        $this->files = $files;
+        return $this;
+    }
+
+    public function connection(string $connection): self
+    {
+        $this->connection = $connection;
+        return $this;
+    }
+
+    public function table(string $table): self
+    {
+        $this->table = $table;
+        return $this;
+    }
+
+    public function store(string $store): self
+    {
+        $this->store = $store;
+        return $this;
+    }
+
+    /**
+     * @param string[] $lottery
+     */
+    public function lottery(array $lottery): self
+    {
+        $this->lottery = $lottery;
+        return $this;
+    }
+
+    public function cookie(string $cookie): self
+    {
+        $this->cookie = $cookie;
+        return $this;
+    }
+
+    public function path(string $path): self
+    {
+        $this->path = $path;
+        return $this;
+    }
+
+    public function domain(string $domain): self
+    {
+        $this->domain = $domain;
+        return $this;
+    }
+
+    public function secure(string $secure): self
+    {
+        $this->secure = $secure;
+        return $this;
+    }
+
+    public function http_only(bool $http_only): self
+    {
+        $this->http_only = $http_only;
+        return $this;
+    }
+
+    public function same_site(string $same_site): self
+    {
+        $this->same_site = $same_site;
+        return $this;
+    }
+
+    /**
+     * @return array<string, mixed[]>
+     */
+    public function toArray(): array
+    {
+        return [
+            'driver' => $this->driver,
+            'lifetime' => $this->lifetime,
+            'expire_on_close' => $this->expire_on_close,
+            'encrypt' => $this->encrypt,
+            'files' => $this->files,
+            'connection' => $this->connection,
+            'table' => $this->table,
+            'store' => $this->store,
+            'lottery' => $this->lottery,
+            'cookie' => $this->cookie,
+            'path' => $this->path,
+            'domain' => $this->domain,
+            'secure' => $this->secure,
+            'http_only' => $this->http_only,
+            'same_site' => $this->same_site,
+        ];
+    }
 }
