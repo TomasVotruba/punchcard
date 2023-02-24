@@ -36,14 +36,15 @@ final class PunchCardCommand extends Command
         foreach ($paths as $path) {
             $fileContents = FileSystem::read($path);
 
-            $fluentConfigContents = $this->fluentConfigGenerator->generate($fileContents, $path);
-
-            if ($fluentConfigContents === null) {
-                $this->error('Not implemented yet for %s', $path);
+            try {
+                $fluentConfigContents = $this->fluentConfigGenerator->generate($fileContents, $path);
+            } catch (\Throwable $throwable) {
+                $errorMessage = sprintf('Not implemented yet for %s: %s', $path, $throwable->getMessage());
+                $this->error($errorMessage);
                 return self::FAILURE;
             }
 
-            $this->line(sprintf('File generated: "%s"', PHP_EOL . PHP_EOL . $path));
+            $this->line(sprintf('File generated: "%s"', PHP_EOL . PHP_EOL . $fluentConfigContents));
         }
 
         $this->info('All done');

@@ -30,13 +30,14 @@ final class FluentConfigGenerator
     ) {
     }
 
-    public function generate(string $configFileContents, string $fileName): ?string
+    public function generate(string $configFileContents, string $fileName): string
     {
         $configStmts = $this->strictPhpParser->parse($configFileContents);
 
         $parametersAndTypes = $this->resolveMainParameterNames($configStmts);
         if ($parametersAndTypes === []) {
-            return null;
+            // empty config
+            return '';
         }
 
         // create basic class from this one :)
