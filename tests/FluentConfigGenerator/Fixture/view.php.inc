@@ -15,7 +15,7 @@ final class ViewConfig
      */
     private array $paths = [];
 
-    public static function create(): self
+    public static function make(): self
     {
         return new self();
     }

@@ -15,7 +15,7 @@ final class Complex_viewConfig
 {
     private string $compiled;
 
-    public static function create(): self
+    public static function make(): self
     {
         return new self();
     }

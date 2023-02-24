@@ -38,7 +38,7 @@ final class ConfigClassFactory
         $classMethods = $this->createClassMethods($parameterAndTypes);
 
         // add static "create" method
-        $classMethod = $this->createCreateStaticClassMethod();
+        $classMethod = $this->createMakeStaticClassMethod();
 
         $toArrayClassMethod = $this->toArrayClassMethodFactory->create($parameterAndTypes);
 
@@ -80,9 +80,9 @@ final class ConfigClassFactory
         return $classMethods;
     }
 
-    private function createCreateStaticClassMethod(): ClassMethod
+    private function createMakeStaticClassMethod(): ClassMethod
     {
-        $classMethod = new ClassMethod('create');
+        $classMethod = new ClassMethod('make');
         $classMethod->flags |= Class_::MODIFIER_STATIC;
         $classMethod->flags |= Class_::MODIFIER_PUBLIC;
         $classMethod->returnType = new Name('self');
