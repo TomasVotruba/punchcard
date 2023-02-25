@@ -18,7 +18,6 @@ final class KnownTypesMap
     {
         $typeMapByFileName = [
             'app' => [
-                'key' => new StringType(),
                 'providers' => new ArrayType(new ClassStringType(ServiceProvider::class)),
                 'aliases' => new ArrayType(new StringType()),
             ],
