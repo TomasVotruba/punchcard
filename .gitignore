@@ -8,6 +8,3 @@ composer.lock
 
 bootstrap/cache/*
 storage/*
-
-
-/generated
