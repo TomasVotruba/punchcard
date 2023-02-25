@@ -225,7 +225,7 @@ final class SessionConfig
     private ?string $store = null;
 
     /**
-     * @var string[]
+     * @var int[]
      */
     private array $lottery = [];
 
@@ -295,7 +295,7 @@ final class SessionConfig
     }
 
     /**
-     * @param string[] $lottery
+     * @param int[] $lottery
      */
     public function lottery(array $lottery): self
     {

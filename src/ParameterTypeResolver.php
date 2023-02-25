@@ -7,6 +7,7 @@ namespace TomasVotruba\PunchCard;
 use PhpParser\ConstExprEvaluator;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\Array_;
+use PhpParser\Node\Expr\ArrayItem;
 use PhpParser\Node\Expr\BinaryOp\Concat;
 use PhpParser\Node\Expr\Cast;
 use PhpParser\Node\Expr\Cast\Bool_;
@@ -16,11 +17,17 @@ use PhpParser\Node\Scalar;
 use PhpParser\Node\Scalar\DNumber;
 use PhpParser\Node\Scalar\LNumber;
 use PhpParser\Node\Scalar\String_;
-use TomasVotruba\PunchCard\Enum\KnownScalarTypeMap;
-use TomasVotruba\PunchCard\Enum\ScalarType;
+use TomasVotruba\PunchCard\Contracts\TypeInterface;
 use TomasVotruba\PunchCard\Exception\NotImplementedYetException;
 use TomasVotruba\PunchCard\Exception\ShouldNotHappenException;
 use TomasVotruba\PunchCard\ValueObject\ConfigFile;
+use TomasVotruba\PunchCard\ValueObject\Types\ArrayType;
+use TomasVotruba\PunchCard\ValueObject\Types\BooleanType;
+use TomasVotruba\PunchCard\ValueObject\Types\FloatType;
+use TomasVotruba\PunchCard\ValueObject\Types\IntegerType;
+use TomasVotruba\PunchCard\ValueObject\Types\MixedType;
+use TomasVotruba\PunchCard\ValueObject\Types\StringType;
+use Webmozart\Assert\Assert;
 
 final class ParameterTypeResolver
 {
@@ -29,22 +36,21 @@ final class ParameterTypeResolver
     ) {
     }
 
-    /**
-     * @return ScalarType::*|string
-     */
-    public function resolveFromExpr(Expr $expr, string $parameterName, ConfigFile $configFile): string
+    public function resolveFromExpr(Expr $expr, string $parameterName, ConfigFile $configFile): TypeInterface
     {
-        // fallback by map
-        if (isset(KnownScalarTypeMap::TYPE_MAP_BY_FILE_NAME[$configFile->getShortFileName()][$parameterName])) {
-            return KnownScalarTypeMap::TYPE_MAP_BY_FILE_NAME[$configFile->getShortFileName()][$parameterName];
-        }
-
         if ($expr instanceof Scalar) {
             return $this->resolveScalar($expr);
         }
 
         if ($expr instanceof Array_) {
-            return ScalarType::STRING_ARRAY;
+            $arrayItemType = new MixedType();
+            foreach ($expr->items as $arrayItem) {
+                Assert::isInstanceOf($arrayItem, ArrayItem::class);
+
+                $arrayItemType = $this->resolveFromExpr($arrayItem->value, $parameterName, $configFile);
+            }
+
+            return new ArrayType($arrayItemType);
         }
 
         // @todo func call?
@@ -53,17 +59,21 @@ final class ParameterTypeResolver
         }
 
         if ($expr instanceof MethodCall) {
-            // @todo resolve later
-            return ScalarType::MIXED;
+            return new MixedType();
         }
 
         if ($expr instanceof Cast && $expr instanceof Bool_) {
-            return ScalarType::BOOLEAN;
+            return new BooleanType();
+        }
+
+        if ($expr instanceof Concat) {
+            return new StringType();
         }
 
         $realValue = $this->constExprEvaluator->evaluateDirectly($expr);
+
         if ($realValue === false || $realValue === true) {
-            return ScalarType::BOOLEAN;
+            return new BooleanType();
         }
 
         throw new NotImplementedYetException(
@@ -80,10 +90,7 @@ final class ParameterTypeResolver
         return $funcCall->name->toString();
     }
 
-    /**
-     * @return ScalarType::*
-     */
-    private function resolveTypeFromFuncCall(FuncCall $funcCall): string
+    private function resolveTypeFromFuncCall(FuncCall $funcCall): TypeInterface
     {
         $funcCallName = $this->resolveFuncCallName($funcCall);
 
@@ -93,7 +100,7 @@ final class ParameterTypeResolver
 
             if (! isset($args[1])) {
                 // fallback to most common type - @todo narrow by name if needed
-                return ScalarType::NULLABLE_STRING;
+                return new StringType(true);
             }
 
             $secondArgValue = $args[1]->value;
@@ -102,12 +109,12 @@ final class ParameterTypeResolver
                 $funcCallName = $this->resolveFuncCallName($secondArgValue);
 
                 if ($funcCallName === 'realpath') {
-                    return ScalarType::STRING;
+                    return new StringType();
                 }
             }
 
             if ($secondArgValue instanceof Concat) {
-                return ScalarType::STRING;
+                return new StringType();
             }
 
             if ($secondArgValue instanceof Scalar) {
@@ -116,32 +123,29 @@ final class ParameterTypeResolver
         }
 
         if ($funcCallName === 'storage_path') {
-            return ScalarType::STRING;
+            return new StringType();
         }
 
         if ($funcCallName === 'explode') {
-            return ScalarType::STRING_ARRAY;
+            return new ArrayType(new StringType());
         }
 
         $errorMessage = sprintf('Unable to resolve type from "%s" func call', $funcCallName);
         throw new NotImplementedYetException($errorMessage);
     }
 
-    /**
-     * @return ScalarType::*
-     */
-    private function resolveScalar(Scalar $scalar): string
+    private function resolveScalar(Scalar $scalar): TypeInterface
     {
         if ($scalar instanceof String_) {
-            return ScalarType::STRING;
+            return new StringType();
         }
 
         if ($scalar instanceof LNumber) {
-            return ScalarType::INTEGER;
+            return new IntegerType();
         }
 
         if ($scalar instanceof DNumber) {
-            return ScalarType::FLOAT;
+            return new FloatType();
         }
 
         throw new NotImplementedYetException(sprintf(
