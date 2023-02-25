@@ -7,7 +7,7 @@ on:
 jobs:
     rector:
         # Don't run on forks.
-        if: github.repository == 'rectorphp/rector-src'
+        if: github.repository == 'tomasvotruba/punchcard'
 
         runs-on: ubuntu-latest
 
