@@ -3,7 +3,7 @@
     "description": "Lazy and strict way to configure your Laravel projects",
     "keywords": ["laravel", "config", "punchcard"],
     "bin": [
-        "bin/punchcard.php"
+        "bin/punchcard"
     ],
     "license": "MIT",
     "require": {
