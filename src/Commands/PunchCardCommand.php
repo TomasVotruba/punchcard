@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TomasVotruba\PunchCard\Commands;
 
+use Throwable;
 use Illuminate\Console\Command;
 use Nette\Utils\FileSystem;
 use TomasVotruba\PunchCard\FluentConfigGenerator;
@@ -41,7 +42,7 @@ final class PunchCardCommand extends Command
 
             try {
                 $fluentConfigContents = $this->fluentConfigGenerator->generate($fileContents, $filePath);
-            } catch (\Throwable $throwable) {
+            } catch (Throwable $throwable) {
                 $errorMessage = sprintf('Not implemented yet for %s: %s', $filePath, $throwable->getMessage());
                 $this->error($errorMessage);
                 return self::FAILURE;
@@ -91,7 +92,7 @@ final class PunchCardCommand extends Command
                     continue;
                 }
 
-                $filePaths = array_merge($filePaths, $currentFilePaths);
+                $filePaths = [...$filePaths, ...$currentFilePaths];
             } else {
                 $filePaths[] = $path;
             }
