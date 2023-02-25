@@ -32,7 +32,7 @@ use Webmozart\Assert\Assert;
 final class ParameterTypeResolver
 {
     public function __construct(
-        private readonly ConstExprEvaluator $constExprEvaluator = new ConstExprEvaluator(),
+        private readonly ConstExprEvaluator $constExprEvaluator,
     ) {
     }
 
