@@ -9,26 +9,6 @@ on:
 jobs:
     generate:
         strategy:
-            fail-fast: false
-            matrix:
-                file:
-                    - app.php
-                    - auth.php
-                    - broadcasting.php
-                    - cache.php
-                    - cors.php
-                    - database.php
-                    - filesystems.php
-                    - hashing.php
-                    - logging.php
-                    - mail.php
-                    - queue.php
-                    - sanctum.php
-                    - services.php
-                    - session.php
-                    - view.php
-
-        name: Generate ${{ matrix.file }} fluent Config
         runs-on: ubuntu-latest
 
         steps:
@@ -44,4 +24,10 @@ jobs:
             # composer install cache - https://github.com/ramsey/composer-install
             -   uses: "ramsey/composer-install@v2"
 
-            -   run: bin/punchcard https://raw.githubusercontent.com/laravel/laravel/10.x/config/${{ matrix.file }} --output generated --ansi
+            # create local version of laravel skeleton
+            -   run: composer create-project laravel/laravel tmp-laravel --no-install --no-scripts
+
+            # generate all configs
+            -   run: bin/punchcard tmp-laravel/config --output generated
+
+            # lint configs
