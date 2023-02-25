@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace TomasVotruba\PunchCard\Commands;
 
-use Throwable;
 use Illuminate\Console\Command;
 use Nette\Utils\FileSystem;
+use Throwable;
 use TomasVotruba\PunchCard\FluentConfigGenerator;
 use Webmozart\Assert\Assert;
 
