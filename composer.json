@@ -12,7 +12,7 @@
         "illuminate/container": "^10.0",
         "illuminate/http": "^10.0",
         "illuminate/support": "^10.0",
-        "nette/utils": "^4.0",
+        "nette/utils": "^3.4|^4.0",
         "nikic/php-parser": "^4.15.3",
         "webmozart/assert": "^1.11"
     },
