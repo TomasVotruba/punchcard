@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-namespace TomasVotruba\PunchCard\Console\Commands;
+namespace TomasVotruba\PunchCard\Commands;
 
 use Illuminate\Console\Command;
 use Nette\Utils\FileSystem;
 use TomasVotruba\PunchCard\FluentConfigGenerator;
-use Webmozart\Assert\Assert;
 
 final class PunchCardCommand extends Command
 {
@@ -15,7 +14,7 @@ final class PunchCardCommand extends Command
      * @see https://laravel.com/docs/10.x/artisan#input-arrays
      * @var string
      */
-    public $signature = 'app:generate {paths*}';
+    public $signature = 'app:generate {paths*} {--output=}';
 
     /**
      * @var string
@@ -45,10 +44,30 @@ final class PunchCardCommand extends Command
                 return self::FAILURE;
             }
 
-            $this->line(sprintf('File generated: "%s"', PHP_EOL . PHP_EOL . $fluentConfigContents));
+            $outputDirectory = $this->option('output');
+            if ($outputDirectory) {
+                $outputFilePath = $this->resolveOutputFilePath($fluentConfigContents, $outputDirectory);
+                FileSystem::write($outputFilePath, $fluentConfigContents);
+
+                $this->line(sprintf('File was generated to "%s"', $outputFilePath));
+            } else {
+                $this->line(sprintf('Generated config contents: "%s"', PHP_EOL . PHP_EOL . $fluentConfigContents));
+            }
         }
 
-        $this->info('All done');
+        $this->newLine();
+        $this->info('Generating finished');
+
         return self::SUCCESS;
+    }
+
+    private function resolveOutputFilePath(string $fluentConfigContents, string $outputDirectory): string
+    {
+        // generate to file path
+        $shortClassName = str($fluentConfigContents)
+            ->match('#class (\w+)#')
+            ->value();
+
+        return $outputDirectory . '/' . $shortClassName . '.php';
     }
 }

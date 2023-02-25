@@ -30,7 +30,7 @@
     },
     "autoload": {
         "psr-4": {
-            "TomasVotruba\\PunchCard\\": ["src", "app"]
+            "TomasVotruba\\PunchCard\\": ["src", "generated"]
         }
     },
     "autoload-dev": {
@@ -48,13 +48,6 @@
         "sort-packages": true,
         "allow-plugins": {
             "phpstan/extension-installer": true
-        }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "TomasVotruba\\PunchCard\\PunchCardServiceProvider"
-            ]
         }
     }
 }

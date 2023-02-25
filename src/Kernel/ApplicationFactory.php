@@ -7,7 +7,7 @@ namespace TomasVotruba\PunchCard\Kernel;
 use Illuminate\Console\Application;
 use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher;
-use TomasVotruba\PunchCard\Console\Commands\PunchCardCommand;
+use TomasVotruba\PunchCard\Commands\PunchCardCommand;
 
 /**
  * @api
