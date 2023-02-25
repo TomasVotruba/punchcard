@@ -11,8 +11,10 @@ use PhpParser\Node\Expr\ArrayItem;
 use PhpParser\Node\Expr\BinaryOp\Concat;
 use PhpParser\Node\Expr\Cast;
 use PhpParser\Node\Expr\Cast\Bool_;
+use PhpParser\Node\Expr\ClassConstFetch;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Expr\MethodCall;
+use PhpParser\Node\Name;
 use PhpParser\Node\Scalar;
 use PhpParser\Node\Scalar\DNumber;
 use PhpParser\Node\Scalar\LNumber;
@@ -23,6 +25,7 @@ use TomasVotruba\PunchCard\Exception\ShouldNotHappenException;
 use TomasVotruba\PunchCard\ValueObject\ConfigFile;
 use TomasVotruba\PunchCard\ValueObject\Types\ArrayType;
 use TomasVotruba\PunchCard\ValueObject\Types\BooleanType;
+use TomasVotruba\PunchCard\ValueObject\Types\ClassStringType;
 use TomasVotruba\PunchCard\ValueObject\Types\FloatType;
 use TomasVotruba\PunchCard\ValueObject\Types\IntegerType;
 use TomasVotruba\PunchCard\ValueObject\Types\MixedType;
@@ -68,6 +71,11 @@ final class ParameterTypeResolver
 
         if ($expr instanceof Concat) {
             return new StringType();
+        }
+
+        $classStringType = $this->resolveClassConstFetch($expr);
+        if ($classStringType instanceof ClassStringType) {
+            return $classStringType;
         }
 
         $realValue = $this->constExprEvaluator->evaluateDirectly($expr);
@@ -152,5 +160,23 @@ final class ParameterTypeResolver
             'The scalar type "%s" is not implemented yet',
             $scalar::class,
         ));
+    }
+
+    private function resolveClassConstFetch(Expr $expr): ?ClassStringType
+    {
+        if (! $expr instanceof ClassConstFetch) {
+            return null;
+        }
+
+        $constantName = $expr->name->toString();
+        if ($constantName !== 'class') {
+            return null;
+        }
+
+        if (! $expr->class instanceof Name) {
+            return null;
+        }
+
+        return new ClassStringType($expr->class->toString());
     }
 }
