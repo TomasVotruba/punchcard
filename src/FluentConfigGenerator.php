@@ -82,7 +82,7 @@ final class FluentConfigGenerator
                 $parameterName = $arrayItem->key->value;
 
                 // how to resolve type here?
-                $scalarType = $this->parameterTypeResolver->resolveExpr($arrayItem->value);
+                $scalarType = $this->parameterTypeResolver->resolveExpr($arrayItem->value, $parameterName);
                 $parametersAndTypes[] = new ParameterAndType($parameterName, $scalarType);
             }
         }

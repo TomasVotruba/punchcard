@@ -28,6 +28,7 @@ jobs:
                     - session.php
                     - view.php
 
+        name: Generate ${{ matrix.file }} fluent Config
         runs-on: ubuntu-latest
 
         steps:

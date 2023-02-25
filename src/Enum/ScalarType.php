@@ -35,4 +35,9 @@ final class ScalarType
      * @var string
      */
     public const MIXED = 'mixed';
+
+    /**
+     * @var string
+     */
+    public const NULLABLE_INTEGER = '?int';
 }

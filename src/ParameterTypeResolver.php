@@ -16,6 +16,7 @@ use PhpParser\Node\Scalar;
 use PhpParser\Node\Scalar\DNumber;
 use PhpParser\Node\Scalar\LNumber;
 use PhpParser\Node\Scalar\String_;
+use TomasVotruba\PunchCard\Enum\KnownScalarTypeMap;
 use TomasVotruba\PunchCard\Enum\ScalarType;
 use TomasVotruba\PunchCard\Exception\NotImplementedYetException;
 use TomasVotruba\PunchCard\Exception\ShouldNotHappenException;
@@ -25,7 +26,7 @@ final class ParameterTypeResolver
     /**
      * @return ScalarType::*
      */
-    public function resolveExpr(Expr $expr): string
+    public function resolveExpr(Expr $expr, string $parameterName): string
     {
         if ($expr instanceof Scalar) {
             return $this->resolveScalar($expr);
@@ -54,6 +55,11 @@ final class ParameterTypeResolver
         $realValue = $constExprEvaluator->evaluateDirectly($expr);
         if ($realValue === false || $realValue === true) {
             return ScalarType::BOOLEAN;
+        }
+
+        // fallback by map
+        if ($realValue === null && isset(KnownScalarTypeMap::TYPE_MAP[$parameterName])) {
+            return KnownScalarTypeMap::TYPE_MAP[$parameterName];
         }
 
         throw new NotImplementedYetException(
@@ -107,6 +113,10 @@ final class ParameterTypeResolver
 
         if ($funcCallName === 'storage_path') {
             return ScalarType::STRING;
+        }
+
+        if ($funcCallName === 'explode') {
+            return ScalarType::ARRAY;
         }
 
         $errorMessage = sprintf('Unable to resolve type from "%s" func call', $funcCallName);
