@@ -208,19 +208,19 @@ namespace TomasVotruba\PunchCard;
 
 final class SessionConfig
 {
-    private string $driver;
+    private ?string $driver = null;
 
     private int $lifetime;
 
-    private bool $expireOnClose;
+    private bool $expireOnClose = false;
 
-    private bool $encrypt;
+    private bool $encrypt = false;
 
-    private string $files;
+    private ?string $files = null;
 
     private ?string $connection = null;
 
-    private string $table;
+    private ?string $table = null;
 
     private ?string $store = null;
 
@@ -229,17 +229,17 @@ final class SessionConfig
      */
     private array $lottery = [];
 
-    private string $cookie;
+    private ?string $cookie = null;
 
-    private string $path;
+    private ?string $path = null;
 
     private ?string $domain = null;
 
     private ?string $secure = null;
 
-    private bool $httpOnly;
+    private bool $httpOnly = false;
 
-    private string $sameSite;
+    private ?string $sameSite = null;
 
     public static function make(): self
     {

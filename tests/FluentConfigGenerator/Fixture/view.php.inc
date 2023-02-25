@@ -21,7 +21,7 @@ final class ViewConfig
      */
     private array $paths = [];
 
-    private string $compiled;
+    private ?string $compiled = null;
 
     public static function make(): self
     {

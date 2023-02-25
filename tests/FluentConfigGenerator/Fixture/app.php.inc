@@ -222,27 +222,27 @@ namespace TomasVotruba\PunchCard;
 
 final class AppConfig
 {
-    private string $name;
+    private ?string $name = null;
 
-    private string $env;
+    private ?string $env = null;
 
-    private bool $debug;
+    private bool $debug = false;
 
-    private string $url;
+    private ?string $url = null;
 
     private ?string $assetUrl = null;
 
-    private string $timezone;
+    private ?string $timezone = null;
 
-    private string $locale;
+    private ?string $locale = null;
 
-    private string $fallbackLocale;
+    private ?string $fallbackLocale = null;
 
-    private string $fakerLocale;
+    private ?string $fakerLocale = null;
 
     private string $key;
 
-    private string $cipher;
+    private ?string $cipher = null;
 
     /**
      * @var string[]
@@ -250,7 +250,7 @@ final class AppConfig
     private array $maintenance = [];
 
     /**
-     * @var string[]
+     * @var array<class-string<\Illuminate\Support\ServiceProvider>>
      */
     private array $providers = [];
 
@@ -337,7 +337,7 @@ final class AppConfig
     }
 
     /**
-     * @param string[] $providers
+     * @param array<class-string<\Illuminate\Support\ServiceProvider>> $providers
      */
     public function providers(array $providers): self
     {

@@ -13,6 +13,7 @@ use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Nop;
 use PhpParser\Node\Stmt\Property;
 use PhpParser\Node\Stmt\Return_;
+use TomasVotruba\PunchCard\ValueObject\ConfigFile;
 use TomasVotruba\PunchCard\ValueObject\ParameterAndType;
 use Webmozart\Assert\Assert;
 
@@ -28,11 +29,11 @@ final class ConfigClassFactory
     /**
      * @param ParameterAndType[] $parameterAndTypes
      */
-    public function createClassFromParameterNames(array $parameterAndTypes, string $fileName): Class_
+    public function createClassFromParameterNames(array $parameterAndTypes, ConfigFile $configFile): Class_
     {
         Assert::allIsInstanceOf($parameterAndTypes, ParameterAndType::class);
 
-        $class = $this->createClass($fileName);
+        $class = $this->createClass($configFile);
 
         $properties = $this->createProperties($parameterAndTypes);
         $classMethods = $this->createClassMethods($parameterAndTypes);
@@ -94,11 +95,9 @@ final class ConfigClassFactory
         return $classMethod;
     }
 
-    private function createClass(string $fileName): Class_
+    private function createClass(ConfigFile $configFile): Class_
     {
-        $configClassName = $this->resolveClassName($fileName);
-
-        $class = new Class_($configClassName);
+        $class = new Class_($configFile->getClassName());
         $class->flags |= Class_::MODIFIER_FINAL;
 
         return $class;
@@ -120,14 +119,5 @@ final class ConfigClassFactory
         unset($separatedStmts[array_key_last($separatedStmts)]);
 
         return $separatedStmts;
-    }
-
-    private function resolveClassName(string $fileName): string
-    {
-        $shortFileName = str($fileName)
-            ->match('#(?<name>[A-Za-z]+)\.php#')
-            ->value();
-
-        return ucfirst(($shortFileName) . 'Config');
     }
 }

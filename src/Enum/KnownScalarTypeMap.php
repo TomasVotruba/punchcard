@@ -7,9 +7,15 @@ namespace TomasVotruba\PunchCard\Enum;
 final class KnownScalarTypeMap
 {
     /**
-     * @var array<string, ScalarType::*>
+     * @var array<string, array<string, string>>
      */
-    public const TYPE_MAP = [
-        'expiration' => ScalarType::NULLABLE_INTEGER,
+    public const TYPE_MAP_BY_FILE_NAME = [
+        'app' => [
+            'key' => ScalarType::STRING,
+            'providers' => 'array<class-string<\Illuminate\Support\ServiceProvider>>',
+        ],
+        'sanctum' => [
+            'expiration' => ScalarType::NULLABLE_INTEGER,
+        ],
     ];
 }

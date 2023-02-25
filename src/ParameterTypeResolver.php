@@ -20,6 +20,7 @@ use TomasVotruba\PunchCard\Enum\KnownScalarTypeMap;
 use TomasVotruba\PunchCard\Enum\ScalarType;
 use TomasVotruba\PunchCard\Exception\NotImplementedYetException;
 use TomasVotruba\PunchCard\Exception\ShouldNotHappenException;
+use TomasVotruba\PunchCard\ValueObject\ConfigFile;
 
 final class ParameterTypeResolver
 {
@@ -29,16 +30,21 @@ final class ParameterTypeResolver
     }
 
     /**
-     * @return ScalarType::*
+     * @return ScalarType::*|string
      */
-    public function resolveExpr(Expr $expr, string $parameterName): string
+    public function resolveFromExpr(Expr $expr, string $parameterName, ConfigFile $configFile): string
     {
+        // fallback by map
+        if (isset(KnownScalarTypeMap::TYPE_MAP_BY_FILE_NAME[$configFile->getShortFileName()][$parameterName])) {
+            return KnownScalarTypeMap::TYPE_MAP_BY_FILE_NAME[$configFile->getShortFileName()][$parameterName];
+        }
+
         if ($expr instanceof Scalar) {
             return $this->resolveScalar($expr);
         }
 
         if ($expr instanceof Array_) {
-            return ScalarType::ARRAY;
+            return ScalarType::STRING_ARRAY;
         }
 
         // @todo func call?
@@ -58,11 +64,6 @@ final class ParameterTypeResolver
         $realValue = $this->constExprEvaluator->evaluateDirectly($expr);
         if ($realValue === false || $realValue === true) {
             return ScalarType::BOOLEAN;
-        }
-
-        // fallback by map
-        if ($realValue === null && isset(KnownScalarTypeMap::TYPE_MAP[$parameterName])) {
-            return KnownScalarTypeMap::TYPE_MAP[$parameterName];
         }
 
         throw new NotImplementedYetException(
@@ -91,14 +92,6 @@ final class ParameterTypeResolver
             $args = $funcCall->getArgs();
 
             if (! isset($args[1])) {
-                // always string
-                $firstArgValue = $this->constExprEvaluator->evaluateDirectly($args[0]->value);
-
-                // this key is 99.99 % most likely filled
-                if ($firstArgValue === 'APP_KEY') {
-                    return ScalarType::STRING;
-                }
-
                 // fallback to most common type - @todo narrow by name if needed
                 return ScalarType::NULLABLE_STRING;
             }
@@ -127,7 +120,7 @@ final class ParameterTypeResolver
         }
 
         if ($funcCallName === 'explode') {
-            return ScalarType::ARRAY;
+            return ScalarType::STRING_ARRAY;
         }
 
         $errorMessage = sprintf('Unable to resolve type from "%s" func call', $funcCallName);

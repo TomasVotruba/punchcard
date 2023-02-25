@@ -22,15 +22,22 @@ final class PropertyFactory
         $propertyProperty = new PropertyProperty($parameterAndType->getVariableName());
 
         $property = new Property(Class_::MODIFIER_PRIVATE, [$propertyProperty]);
-        $property->type = new Identifier($parameterAndType->getType());
 
-        if ($parameterAndType->getType() === ScalarType::ARRAY) {
+        // property is always nullable if string, unless special name
+        $property->type = new Identifier($parameterAndType->getPropertyTypeDeclaration());
+
+        if ($parameterAndType->isArrayType()) {
             $property->props[0]->default = new Array_([]);
 
             // so far just string[], improve later on with types
-            $property->setDocComment(new Doc("/**\n * @var string[]\n */"));
-        } elseif ($parameterAndType->isNullableType()) {
+            $property->setDocComment(new Doc(sprintf(
+                "/**\n * @var %s\n */",
+                $parameterAndType->getPropertyType()
+            )));
+        } elseif ($parameterAndType->isPropertyNullableType()) {
             $property->props[0]->default = new ConstFetch(new Name('null'));
+        } elseif ($parameterAndType->getPropertyType() === ScalarType::BOOLEAN) {
+            $property->props[0]->default = new ConstFetch(new Name('false'));
         }
 
         return $property;

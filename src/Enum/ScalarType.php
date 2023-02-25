@@ -9,7 +9,7 @@ final class ScalarType
     /**
      * @var string
      */
-    public const ARRAY = 'array';
+    public const STRING_ARRAY = 'string[]';
 
     /**
      * @var string

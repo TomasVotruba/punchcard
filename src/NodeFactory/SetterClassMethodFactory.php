@@ -53,15 +53,22 @@ final class SetterClassMethodFactory
     private function createParam(ParameterAndType $parameterAndType): Param
     {
         $param = new Param(new Variable($parameterAndType->getVariableName()));
-        $param->type = new Identifier($parameterAndType->getType());
+        $param->type = new Identifier($parameterAndType->getSetterParamTypeDeclaration());
 
         return $param;
     }
 
     private function decorateDocBlock(ClassMethod $classMethod, ParameterAndType $parameterAndType): void
     {
-        if ($parameterAndType->getType() === ScalarType::ARRAY) {
+        if ($parameterAndType->getSetterParamType() === ScalarType::STRING_ARRAY) {
             $classMethod->setDocComment(new Doc("/**\n * @param string[] $" . $parameterAndType->getName() . "\n */"));
+        // custom type?
+        } elseif (str_starts_with($parameterAndType->getSetterParamType(), 'array<')) {
+            $classMethod->setDocComment(new Doc(sprintf(
+                "/**\n * @param %s $%s\n */",
+                $parameterAndType->getSetterParamType(),
+                $parameterAndType->getName()
+            )));
         }
     }
 }
