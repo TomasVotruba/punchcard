@@ -16,8 +16,8 @@ use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Expression;
 use PhpParser\Node\Stmt\Return_;
-use TomasVotruba\PunchCard\Enum\ScalarType;
 use TomasVotruba\PunchCard\ValueObject\ParameterAndType;
+use TomasVotruba\PunchCard\ValueObject\Types\ArrayType;
 
 final class SetterClassMethodFactory
 {
@@ -60,15 +60,14 @@ final class SetterClassMethodFactory
 
     private function decorateDocBlock(ClassMethod $classMethod, ParameterAndType $parameterAndType): void
     {
-        if ($parameterAndType->getSetterParamType() === ScalarType::STRING_ARRAY) {
-            $classMethod->setDocComment(new Doc("/**\n * @param string[] $" . $parameterAndType->getName() . "\n */"));
-        // custom type?
-        } elseif (str_starts_with($parameterAndType->getSetterParamType(), 'array<')) {
-            $classMethod->setDocComment(new Doc(sprintf(
-                "/**\n * @param %s $%s\n */",
-                $parameterAndType->getSetterParamType(),
-                $parameterAndType->getName()
-            )));
+        if (! $parameterAndType->getSetterParamType() instanceof ArrayType) {
+            return;
         }
+
+        $classMethod->setDocComment(new Doc(sprintf(
+            "/**\n * @param %s $%s\n */",
+            $parameterAndType->renderPropertyTypeDoc(),
+            $parameterAndType->getName()
+        )));
     }
 }

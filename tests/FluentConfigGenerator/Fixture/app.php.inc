@@ -254,7 +254,10 @@ final class AppConfig
      */
     private array $providers = [];
 
-    private mixed $aliases;
+    /**
+     * @var string[]
+     */
+    private array $aliases = [];
 
     public static function make(): self
     {
@@ -345,7 +348,10 @@ final class AppConfig
         return $this;
     }
 
-    public function aliases(mixed $aliases): self
+    /**
+     * @param string[] $aliases
+     */
+    public function aliases(array $aliases): self
     {
         $this->aliases = $aliases;
         return $this;

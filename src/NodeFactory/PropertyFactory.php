@@ -12,8 +12,8 @@ use PhpParser\Node\Name;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\Property;
 use PhpParser\Node\Stmt\PropertyProperty;
-use TomasVotruba\PunchCard\Enum\ScalarType;
 use TomasVotruba\PunchCard\ValueObject\ParameterAndType;
+use TomasVotruba\PunchCard\ValueObject\Types\BooleanType;
 
 final class PropertyFactory
 {
@@ -32,11 +32,11 @@ final class PropertyFactory
             // so far just string[], improve later on with types
             $property->setDocComment(new Doc(sprintf(
                 "/**\n * @var %s\n */",
-                $parameterAndType->getPropertyType()
+                $parameterAndType->renderPropertyTypeDoc()
             )));
         } elseif ($parameterAndType->isPropertyNullableType()) {
             $property->props[0]->default = new ConstFetch(new Name('null'));
-        } elseif ($parameterAndType->getPropertyType() === ScalarType::BOOLEAN) {
+        } elseif ($parameterAndType->getPropertyType() instanceof BooleanType) {
             $property->props[0]->default = new ConstFetch(new Name('false'));
         }
 

@@ -28,7 +28,21 @@ final class ToArrayClassMethodFactory
         $toArrayClassMethod->flags |= Class_::MODIFIER_PUBLIC;
         $toArrayClassMethod->returnType = new Identifier('array');
 
+        $array = $this->createArray($parametersAndTypes);
+        $toArrayClassMethod->stmts[] = new Return_($array);
+
+        $toArrayClassMethod->setDocComment(new Doc("/**\n * @return array<string, mixed[]>\n */"));
+
+        return $toArrayClassMethod;
+    }
+
+    /**
+     * @param ParameterAndType[] $parametersAndTypes
+     */
+    private function createArray(array $parametersAndTypes): Array_
+    {
         $array = new Array_();
+
         foreach ($parametersAndTypes as $parameterAndType) {
             $array->items[] = new ArrayItem(
                 new PropertyFetch(new Variable('this'), $parameterAndType->getVariableName()),
@@ -36,10 +50,6 @@ final class ToArrayClassMethodFactory
             );
         }
 
-        $toArrayClassMethod->stmts[] = new Return_($array);
-
-        $toArrayClassMethod->setDocComment(new Doc("/**\n * @return array<string, mixed[]>\n */"));
-
-        return $toArrayClassMethod;
+        return $array;
     }
 }

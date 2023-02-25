@@ -11,13 +11,14 @@ use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Stmt;
 use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\Node\Stmt\Return_;
-use TomasVotruba\PunchCard\Enum\KnownScalarTypeMap;
-use TomasVotruba\PunchCard\Enum\ScalarType;
+use TomasVotruba\PunchCard\Contracts\TypeInterface;
+use TomasVotruba\PunchCard\Enum\KnownTypesMap;
 use TomasVotruba\PunchCard\NodeFactory\ConfigClassFactory;
 use TomasVotruba\PunchCard\PhpParser\PhpNodesPrinter;
 use TomasVotruba\PunchCard\PhpParser\StrictPhpParser;
 use TomasVotruba\PunchCard\ValueObject\ConfigFile;
 use TomasVotruba\PunchCard\ValueObject\ParameterAndType;
+use TomasVotruba\PunchCard\ValueObject\Types\StringType;
 use Webmozart\Assert\Assert;
 
 /**
@@ -89,16 +90,16 @@ final class FluentConfigGenerator
 
                 $parameterName = $arrayItem->key->value;
 
-                $propertyType = KnownScalarTypeMap::TYPE_MAP_BY_FILE_NAME[$configFile->getShortFileName()][$parameterName] ?? null;
+                $propertyType = KnownTypesMap::match($configFile->getShortFileName(), $parameterName) ?? null;
 
                 // how to resolve type here?
-                if ($propertyType === null) {
+                if (! $propertyType instanceof TypeInterface) {
                     $propertyType = $this->parameterTypeResolver->resolveFromExpr($arrayItem->value, $parameterName, $configFile);
                     $paramSetterType = $propertyType;
 
                     // make always nullable, as does not have to be set
-                    if ($propertyType === ScalarType::STRING) {
-                        $propertyType = ScalarType::NULLABLE_STRING;
+                    if ($propertyType instanceof StringType) {
+                        $propertyType = new StringType(true);
                     }
                 } else {
                     $paramSetterType = $propertyType;
