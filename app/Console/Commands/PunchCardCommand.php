@@ -7,6 +7,7 @@ namespace TomasVotruba\PunchCard\Console\Commands;
 use Illuminate\Console\Command;
 use Nette\Utils\FileSystem;
 use TomasVotruba\PunchCard\FluentConfigGenerator;
+use Webmozart\Assert\Assert;
 
 final class PunchCardCommand extends Command
 {
