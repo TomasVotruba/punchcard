@@ -38,7 +38,7 @@ jobs:
 
                     -
                         name: 'Check Active Classes'
-                        run: vendor/bin/easy-ci check-active-class config src --ansi
+                        run: vendor/bin/easy-ci check-active-class src --ansi
 
                     -
                         name: 'Bare CLI run'
