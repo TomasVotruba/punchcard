@@ -23,8 +23,7 @@ final class PunchCardCommand extends Command
 
     public function __construct(
         private readonly FluentConfigGenerator $fluentConfigGenerator,
-    )
-    {
+    ) {
         parent::__construct();
     }
 
