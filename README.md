@@ -8,21 +8,29 @@ composer require tomasvotruba/punchcard
 
 ## Usage
 
-Create a fluent config from provided array config file:
+This package provides basic fluent config classes for the Laravel project [`/config`](https://github.com/laravel/laravel/tree/10.x/config) directory.
 
-```
-vendor/bin/punchcard config/mail.php
-```
-
-This will print a config fluent class cointents:
+You can use the right away after installing this package, e.g. in your `config/app.php`:
 
 ```php
-@todo
+<?php
+
+declare(strict_types=1);
+
+use TomasVotruba\PunchCard\CacheConfig;
+
+return CacheConfig::make()
+    ->default(env('CACHE_DRIVER', 'file'))
+    ->stores([
+        'array' => [
+            'driver' => 'array',
+            'serialize' => false,
+        ],
+    ])
+    ->toArray();
 ```
 
 
+<br>
 
-
-## Todo
-
-- [ ] pre-generated configs before deploying to make it part of autoloaded scope
+Happy coding!
