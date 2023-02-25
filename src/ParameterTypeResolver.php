@@ -150,16 +150,6 @@ final class ParameterTypeResolver
             if ($secondArgValueType instanceof TypeInterface) {
                 return $secondArgValueType;
             }
-
-            //if ($secondArgValue instanceof Concat) {
-            //    return new StringType();
-            //}
-            //
-            //if ($secondArgValue instanceof Scalar) {
-            //    return $this->resolveScalar($secondArgValue);
-            //}
-
-            //dump($secondArgValue);
         }
 
         if (str_ends_with($funcCallName, '_path')) {
