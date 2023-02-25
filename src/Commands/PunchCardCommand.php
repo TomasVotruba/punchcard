@@ -44,7 +44,7 @@ final class PunchCardCommand extends Command
             }
 
             $outputDirectory = $this->option('output');
-            if ($outputDirectory) {
+            if (is_string($outputDirectory)) {
                 $outputFilePath = $this->resolveOutputFilePath($fluentConfigContents, $outputDirectory);
                 FileSystem::write($outputFilePath, $fluentConfigContents);
 
