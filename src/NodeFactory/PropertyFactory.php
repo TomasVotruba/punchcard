@@ -6,7 +6,9 @@ namespace TomasVotruba\PunchCard\NodeFactory;
 
 use PhpParser\Comment\Doc;
 use PhpParser\Node\Expr\Array_;
+use PhpParser\Node\Expr\ConstFetch;
 use PhpParser\Node\Identifier;
+use PhpParser\Node\Name;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\Property;
 use PhpParser\Node\Stmt\PropertyProperty;
@@ -27,6 +29,8 @@ final class PropertyFactory
 
             // so far just string[], improve later on with types
             $property->setDocComment(new Doc("/**\n * @var string[]\n */"));
+        } elseif ($parameterAndType->isNullableType()) {
+            $property->props[0]->default = new ConstFetch(new Name('null'));
         }
 
         return $property;

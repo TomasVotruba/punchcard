@@ -40,4 +40,9 @@ final class ScalarType
      * @var string
      */
     public const NULLABLE_INTEGER = '?int';
+
+    /**
+     * @var string
+     */
+    public const NULLABLE_STRING = '?string';
 }

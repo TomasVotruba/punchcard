@@ -230,7 +230,7 @@ final class AppConfig
 
     private string $url;
 
-    private string $assetUrl;
+    private ?string $assetUrl = null;
 
     private string $timezone;
 
@@ -285,7 +285,7 @@ final class AppConfig
         return $this;
     }
 
-    public function assetUrl(string $assetUrl): self
+    public function assetUrl(?string $assetUrl): self
     {
         $this->assetUrl = $assetUrl;
         return $this;
