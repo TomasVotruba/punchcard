@@ -26,7 +26,7 @@ jobs:
             -   uses: "ramsey/composer-install@v2"
 
             # create local version of laravel skeleton
-            -   run: composer create-project laravel/laravel tmp-laravel
+            -   run: composer create-project laravel/laravel tmp-laravel --no-install --no-scripts
 
             # generate all configs
             -   run: bin/punchcard tmp-laravel/config --output generated
