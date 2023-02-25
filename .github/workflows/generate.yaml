@@ -44,6 +44,12 @@ jobs:
 
             -   run: bin/punchcard https://raw.githubusercontent.com/laravel/laravel/10.x/config/${{ matrix.file }} --output generated --ansi
 
+            # setup github user
+            -
+                run: |
+                    git config user.email "action@github.com"
+                    git config user.name "GitHub Action"
+
             -
                 name: "Tag Downgraded Code"
                 run: |
