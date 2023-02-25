@@ -12,7 +12,7 @@ final class KnownScalarTypeMap
     public const TYPE_MAP_BY_FILE_NAME = [
         'app' => [
             'key' => ScalarType::STRING,
-            'provides' => 'array<class-string<\Illuminate\Support\ServiceProvider>>',
+            'providers' => 'array<class-string<\Illuminate\Support\ServiceProvider>>',
         ],
         'sanctum' => [
             'expiration' => ScalarType::NULLABLE_INTEGER,

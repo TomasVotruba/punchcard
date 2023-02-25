@@ -21,10 +21,23 @@ final class ParameterAndType
     }
 
     /**
-     * @return ScalarType::*
+     * @return ScalarType::*|string
      */
     public function getPropertyType(): string
     {
+        return $this->propertyType;
+    }
+
+    public function getPropertyTypeDeclaration(): string
+    {
+        if (str_starts_with($this->propertyType, 'array<')) {
+            return 'array';
+        }
+
+        if (str_ends_with($this->propertyType, '[]')) {
+            return 'array';
+        }
+
         return $this->propertyType;
     }
 
@@ -34,15 +47,36 @@ final class ParameterAndType
     }
 
     /**
-     * @return ScalarType::*
+     * @return ScalarType::*|string
      */
     public function getSetterParamType(): string
     {
         return $this->setterParamType;
     }
 
+    /**
+     * Must be valid PHP
+     */
+    public function getSetterParamTypeDeclaration(): string
+    {
+        if (str_starts_with($this->setterParamType, 'array<')) {
+            return 'array';
+        }
+
+        if (str_ends_with($this->setterParamType, '[]')) {
+            return 'array';
+        }
+
+        return $this->setterParamType;
+    }
+
     public function isPropertyNullableType(): bool
     {
         return in_array($this->propertyType, [ScalarType::NULLABLE_STRING, ScalarType::NULLABLE_INTEGER], true);
+    }
+
+    public function isArrayType(): bool
+    {
+        return $this->getPropertyTypeDeclaration() === 'array';
     }
 }

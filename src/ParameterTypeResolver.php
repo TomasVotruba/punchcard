@@ -44,7 +44,7 @@ final class ParameterTypeResolver
         }
 
         if ($expr instanceof Array_) {
-            return ScalarType::ARRAY;
+            return ScalarType::STRING_ARRAY;
         }
 
         // @todo func call?
@@ -120,7 +120,7 @@ final class ParameterTypeResolver
         }
 
         if ($funcCallName === 'explode') {
-            return ScalarType::ARRAY;
+            return ScalarType::STRING_ARRAY;
         }
 
         $errorMessage = sprintf('Unable to resolve type from "%s" func call', $funcCallName);
