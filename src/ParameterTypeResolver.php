@@ -56,9 +56,8 @@ final class ParameterTypeResolver
             return new ArrayType($arrayItemType);
         }
 
-        // @todo func call?
         if ($expr instanceof FuncCall) {
-            return $this->resolveTypeFromFuncCall($expr);
+            return $this->resolveTypeFromFuncCall($expr, $parameterName, $configFile);
         }
 
         if ($expr instanceof MethodCall) {
@@ -73,12 +72,33 @@ final class ParameterTypeResolver
             return new StringType();
         }
 
+        if ($expr instanceof Expr\Ternary) {
+            $ifType = null;
+            if ($expr->if instanceof Expr) {
+                $ifType = $this->resolveFromExpr($expr->if, $parameterName, $configFile);
+            }
+            $elseType = $this->resolveFromExpr($expr->else, $parameterName, $configFile);
+
+            if ($ifType === null) {
+                return $elseType;
+            }
+
+            if ($ifType::class === $elseType::class) {
+                return $ifType;
+            }
+        }
+
         $classStringType = $this->resolveClassConstFetch($expr);
         if ($classStringType instanceof ClassStringType) {
             return $classStringType;
         }
 
-        $realValue = $this->constExprEvaluator->evaluateDirectly($expr);
+        try {
+            $realValue = $this->constExprEvaluator->evaluateDirectly($expr);
+        } catch (\Throwable) {
+            // nothing we can do
+            return new MixedType();
+        }
 
         if ($realValue === false || $realValue === true) {
             return new BooleanType();
@@ -98,7 +118,7 @@ final class ParameterTypeResolver
         return $funcCall->name->toString();
     }
 
-    private function resolveTypeFromFuncCall(FuncCall $funcCall): TypeInterface
+    private function resolveTypeFromFuncCall(FuncCall $funcCall, string $parameterName, ConfigFile $configFile): TypeInterface
     {
         $funcCallName = $this->resolveFuncCallName($funcCall);
 
@@ -121,16 +141,23 @@ final class ParameterTypeResolver
                 }
             }
 
-            if ($secondArgValue instanceof Concat) {
-                return new StringType();
+            $secondArgValueType = $this->resolveFromExpr($secondArgValue, $parameterName, $configFile);
+            if ($secondArgValueType instanceof TypeInterface) {
+                return $secondArgValueType;
             }
 
-            if ($secondArgValue instanceof Scalar) {
-                return $this->resolveScalar($secondArgValue);
-            }
+            //if ($secondArgValue instanceof Concat) {
+            //    return new StringType();
+            //}
+            //
+            //if ($secondArgValue instanceof Scalar) {
+            //    return $this->resolveScalar($secondArgValue);
+            //}
+
+            //dump($secondArgValue);
         }
 
-        if ($funcCallName === 'storage_path') {
+        if (str_ends_with($funcCallName, '_path')) {
             return new StringType();
         }
 

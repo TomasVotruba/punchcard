@@ -12,7 +12,6 @@ use PhpParser\Node\Stmt;
 use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\Node\Stmt\Return_;
 use TomasVotruba\PunchCard\Contracts\TypeInterface;
-use TomasVotruba\PunchCard\Enum\KnownTypesMap;
 use TomasVotruba\PunchCard\NodeFactory\ConfigClassFactory;
 use TomasVotruba\PunchCard\PhpParser\PhpNodesPrinter;
 use TomasVotruba\PunchCard\PhpParser\StrictPhpParser;

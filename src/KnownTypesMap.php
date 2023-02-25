@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace TomasVotruba\PunchCard\Enum;
+namespace TomasVotruba\PunchCard;
 
 use Illuminate\Support\ServiceProvider;
 use TomasVotruba\PunchCard\Contracts\TypeInterface;
 use TomasVotruba\PunchCard\ValueObject\Types\ArrayType;
 use TomasVotruba\PunchCard\ValueObject\Types\ClassStringType;
 use TomasVotruba\PunchCard\ValueObject\Types\IntegerType;
+use TomasVotruba\PunchCard\ValueObject\Types\MixedType;
 use TomasVotruba\PunchCard\ValueObject\Types\StringType;
 
 final class KnownTypesMap
@@ -23,6 +24,9 @@ final class KnownTypesMap
             ],
             'sanctum' => [
                 'expiration' => new IntegerType(true),
+            ],
+            'cache' => [
+                'stores' => new ArrayType(new MixedType()),
             ],
         ];
 
