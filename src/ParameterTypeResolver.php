@@ -105,6 +105,10 @@ final class ParameterTypeResolver
             return new BooleanType();
         }
 
+        if ($realValue === null) {
+            return new MixedType();
+        }
+
         throw new NotImplementedYetException(
             sprintf('The "%s" type is not implemented yet', $expr::class)
         );
@@ -164,6 +168,10 @@ final class ParameterTypeResolver
 
         if ($funcCallName === 'explode') {
             return new ArrayType(new StringType());
+        }
+
+        if ($funcCallName === 'array_filter') {
+            return new ArrayType(new MixedType());
         }
 
         $errorMessage = sprintf('Unable to resolve type from "%s" func call', $funcCallName);
