@@ -15,3 +15,5 @@ parameters:
 
         # known value
         - '#Parameter \#1 \$commandName of method Symfony\\Component\\Console\\Application\:\:setDefaultCommand\(\) expects string, string\|null given#'
+
+        - '#Method TomasVotruba\\PunchCard\\ValueObject\\ParameterAndType\:\:(.*?) should return (.*?) but returns string#'

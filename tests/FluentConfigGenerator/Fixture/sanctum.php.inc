@@ -67,7 +67,7 @@ final class SanctumConfig
      */
     private array $guard = [];
 
-    private ?int $expiration;
+    private ?int $expiration = null;
 
     public static function make(): self
     {

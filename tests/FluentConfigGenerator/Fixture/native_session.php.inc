@@ -218,11 +218,11 @@ final class SessionConfig
 
     private string $files;
 
-    private string $connection;
+    private ?string $connection = null;
 
     private string $table;
 
-    private string $store;
+    private ?string $store = null;
 
     /**
      * @var string[]
@@ -233,9 +233,9 @@ final class SessionConfig
 
     private string $path;
 
-    private string $domain;
+    private ?string $domain = null;
 
-    private string $secure;
+    private ?string $secure = null;
 
     private bool $httpOnly;
 
@@ -276,7 +276,7 @@ final class SessionConfig
         return $this;
     }
 
-    public function connection(string $connection): self
+    public function connection(?string $connection): self
     {
         $this->connection = $connection;
         return $this;
@@ -288,7 +288,7 @@ final class SessionConfig
         return $this;
     }
 
-    public function store(string $store): self
+    public function store(?string $store): self
     {
         $this->store = $store;
         return $this;
@@ -315,13 +315,13 @@ final class SessionConfig
         return $this;
     }
 
-    public function domain(string $domain): self
+    public function domain(?string $domain): self
     {
         $this->domain = $domain;
         return $this;
     }
 
-    public function secure(string $secure): self
+    public function secure(?string $secure): self
     {
         $this->secure = $secure;
         return $this;

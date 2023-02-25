@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace TomasVotruba\PunchCard\ValueObject;
 
+use TomasVotruba\PunchCard\Enum\ScalarType;
+
 final class ParameterAndType
 {
     public function __construct(
@@ -17,6 +19,9 @@ final class ParameterAndType
         return $this->name;
     }
 
+    /**
+     * @return ScalarType::*
+     */
     public function getType(): string
     {
         return $this->type;
@@ -25,5 +30,10 @@ final class ParameterAndType
     public function getVariableName(): string
     {
         return str($this->name)->camel()->value();
+    }
+
+    public function isNullableType(): bool
+    {
+        return in_array($this->type, [ScalarType::NULLABLE_STRING, ScalarType::NULLABLE_INTEGER], true);
     }
 }

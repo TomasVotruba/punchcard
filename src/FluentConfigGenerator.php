@@ -22,6 +22,11 @@ use Webmozart\Assert\Assert;
  */
 final class FluentConfigGenerator
 {
+    /**
+     * @var string
+     */
+    private const NAMESPACE_NAME = 'TomasVotruba\PunchCard';
+
     public function __construct(
         private readonly ConfigClassFactory $configClassFactory,
         private readonly StrictPhpParser $strictPhpParser,
@@ -43,7 +48,7 @@ final class FluentConfigGenerator
         // create basic class from this one :)
         $class = $this->configClassFactory->createClassFromParameterNames($parametersAndTypes, $fileName);
 
-        $namespace = new Namespace_(new Name('TomasVotruba\PunchCard'), [
+        $namespace = new Namespace_(new Name(self::NAMESPACE_NAME), [
             $class,
         ]);
 

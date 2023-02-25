@@ -23,6 +23,11 @@ use TomasVotruba\PunchCard\Exception\ShouldNotHappenException;
 
 final class ParameterTypeResolver
 {
+    public function __construct(
+        private readonly ConstExprEvaluator $constExprEvaluator = new ConstExprEvaluator(),
+    ) {
+    }
+
     /**
      * @return ScalarType::*
      */
@@ -41,8 +46,6 @@ final class ParameterTypeResolver
             return $this->resolveTypeFromFuncCall($expr);
         }
 
-        $constExprEvaluator = new ConstExprEvaluator();
-
         if ($expr instanceof MethodCall) {
             // @todo resolve later
             return ScalarType::MIXED;
@@ -52,7 +55,7 @@ final class ParameterTypeResolver
             return ScalarType::BOOLEAN;
         }
 
-        $realValue = $constExprEvaluator->evaluateDirectly($expr);
+        $realValue = $this->constExprEvaluator->evaluateDirectly($expr);
         if ($realValue === false || $realValue === true) {
             return ScalarType::BOOLEAN;
         }
@@ -88,8 +91,16 @@ final class ParameterTypeResolver
             $args = $funcCall->getArgs();
 
             if (! isset($args[1])) {
+                // always string
+                $firstArgValue = $this->constExprEvaluator->evaluateDirectly($args[0]->value);
+
+                // this key is 99.99 % most likely filled
+                if ($firstArgValue === 'APP_KEY') {
+                    return ScalarType::STRING;
+                }
+
                 // fallback to most common type - @todo narrow by name if needed
-                return ScalarType::STRING;
+                return ScalarType::NULLABLE_STRING;
             }
 
             $secondArgValue = $args[1]->value;
