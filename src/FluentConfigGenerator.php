@@ -11,9 +11,12 @@ use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Stmt;
 use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\Node\Stmt\Return_;
+use TomasVotruba\PunchCard\Enum\KnownScalarTypeMap;
+use TomasVotruba\PunchCard\Enum\ScalarType;
 use TomasVotruba\PunchCard\NodeFactory\ConfigClassFactory;
 use TomasVotruba\PunchCard\PhpParser\PhpNodesPrinter;
 use TomasVotruba\PunchCard\PhpParser\StrictPhpParser;
+use TomasVotruba\PunchCard\ValueObject\ConfigFile;
 use TomasVotruba\PunchCard\ValueObject\ParameterAndType;
 use Webmozart\Assert\Assert;
 
@@ -35,18 +38,18 @@ final class FluentConfigGenerator
     ) {
     }
 
-    public function generate(string $configFileContents, string $fileName): string
+    public function generate(ConfigFile $configFile): string
     {
-        $configStmts = $this->strictPhpParser->parse($configFileContents);
+        $configStmts = $this->strictPhpParser->parse($configFile->getFileContents());
 
-        $parametersAndTypes = $this->resolveMainParameterNames($configStmts);
+        $parametersAndTypes = $this->resolveMainParameterNames($configStmts, $configFile);
         if ($parametersAndTypes === []) {
             // empty config
             return '';
         }
 
         // create basic class from this one :)
-        $class = $this->configClassFactory->createClassFromParameterNames($parametersAndTypes, $fileName);
+        $class = $this->configClassFactory->createClassFromParameterNames($parametersAndTypes, $configFile);
 
         $namespace = new Namespace_(new Name(self::NAMESPACE_NAME), [
             $class,
@@ -59,7 +62,7 @@ final class FluentConfigGenerator
      * @param Stmt[] $configStmts
      * @return ParameterAndType[]
      */
-    private function resolveMainParameterNames(array $configStmts): array
+    private function resolveMainParameterNames(array $configStmts, ConfigFile $configFile): array
     {
         $parametersAndTypes = [];
 
@@ -86,9 +89,22 @@ final class FluentConfigGenerator
 
                 $parameterName = $arrayItem->key->value;
 
+                $propertyType = KnownScalarTypeMap::TYPE_MAP_BY_FILE_NAME[$configFile->getShortFileName()][$parameterName] ?? null;
+
                 // how to resolve type here?
-                $scalarType = $this->parameterTypeResolver->resolveExpr($arrayItem->value, $parameterName);
-                $parametersAndTypes[] = new ParameterAndType($parameterName, $scalarType);
+                if ($propertyType === null) {
+                    $propertyType = $this->parameterTypeResolver->resolveFromExpr($arrayItem->value, $parameterName, $configFile);
+                    $paramSetterType = $propertyType;
+
+                    // make always nullable, as does not have to be set
+                    if ($propertyType === ScalarType::STRING) {
+                        $propertyType = ScalarType::NULLABLE_STRING;
+                    }
+                } else {
+                    $paramSetterType = $propertyType;
+                }
+
+                $parametersAndTypes[] = new ParameterAndType($parameterName, $propertyType, $paramSetterType);
             }
         }
 

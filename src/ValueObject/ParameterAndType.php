@@ -10,7 +10,8 @@ final class ParameterAndType
 {
     public function __construct(
         private readonly string $name,
-        private readonly string $type,
+        private readonly string $propertyType,
+        private readonly string $setterParamType,
     ) {
     }
 
@@ -22,9 +23,9 @@ final class ParameterAndType
     /**
      * @return ScalarType::*
      */
-    public function getType(): string
+    public function getPropertyType(): string
     {
-        return $this->type;
+        return $this->propertyType;
     }
 
     public function getVariableName(): string
@@ -32,8 +33,16 @@ final class ParameterAndType
         return str($this->name)->camel()->value();
     }
 
-    public function isNullableType(): bool
+    /**
+     * @return ScalarType::*
+     */
+    public function getSetterParamType(): string
     {
-        return in_array($this->type, [ScalarType::NULLABLE_STRING, ScalarType::NULLABLE_INTEGER], true);
+        return $this->setterParamType;
+    }
+
+    public function isPropertyNullableType(): bool
+    {
+        return in_array($this->propertyType, [ScalarType::NULLABLE_STRING, ScalarType::NULLABLE_INTEGER], true);
     }
 }

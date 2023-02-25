@@ -9,6 +9,7 @@ use Nette\Utils\FileSystem;
 use PHPUnit\Framework\Attributes\DataProvider;
 use TomasVotruba\PunchCard\FluentConfigGenerator;
 use TomasVotruba\PunchCard\Tests\AbstractTestCase;
+use TomasVotruba\PunchCard\ValueObject\ConfigFile;
 
 final class FluentConfigGeneratorTest extends AbstractTestCase
 {
@@ -28,7 +29,8 @@ final class FluentConfigGeneratorTest extends AbstractTestCase
 
         [$inputConfigContents, $expectedConfigClassContents] = $this->split($fixtureFileContents);
 
-        $configClassContents = $this->fluentConfigGenerator->generate($inputConfigContents, $fixtureFilePath);
+        $configFile = new ConfigFile($fixtureFilePath, $inputConfigContents);
+        $configClassContents = $this->fluentConfigGenerator->generate($configFile);
 
         // update tests
         if (getenv('UT')) {

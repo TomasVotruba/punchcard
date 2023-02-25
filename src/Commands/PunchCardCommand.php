@@ -8,6 +8,7 @@ use Illuminate\Console\Command;
 use Nette\Utils\FileSystem;
 use Throwable;
 use TomasVotruba\PunchCard\FluentConfigGenerator;
+use TomasVotruba\PunchCard\ValueObject\ConfigFile;
 use Webmozart\Assert\Assert;
 
 final class PunchCardCommand extends Command
@@ -39,9 +40,10 @@ final class PunchCardCommand extends Command
 
         foreach ($filePaths as $filePath) {
             $fileContents = FileSystem::read($filePath);
+            $configFile = new ConfigFile($filePath, $fileContents);
 
             try {
-                $fluentConfigContents = $this->fluentConfigGenerator->generate($fileContents, $filePath);
+                $fluentConfigContents = $this->fluentConfigGenerator->generate($configFile);
             } catch (Throwable $throwable) {
                 $errorMessage = sprintf('Not implemented yet for %s: %s', $filePath, $throwable->getMessage());
                 $this->error($errorMessage);
