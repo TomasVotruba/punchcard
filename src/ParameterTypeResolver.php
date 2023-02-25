@@ -14,6 +14,7 @@ use PhpParser\Node\Expr\Cast\Bool_;
 use PhpParser\Node\Expr\ClassConstFetch;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Expr\MethodCall;
+use PhpParser\Node\Identifier;
 use PhpParser\Node\Name;
 use PhpParser\Node\Scalar;
 use PhpParser\Node\Scalar\DNumber;
@@ -192,6 +193,10 @@ final class ParameterTypeResolver
     private function resolveClassConstFetch(Expr $expr): ?ClassStringType
     {
         if (! $expr instanceof ClassConstFetch) {
+            return null;
+        }
+
+        if (! $expr->name instanceof Identifier) {
             return null;
         }
 
