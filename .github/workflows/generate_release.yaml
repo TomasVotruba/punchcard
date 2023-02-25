@@ -25,6 +25,12 @@ jobs:
             # composer install cache - https://github.com/ramsey/composer-install
             -   uses: "ramsey/composer-install@v2"
 
+            # create local version of laravel skeleton
+            -   run: composer create-project laravel/laravel tmp-laravel
+
+            # generate all configs
+            -   run: bin/punchcard tmp-laravel/config --output generated
+
             # setup git user
             -
                 run: |
@@ -37,7 +43,7 @@ jobs:
                 run: |
                     # separate a "git add" to add untracked (new) files too
                     git add --all
-                    git commit -m "release PHP 7.2 downgraded"
+                    git commit -m "release Generated Configs"
 
                     # force push tag, so there is only 1 version
                     git tag "${GITHUB_REF#refs/tags/}" --force

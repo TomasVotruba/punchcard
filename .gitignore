@@ -8,3 +8,5 @@ composer.lock
 
 bootstrap/cache/*
 storage/*
+
+/tmp-laravel

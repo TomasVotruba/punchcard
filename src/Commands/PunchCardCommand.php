@@ -7,6 +7,7 @@ namespace TomasVotruba\PunchCard\Commands;
 use Illuminate\Console\Command;
 use Nette\Utils\FileSystem;
 use TomasVotruba\PunchCard\FluentConfigGenerator;
+use Webmozart\Assert\Assert;
 
 final class PunchCardCommand extends Command
 {
@@ -32,13 +33,16 @@ final class PunchCardCommand extends Command
         /** @var string[] $paths */
         $paths = $this->argument('paths');
 
-        foreach ($paths as $path) {
-            $fileContents = FileSystem::read($path);
+        // normalize to files
+        $filePaths = $this->normalizeToFiles($paths);
+
+        foreach ($filePaths as $filePath) {
+            $fileContents = FileSystem::read($filePath);
 
             try {
-                $fluentConfigContents = $this->fluentConfigGenerator->generate($fileContents, $path);
+                $fluentConfigContents = $this->fluentConfigGenerator->generate($fileContents, $filePath);
             } catch (\Throwable $throwable) {
-                $errorMessage = sprintf('Not implemented yet for %s: %s', $path, $throwable->getMessage());
+                $errorMessage = sprintf('Not implemented yet for %s: %s', $filePath, $throwable->getMessage());
                 $this->error($errorMessage);
                 return self::FAILURE;
             }
@@ -67,6 +71,30 @@ final class PunchCardCommand extends Command
             ->match('#class (\w+)#')
             ->value();
 
+        Assert::notEmpty($shortClassName);
+
         return $outputDirectory . '/' . $shortClassName . '.php';
+    }
+
+    /**
+     * @param string[] $paths
+     * @return string[]
+     */
+    private function normalizeToFiles(array $paths): array
+    {
+        $filePaths = [];
+
+        foreach ($paths as $path) {
+            if (is_dir($path)) {
+                $currentFilePaths = glob($path . '/*.php', GLOB_BRACE);
+                $filePaths = array_merge($filePaths, $currentFilePaths);
+            } else {
+                $filePaths[] = $path;
+            }
+        }
+
+        Assert::allString($filePaths);
+
+        return $filePaths;
     }
 }
