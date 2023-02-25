@@ -240,7 +240,7 @@ final class AppConfig
 
     private ?string $fakerLocale = null;
 
-    private string $key;
+    private ?string $key = null;
 
     private ?string $cipher = null;
 
@@ -318,7 +318,7 @@ final class AppConfig
         return $this;
     }
 
-    public function key(string $key): self
+    public function key(?string $key): self
     {
         $this->key = $key;
         return $this;
