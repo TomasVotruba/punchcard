@@ -87,6 +87,10 @@ final class PunchCardCommand extends Command
         foreach ($paths as $path) {
             if (is_dir($path)) {
                 $currentFilePaths = glob($path . '/*.php', GLOB_BRACE);
+                if (! is_array($currentFilePaths)) {
+                    continue;
+                }
+
                 $filePaths = array_merge($filePaths, $currentFilePaths);
             } else {
                 $filePaths[] = $path;
