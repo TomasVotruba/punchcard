@@ -1,10 +1,16 @@
 # Lazy and strict way to configure your Laravel projects
 
+I love Laravel, but I'm very bad at working with array. I use wrong keys, delete items that are needed and my project kept crashing. So I made this project to help me with that.
+
+<br>
+
 ## Installation
 
 ```bash
 composer require tomasvotruba/punchcard
 ```
+
+<br>
 
 ## Usage
 
