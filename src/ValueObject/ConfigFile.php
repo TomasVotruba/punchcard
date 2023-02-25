@@ -6,7 +6,7 @@ namespace TomasVotruba\PunchCard\ValueObject;
 
 final class ConfigFile
 {
-    private string $shortFileName;
+    private readonly string $shortFileName;
 
     public function __construct(
         string $filePath,
