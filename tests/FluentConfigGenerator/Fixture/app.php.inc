@@ -220,7 +220,7 @@ return [
 
 namespace TomasVotruba\PunchCard;
 
-final class AppConfig
+final class AppConfig implements \Illuminate\Contracts\Support\Arrayable
 {
     private ?string $name = null;
 

@@ -55,7 +55,7 @@ return [
 
 namespace TomasVotruba\PunchCard;
 
-final class SanctumConfig
+final class SanctumConfig implements \Illuminate\Contracts\Support\Arrayable
 {
     /**
      * @var string[]

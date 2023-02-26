@@ -14,7 +14,7 @@ return [
 
 namespace TomasVotruba\PunchCard;
 
-final class ViewConfig
+final class ViewConfig implements \Illuminate\Contracts\Support\Arrayable
 {
     /**
      * @var string[]

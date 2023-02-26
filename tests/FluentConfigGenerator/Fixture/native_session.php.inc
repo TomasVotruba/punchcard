@@ -206,7 +206,7 @@ return [
 
 namespace TomasVotruba\PunchCard;
 
-final class SessionConfig
+final class SessionConfig implements \Illuminate\Contracts\Support\Arrayable
 {
     private ?string $driver = null;
 

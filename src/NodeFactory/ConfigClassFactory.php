@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace TomasVotruba\PunchCard\NodeFactory;
 
+use Illuminate\Contracts\Support\Arrayable;
 use PhpParser\Node\Expr\New_;
 use PhpParser\Node\Name;
+use PhpParser\Node\Name\FullyQualified;
 use PhpParser\Node\Param;
 use PhpParser\Node\Stmt;
 use PhpParser\Node\Stmt\Class_;
@@ -99,6 +101,7 @@ final class ConfigClassFactory
     {
         $class = new Class_($configFile->getClassName());
         $class->flags |= Class_::MODIFIER_FINAL;
+        $class->implements[] = new FullyQualified(Arrayable::class);
 
         return $class;
     }
