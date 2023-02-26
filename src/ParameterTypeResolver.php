@@ -14,12 +14,14 @@ use PhpParser\Node\Expr\Cast\Bool_;
 use PhpParser\Node\Expr\ClassConstFetch;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Expr\MethodCall;
+use PhpParser\Node\Expr\Ternary;
 use PhpParser\Node\Identifier;
 use PhpParser\Node\Name;
 use PhpParser\Node\Scalar;
 use PhpParser\Node\Scalar\DNumber;
 use PhpParser\Node\Scalar\LNumber;
 use PhpParser\Node\Scalar\String_;
+use Throwable;
 use TomasVotruba\PunchCard\Contracts\TypeInterface;
 use TomasVotruba\PunchCard\Exception\NotImplementedYetException;
 use TomasVotruba\PunchCard\Exception\ShouldNotHappenException;
@@ -73,14 +75,15 @@ final class ParameterTypeResolver
             return new StringType();
         }
 
-        if ($expr instanceof Expr\Ternary) {
+        if ($expr instanceof Ternary) {
             $ifType = null;
             if ($expr->if instanceof Expr) {
                 $ifType = $this->resolveFromExpr($expr->if, $parameterName, $configFile);
             }
+
             $elseType = $this->resolveFromExpr($expr->else, $parameterName, $configFile);
 
-            if ($ifType === null) {
+            if (! $ifType instanceof TypeInterface) {
                 return $elseType;
             }
 
@@ -96,7 +99,7 @@ final class ParameterTypeResolver
 
         try {
             $realValue = $this->constExprEvaluator->evaluateDirectly($expr);
-        } catch (\Throwable) {
+        } catch (Throwable) {
             // nothing we can do
             return new MixedType();
         }
