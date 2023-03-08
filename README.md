@@ -16,7 +16,7 @@ composer require tomasvotruba/punchcard
 
 This package provides basic fluent config classes for the Laravel project [`/config`](https://github.com/laravel/laravel/tree/10.x/config) directory.
 
-You can use the right away after installing this package, e.g. in your `config/app.php`:
+You can use the right away after installing this package, e.g. in your `config/cache.php`:
 
 ```php
 <?php
