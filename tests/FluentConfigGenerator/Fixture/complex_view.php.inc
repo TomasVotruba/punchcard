@@ -13,7 +13,7 @@ return [
 
 namespace TomasVotruba\PunchCard;
 
-final class ViewConfig implements \Illuminate\Contracts\Support\Arrayable
+class ViewConfig implements \Illuminate\Contracts\Support\Arrayable
 {
     private ?string $compiled = null;
 
