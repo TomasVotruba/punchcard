@@ -100,7 +100,6 @@ final class ConfigClassFactory
     private function createClass(ConfigFile $configFile): Class_
     {
         $class = new Class_($configFile->getClassName());
-        $class->flags |= Class_::MODIFIER_FINAL;
         $class->implements[] = new FullyQualified(Arrayable::class);
 
         return $class;
