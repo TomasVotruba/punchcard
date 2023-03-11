@@ -74,6 +74,16 @@ class SanctumConfig implements \Illuminate\Contracts\Support\Arrayable
         return new self();
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Stateful Domains
+    |--------------------------------------------------------------------------
+    |
+    | Requests from the following domains / hosts will receive stateful API
+    | authentication cookies. Typically, these should include your local
+    | and production domains which access your API via a frontend SPA.
+    |
+    */
     /**
      * @param string[] $stateful
      */
@@ -83,6 +93,17 @@ class SanctumConfig implements \Illuminate\Contracts\Support\Arrayable
         return $this;
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Sanctum Guards
+    |--------------------------------------------------------------------------
+    |
+    | This array contains the authentication guards that will be checked when
+    | Sanctum is trying to authenticate a request. If none of these guards
+    | are able to authenticate the request, Sanctum will use the bearer
+    | token that's present on an incoming request for authentication.
+    |
+    */
     /**
      * @param string[] $guard
      */
@@ -92,6 +113,16 @@ class SanctumConfig implements \Illuminate\Contracts\Support\Arrayable
         return $this;
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | Expiration Minutes
+    |--------------------------------------------------------------------------
+    |
+    | This value controls the number of minutes until an issued token will be
+    | considered expired. If this value is null, personal access tokens do
+    | not expire. This won't tweak the lifetime of first-party sessions.
+    |
+    */
     public function expiration(?int $expiration): self
     {
         $this->expiration = $expiration;

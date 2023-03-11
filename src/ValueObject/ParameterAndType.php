@@ -4,15 +4,20 @@ declare(strict_types=1);
 
 namespace TomasVotruba\PunchCard\ValueObject;
 
+use PhpParser\Comment;
 use TomasVotruba\PunchCard\Contracts\TypeInterface;
 use TomasVotruba\PunchCard\ValueObject\Types\ArrayType;
 
 final class ParameterAndType
 {
+    /**
+     * @param Comment[] $comments
+     */
     public function __construct(
         private readonly string $name,
         private readonly TypeInterface $propertyType,
         private readonly TypeInterface $setterParamType,
+        private readonly array $comments
     ) {
     }
 
@@ -62,6 +67,13 @@ final class ParameterAndType
     public function isArrayType(): bool
     {
         return $this->propertyType instanceof ArrayType;
-        //return $this->getPropertyTypeDeclaration() === 'array';
+    }
+
+    /**
+     * @return Comment[]
+     */
+    public function getComments(): array
+    {
+        return $this->comments;
     }
 }
