@@ -33,6 +33,7 @@ final class SetterClassMethodFactory
         $classMethod->stmts = $this->createClassMethodStmts($parameterAndType);
 
         $this->decorateDocBlock($classMethod, $parameterAndType);
+        $classMethod->setAttribute('comments', $parameterAndType->getComments());
 
         return $classMethod;
     }
