@@ -76,5 +76,4 @@ final class ParameterAndType
     {
         return $this->comments;
     }
-
 }
