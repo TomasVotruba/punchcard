@@ -104,7 +104,8 @@ final class FluentConfigGenerator
                     $paramSetterType = $propertyType;
                 }
 
-                $parametersAndTypes[] = new ParameterAndType($parameterName, $propertyType, $paramSetterType);
+                $comments = $arrayItem->getComments();
+                $parametersAndTypes[] = new ParameterAndType($parameterName, $propertyType, $paramSetterType, $comments);
             }
         }
 

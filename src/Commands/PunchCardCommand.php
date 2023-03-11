@@ -22,7 +22,7 @@ final class PunchCardCommand extends Command
     /**
      * @var string
      */
-    public $description = 'Generate fluent config';
+    public $description = 'Generate fluent config class from provided directory';
 
     public function __construct(
         private readonly FluentConfigGenerator $fluentConfigGenerator,
