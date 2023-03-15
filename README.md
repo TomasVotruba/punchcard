@@ -1,6 +1,6 @@
 # Lazy and strict way to configure your Laravel projects
 
-I love Laravel, but I'm very bad at working with array. I use wrong keys, delete items that are needed and my project kept crashing. So I made this project to help me with that.
+I love Laravel, but I'm terrible at working with an array. I used the wrong keys and deleted the needed items, and my project kept crashing. So I did this project to help me with that.
 
 <br>
 
