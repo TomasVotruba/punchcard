@@ -40,9 +40,13 @@ final class StrictPhpParser
         // keep functions clean, already short names
         $nodeTraverser = new NodeTraverser();
         $nodeTraverser->addVisitor(new class() extends NodeVisitorAbstract {
-            public function enterNode(\PhpParser\Node $node)
+            public function enterNode(\PhpParser\Node $node): ?\PhpParser\Node
             {
                 if (! $node instanceof FuncCall) {
+                    return null;
+                }
+
+                if (! $node->name instanceof Name) {
                     return null;
                 }
 
