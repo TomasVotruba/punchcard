@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace TomasVotruba\PunchCard\NodeFactory;
 
 use Illuminate\Contracts\Support\Arrayable;
-use PhpParser\Node\Expr\New_;
-use PhpParser\Node\Name;
 use PhpParser\Node\Name\FullyQualified;
 use PhpParser\Node\Param;
 use PhpParser\Node\Stmt;
@@ -14,7 +12,6 @@ use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Nop;
 use PhpParser\Node\Stmt\Property;
-use PhpParser\Node\Stmt\Return_;
 use TomasVotruba\PunchCard\ValueObject\ConfigFile;
 use TomasVotruba\PunchCard\ValueObject\ParameterTypeAndDefaultValue;
 use Webmozart\Assert\Assert;

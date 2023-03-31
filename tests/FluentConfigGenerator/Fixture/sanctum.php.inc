@@ -76,11 +76,11 @@ class SanctumConfig implements \Illuminate\Contracts\Support\Arrayable
 
     public function defaults(): self
     {
-        $this->stateful(explode(',', env('SANCTUM_STATEFUL_DOMAINS', sprintf('%s%s', 'localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,::1', Sanctum::currentApplicationUrlWithPort()))));
+        $this->stateful(\explode(',', \env('SANCTUM_STATEFUL_DOMAINS', \sprintf('%s%s', 'localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,::1', \Sanctum::currentApplicationUrlWithPort()))));
         $this->guard([
             'web',
         ]);
-        $this->expiration(null);
+        $this->expiration(\null);
         return $this;
     }
 
