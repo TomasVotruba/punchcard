@@ -44,10 +44,10 @@ final class ToArrayClassMethodFactory
         $array = new Array_();
 
         foreach ($parameterTypeAndDefaultValues as $parameterTypeAndDefaultValue) {
-            $array->items[] = new ArrayItem(
-                new PropertyFetch(new Variable('this'), $parameterTypeAndDefaultValue->getVariableName()),
-                new String_($parameterTypeAndDefaultValue->getName())
-            );
+            $localPropertyFetch = new PropertyFetch(new Variable('this'), $parameterTypeAndDefaultValue->getVariableName());
+            $parameterName = new String_($parameterTypeAndDefaultValue->getName());
+
+            $array->items[] = new ArrayItem($localPropertyFetch, $parameterName);
         }
 
         return $array;

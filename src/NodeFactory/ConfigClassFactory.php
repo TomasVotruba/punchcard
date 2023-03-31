@@ -26,6 +26,7 @@ final class ConfigClassFactory
         private readonly SetterClassMethodFactory $setterClassMethodFactory,
         private readonly DefaultsClassMethodFactory $defaultsClassMethodFactory,
         private readonly PropertyFactory $propertyFactory,
+        private readonly \TomasVotruba\PunchCard\NodeFactory\MakeClassMethodFactory $makeClassMethodFactory,
     ) {
     }
 
@@ -41,7 +42,7 @@ final class ConfigClassFactory
         $properties = $this->createProperties($parameterTypeAndDefaultValues);
         $classMethods = $this->createClassMethods($parameterTypeAndDefaultValues);
 
-        $makeClassMethod = $this->createMakeStaticClassMethod();
+        $makeClassMethod = $this->makeClassMethodFactory->create();
         $defaultsClassMethod = $this->defaultsClassMethodFactory->createDefaultsClassMethod($parameterTypeAndDefaultValues);
 
         $toArrayClassMethod = $this->toArrayClassMethodFactory->create($parameterTypeAndDefaultValues);
@@ -82,20 +83,6 @@ final class ConfigClassFactory
         }
 
         return $classMethods;
-    }
-
-    private function createMakeStaticClassMethod(): ClassMethod
-    {
-        $classMethod = new ClassMethod('make');
-        $classMethod->flags |= Class_::MODIFIER_STATIC;
-        $classMethod->flags |= Class_::MODIFIER_PUBLIC;
-        $classMethod->returnType = new Name('self');
-
-        $newSelfReturn = new Return_(new New_(new Name('self')));
-
-        $classMethod->stmts = [$newSelfReturn];
-
-        return $classMethod;
     }
 
     private function createClass(ConfigFile $configFile): Class_
