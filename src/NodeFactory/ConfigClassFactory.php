@@ -23,7 +23,7 @@ final class ConfigClassFactory
         private readonly SetterClassMethodFactory $setterClassMethodFactory,
         private readonly DefaultsClassMethodFactory $defaultsClassMethodFactory,
         private readonly PropertyFactory $propertyFactory,
-        private readonly \TomasVotruba\PunchCard\NodeFactory\MakeClassMethodFactory $makeClassMethodFactory,
+        private readonly MakeClassMethodFactory $makeClassMethodFactory,
     ) {
     }
 

@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace TomasVotruba\PunchCard\PhpParser;
 
-use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Name;
 use PhpParser\Node\Stmt;
 use PhpParser\NodeTraverser;
 use PhpParser\NodeVisitor\NameResolver;
-use PhpParser\NodeVisitorAbstract;
 use PhpParser\Parser;
 use PhpParser\ParserFactory;
+use TomasVotruba\PunchCard\NodeVisitor\UnprefixFuncCallNamesNodeVisitor;
 use Webmozart\Assert\Assert;
 
 final class StrictPhpParser
@@ -32,6 +31,16 @@ final class StrictPhpParser
         $stmts = $this->parser->parse($fileContents);
         Assert::isArray($stmts);
 
+        $this->makeClassNamesFullyQualified($stmts);
+
+        return $stmts;
+    }
+
+    /**
+     * @param Stmt[] $stmts
+     */
+    private function makeClassNamesFullyQualified(array $stmts): void
+    {
         // decorate name nodes, to keep them FQN even under namespace
         $nodeTraverser = new NodeTraverser();
         $nodeTraverser->addVisitor(new NameResolver());
@@ -39,23 +48,7 @@ final class StrictPhpParser
 
         // keep functions clean, already short names
         $nodeTraverser = new NodeTraverser();
-        $nodeTraverser->addVisitor(new class() extends NodeVisitorAbstract {
-            public function enterNode(\PhpParser\Node $node): ?\PhpParser\Node
-            {
-                if (! $node instanceof FuncCall) {
-                    return null;
-                }
-
-                if (! $node->name instanceof Name) {
-                    return null;
-                }
-
-                $node->name = new Name($node->name->toString());
-                return $node;
-            }
-        });
+        $nodeTraverser->addVisitor(new UnprefixFuncCallNamesNodeVisitor());
         $nodeTraverser->traverse($stmts);
-
-        return $stmts;
     }
 }
