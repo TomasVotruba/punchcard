@@ -15,20 +15,20 @@ use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Return_;
-use TomasVotruba\PunchCard\ValueObject\ParameterAndType;
+use TomasVotruba\PunchCard\ValueObject\ParameterTypeAndDefaultValue;
 
 final class ToArrayClassMethodFactory
 {
     /**
-     * @param ParameterAndType[] $parametersAndTypes
+     * @param ParameterTypeAndDefaultValue[] $parameterTypeAndDefaultValues
      */
-    public function create(array $parametersAndTypes): ClassMethod
+    public function create(array $parameterTypeAndDefaultValues): ClassMethod
     {
         $toArrayClassMethod = new ClassMethod('toArray');
         $toArrayClassMethod->flags |= Class_::MODIFIER_PUBLIC;
         $toArrayClassMethod->returnType = new Identifier('array');
 
-        $array = $this->createArray($parametersAndTypes);
+        $array = $this->createArray($parameterTypeAndDefaultValues);
         $toArrayClassMethod->stmts[] = new Return_($array);
 
         $toArrayClassMethod->setDocComment(new Doc("/**\n * @return array<string, mixed[]>\n */"));
@@ -37,16 +37,16 @@ final class ToArrayClassMethodFactory
     }
 
     /**
-     * @param ParameterAndType[] $parametersAndTypes
+     * @param ParameterTypeAndDefaultValue[] $parameterTypeAndDefaultValues
      */
-    private function createArray(array $parametersAndTypes): Array_
+    private function createArray(array $parameterTypeAndDefaultValues): Array_
     {
         $array = new Array_();
 
-        foreach ($parametersAndTypes as $parameterAndType) {
+        foreach ($parameterTypeAndDefaultValues as $parameterTypeAndDefaultValue) {
             $array->items[] = new ArrayItem(
-                new PropertyFetch(new Variable('this'), $parameterAndType->getVariableName()),
-                new String_($parameterAndType->getName())
+                new PropertyFetch(new Variable('this'), $parameterTypeAndDefaultValue->getVariableName()),
+                new String_($parameterTypeAndDefaultValue->getName())
             );
         }
 

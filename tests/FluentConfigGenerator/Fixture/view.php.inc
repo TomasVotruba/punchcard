@@ -28,6 +28,15 @@ class ViewConfig implements \Illuminate\Contracts\Support\Arrayable
         return new self();
     }
 
+    public function defaults(): self
+    {
+        $this->paths([
+            __DIR__ . '/../resources/views',
+        ]);
+        $this->compiled(env('VIEW_COMPILED_PATH', realpath(storage_path('framework/views'))));
+        return $this;
+    }
+
     /**
      * @param string[] $paths
      */

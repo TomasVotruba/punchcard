@@ -16,26 +16,26 @@ use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Expression;
 use PhpParser\Node\Stmt\Return_;
-use TomasVotruba\PunchCard\ValueObject\ParameterAndType;
+use TomasVotruba\PunchCard\ValueObject\ParameterTypeAndDefaultValue;
 use TomasVotruba\PunchCard\ValueObject\Types\ArrayType;
 
 final class SetterClassMethodFactory
 {
-    public function create(ParameterAndType $parameterAndType): ClassMethod
+    public function create(ParameterTypeAndDefaultValue $parameterTypeAndDefaultValue): ClassMethod
     {
-        $classMethod = new ClassMethod($parameterAndType->getVariableName());
+        $classMethod = new ClassMethod($parameterTypeAndDefaultValue->getVariableName());
         $classMethod->flags |= Class_::MODIFIER_PUBLIC;
         $classMethod->returnType = new Name('self');
 
-        $param = $this->createParam($parameterAndType);
+        $param = $this->createParam($parameterTypeAndDefaultValue);
 
         $classMethod->params[] = $param;
-        $classMethod->stmts = $this->createClassMethodStmts($parameterAndType);
+        $classMethod->stmts = $this->createClassMethodStmts($parameterTypeAndDefaultValue);
 
         // move descirptive comments first
-        $classMethod->setAttribute('comments', $parameterAndType->getComments());
+        $classMethod->setAttribute('comments', $parameterTypeAndDefaultValue->getComments());
 
-        $this->decorateDocBlock($classMethod, $parameterAndType);
+        $this->decorateDocBlock($classMethod, $parameterTypeAndDefaultValue);
 
         return $classMethod;
     }
@@ -43,34 +43,34 @@ final class SetterClassMethodFactory
     /**
      * @return Stmt[]
      */
-    private function createClassMethodStmts(ParameterAndType $parameterAndType): array
+    private function createClassMethodStmts(ParameterTypeAndDefaultValue $parameterTypeAndDefaultValue): array
     {
-        $propertyFetch = new PropertyFetch(new Variable('this'), $parameterAndType->getVariableName());
-        $propertyAssign = new Assign($propertyFetch, new Variable($parameterAndType->getVariableName()));
+        $propertyFetch = new PropertyFetch(new Variable('this'), $parameterTypeAndDefaultValue->getVariableName());
+        $propertyAssign = new Assign($propertyFetch, new Variable($parameterTypeAndDefaultValue->getVariableName()));
 
         $return = new Return_(new Variable('this'));
 
         return [new Expression($propertyAssign), $return];
     }
 
-    private function createParam(ParameterAndType $parameterAndType): Param
+    private function createParam(ParameterTypeAndDefaultValue $parameterTypeAndDefaultValue): Param
     {
-        $param = new Param(new Variable($parameterAndType->getVariableName()));
-        $param->type = new Identifier($parameterAndType->getSetterParamTypeDeclaration());
+        $param = new Param(new Variable($parameterTypeAndDefaultValue->getVariableName()));
+        $param->type = new Identifier($parameterTypeAndDefaultValue->getSetterParamTypeDeclaration());
 
         return $param;
     }
 
-    private function decorateDocBlock(ClassMethod $classMethod, ParameterAndType $parameterAndType): void
+    private function decorateDocBlock(ClassMethod $classMethod, ParameterTypeAndDefaultValue $parameterTypeAndDefaultValue): void
     {
-        if (! $parameterAndType->getSetterParamType() instanceof ArrayType) {
+        if (! $parameterTypeAndDefaultValue->getSetterParamType() instanceof ArrayType) {
             return;
         }
 
         $classMethod->setDocComment(new Doc(sprintf(
             "/**\n * @param %s $%s\n */",
-            $parameterAndType->renderPropertyTypeDoc(),
-            $parameterAndType->getName()
+            $parameterTypeAndDefaultValue->renderPropertyTypeDoc(),
+            $parameterTypeAndDefaultValue->getName()
         )));
     }
 }

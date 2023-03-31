@@ -246,6 +246,29 @@ class SessionConfig implements \Illuminate\Contracts\Support\Arrayable
         return new self();
     }
 
+    public function defaults(): self
+    {
+        $this->driver(env('SESSION_DRIVER', 'file'));
+        $this->lifetime(env('SESSION_LIFETIME', 120));
+        $this->expireOnClose(false);
+        $this->encrypt(false);
+        $this->files(storage_path('framework/sessions'));
+        $this->connection(env('SESSION_CONNECTION'));
+        $this->table('sessions');
+        $this->store(env('SESSION_STORE'));
+        $this->lottery([
+            2,
+            100,
+        ]);
+        $this->cookie(env('SESSION_COOKIE', Str::slug(env('APP_NAME', 'laravel'), '_') . '_session'));
+        $this->path('/');
+        $this->domain(env('SESSION_DOMAIN'));
+        $this->secure(env('SESSION_SECURE_COOKIE'));
+        $this->httpOnly(true);
+        $this->sameSite('lax');
+        return $this;
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Default Session Driver
