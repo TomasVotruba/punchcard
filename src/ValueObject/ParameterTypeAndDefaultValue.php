@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace TomasVotruba\PunchCard\ValueObject;
 
 use PhpParser\Comment;
+use PhpParser\Node\Expr;
 use TomasVotruba\PunchCard\Contracts\TypeInterface;
 use TomasVotruba\PunchCard\ValueObject\Types\ArrayType;
 
-final class ParameterAndType
+final class ParameterTypeAndDefaultValue
 {
     /**
      * @param Comment[] $comments
@@ -17,7 +18,8 @@ final class ParameterAndType
         private readonly string $name,
         private readonly TypeInterface $propertyType,
         private readonly TypeInterface $setterParamType,
-        private readonly array $comments
+        private readonly array $comments,
+        private readonly Expr $defaultValueExpr
     ) {
     }
 
@@ -75,5 +77,10 @@ final class ParameterAndType
     public function getComments(): array
     {
         return $this->comments;
+    }
+
+    public function getDefaultValueExpr(): Expr
+    {
+        return $this->defaultValueExpr;
     }
 }

@@ -16,7 +16,7 @@ use PhpParser\Node\Stmt\Nop;
 use PhpParser\Node\Stmt\Property;
 use PhpParser\Node\Stmt\Return_;
 use TomasVotruba\PunchCard\ValueObject\ConfigFile;
-use TomasVotruba\PunchCard\ValueObject\ParameterAndType;
+use TomasVotruba\PunchCard\ValueObject\ParameterTypeAndDefaultValue;
 use Webmozart\Assert\Assert;
 
 final class ConfigClassFactory
@@ -24,28 +24,29 @@ final class ConfigClassFactory
     public function __construct(
         private readonly ToArrayClassMethodFactory $toArrayClassMethodFactory,
         private readonly SetterClassMethodFactory $setterClassMethodFactory,
+        private readonly DefaultsClassMethodFactory $defaultsClassMethodFactory,
         private readonly PropertyFactory $propertyFactory,
     ) {
     }
 
     /**
-     * @param ParameterAndType[] $parameterAndTypes
+     * @param ParameterTypeAndDefaultValue[] $parameterTypeAndDefaultValues
      */
-    public function createClassFromParameterNames(array $parameterAndTypes, ConfigFile $configFile): Class_
+    public function createClassFromParameterNames(array $parameterTypeAndDefaultValues, ConfigFile $configFile): Class_
     {
-        Assert::allIsInstanceOf($parameterAndTypes, ParameterAndType::class);
+        Assert::allIsInstanceOf($parameterTypeAndDefaultValues, ParameterTypeAndDefaultValue::class);
 
         $class = $this->createClass($configFile);
 
-        $properties = $this->createProperties($parameterAndTypes);
-        $classMethods = $this->createClassMethods($parameterAndTypes);
+        $properties = $this->createProperties($parameterTypeAndDefaultValues);
+        $classMethods = $this->createClassMethods($parameterTypeAndDefaultValues);
 
-        // add static "create" method
-        $classMethod = $this->createMakeStaticClassMethod();
+        $makeClassMethod = $this->createMakeStaticClassMethod();
+        $defaultsClassMethod = $this->defaultsClassMethodFactory->createDefaultsClassMethod($parameterTypeAndDefaultValues);
 
-        $toArrayClassMethod = $this->toArrayClassMethodFactory->create($parameterAndTypes);
+        $toArrayClassMethod = $this->toArrayClassMethodFactory->create($parameterTypeAndDefaultValues);
 
-        $classStmts = array_merge($properties, [$classMethod], $classMethods, [$toArrayClassMethod]);
+        $classStmts = array_merge($properties, [$makeClassMethod, $defaultsClassMethod], $classMethods, [$toArrayClassMethod]);
 
         // separate by newline to make it standard out of the box
         $class->stmts = $this->separateStmtsByNewline($classStmts);
@@ -54,30 +55,30 @@ final class ConfigClassFactory
     }
 
     /**
-     * @param ParameterAndType[] $parametersAndTypes
+     * @param ParameterTypeAndDefaultValue[] $parameterTypeAndDefaultValues
      * @return Property[]
      */
-    private function createProperties(array $parametersAndTypes): array
+    private function createProperties(array $parameterTypeAndDefaultValues): array
     {
         $properties = [];
 
-        foreach ($parametersAndTypes as $parameterAndType) {
-            $properties[] = $this->propertyFactory->create($parameterAndType);
+        foreach ($parameterTypeAndDefaultValues as $parameterTypeAndDefaultValue) {
+            $properties[] = $this->propertyFactory->create($parameterTypeAndDefaultValue);
         }
 
         return $properties;
     }
 
     /**
-     * @param ParameterAndType[] $parametersAndTypes
+     * @param ParameterTypeAndDefaultValue[] $parameterTypeAndDefaultValues
      * @return ClassMethod[]
      */
-    private function createClassMethods(array $parametersAndTypes): array
+    private function createClassMethods(array $parameterTypeAndDefaultValues): array
     {
         $classMethods = [];
 
-        foreach ($parametersAndTypes as $parameterAndType) {
-            $classMethods[] = $this->setterClassMethodFactory->create($parameterAndType);
+        foreach ($parameterTypeAndDefaultValues as $parameterTypeAndDefaultValue) {
+            $classMethods[] = $this->setterClassMethodFactory->create($parameterTypeAndDefaultValue);
         }
 
         return $classMethods;
