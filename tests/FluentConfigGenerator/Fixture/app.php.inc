@@ -266,16 +266,16 @@ class AppConfig implements \Illuminate\Contracts\Support\Arrayable
 
     public function defaults(): self
     {
-        $this->name(\env('APP_NAME', 'Laravel'));
-        $this->env(\env('APP_ENV', 'production'));
-        $this->debug((bool) \env('APP_DEBUG', \false));
-        $this->url(\env('APP_URL', 'http://localhost'));
-        $this->assetUrl(\env('ASSET_URL'));
+        $this->name(env('APP_NAME', 'Laravel'));
+        $this->env(env('APP_ENV', 'production'));
+        $this->debug((bool) env('APP_DEBUG', \false));
+        $this->url(env('APP_URL', 'http://localhost'));
+        $this->assetUrl(env('ASSET_URL'));
         $this->timezone('UTC');
         $this->locale('en');
         $this->fallbackLocale('en');
         $this->fakerLocale('en_US');
-        $this->key(\env('APP_KEY'));
+        $this->key(env('APP_KEY'));
         $this->cipher('AES-256-CBC');
         $this->maintenance([
             'driver' => 'file',
