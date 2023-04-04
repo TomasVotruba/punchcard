@@ -37,7 +37,7 @@ return CacheConfig::make()
 ```
 
 
-## Make use of `defaults()` values
+## Make use of `makeWithDefaults()` values
 
 Do you want to use default configuration, but don't want to keep your configs huge?
 
@@ -54,8 +54,7 @@ return AppConfig::make()
 Override just 1 item with a `defaults()` method:
 
 ```php
-return AppConfig::make()
-    ->defaults()
+return AppConfig::makeWithDefaults()
     ->name(env('APP_NAME', 'TomasVotruba'))
     ->toArray();
 ```
