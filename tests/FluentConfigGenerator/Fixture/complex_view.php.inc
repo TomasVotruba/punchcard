@@ -22,10 +22,11 @@ class ViewConfig implements \Illuminate\Contracts\Support\Arrayable
         return new self();
     }
 
-    public function defaults(): self
+    public static function makeWithDefaults(): self
     {
-        $this->compiled(env('VIEW_COMPILED_PATH', realpath(storage_path('framework/views'))));
-        return $this;
+        $config = new self();
+        $config->compiled(env('VIEW_COMPILED_PATH', realpath(storage_path('framework/views'))));
+        return $config;
     }
 
     public function compiled(string $compiled): self

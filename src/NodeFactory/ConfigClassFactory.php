@@ -12,6 +12,7 @@ use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Nop;
 use PhpParser\Node\Stmt\Property;
+use TomasVotruba\PunchCard\Validation\UniqueClassMethodNameValidator;
 use TomasVotruba\PunchCard\ValueObject\ConfigFile;
 use TomasVotruba\PunchCard\ValueObject\ParameterTypeAndDefaultValue;
 use Webmozart\Assert\Assert;
@@ -24,6 +25,7 @@ final class ConfigClassFactory
         private readonly DefaultsClassMethodFactory $defaultsClassMethodFactory,
         private readonly PropertyFactory $propertyFactory,
         private readonly MakeClassMethodFactory $makeClassMethodFactory,
+        private readonly UniqueClassMethodNameValidator $uniqueClassMethodNameValidator,
     ) {
     }
 
@@ -45,6 +47,8 @@ final class ConfigClassFactory
         $toArrayClassMethod = $this->toArrayClassMethodFactory->create($parameterTypeAndDefaultValues);
 
         $classStmts = array_merge($properties, [$makeClassMethod, $defaultsClassMethod], $classMethods, [$toArrayClassMethod]);
+
+        $this->uniqueClassMethodNameValidator->ensureMethodNamesAreUnique($classStmts);
 
         // separate by newline to make it standard out of the box
         $class->stmts = $this->separateStmtsByNewline($classStmts);

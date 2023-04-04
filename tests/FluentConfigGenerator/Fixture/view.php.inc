@@ -28,13 +28,14 @@ class ViewConfig implements \Illuminate\Contracts\Support\Arrayable
         return new self();
     }
 
-    public function defaults(): self
+    public static function makeWithDefaults(): self
     {
-        $this->paths([
+        $config = new self();
+        $config->paths([
             __DIR__ . '/../resources/views',
         ]);
-        $this->compiled(env('VIEW_COMPILED_PATH', realpath(storage_path('framework/views'))));
-        return $this;
+        $config->compiled(env('VIEW_COMPILED_PATH', realpath(storage_path('framework/views'))));
+        return $config;
     }
 
     /**
