@@ -264,23 +264,24 @@ class AppConfig implements \Illuminate\Contracts\Support\Arrayable
         return new self();
     }
 
-    public function defaults(): self
+    public static function makeWithDefaults(): self
     {
-        $this->name(env('APP_NAME', 'Laravel'));
-        $this->env(env('APP_ENV', 'production'));
-        $this->debug((bool) env('APP_DEBUG', \false));
-        $this->url(env('APP_URL', 'http://localhost'));
-        $this->assetUrl(env('ASSET_URL'));
-        $this->timezone('UTC');
-        $this->locale('en');
-        $this->fallbackLocale('en');
-        $this->fakerLocale('en_US');
-        $this->key(env('APP_KEY'));
-        $this->cipher('AES-256-CBC');
-        $this->maintenance([
+        $config = new self();
+        $config->name(env('APP_NAME', 'Laravel'));
+        $config->env(env('APP_ENV', 'production'));
+        $config->debug((bool) env('APP_DEBUG', \false));
+        $config->url(env('APP_URL', 'http://localhost'));
+        $config->assetUrl(env('ASSET_URL'));
+        $config->timezone('UTC');
+        $config->locale('en');
+        $config->fallbackLocale('en');
+        $config->fakerLocale('en_US');
+        $config->key(env('APP_KEY'));
+        $config->cipher('AES-256-CBC');
+        $config->maintenance([
             'driver' => 'file',
         ]);
-        $this->providers([
+        $config->providers([
             /*
              * Laravel Framework Service Providers...
              */
@@ -318,8 +319,8 @@ class AppConfig implements \Illuminate\Contracts\Support\Arrayable
             \App\Providers\EventServiceProvider::class,
             \App\Providers\RouteServiceProvider::class,
         ]);
-        $this->aliases(\Illuminate\Support\Facades\Facade::defaultAliases()->merge([])->toArray());
-        return $this;
+        $config->aliases(\Illuminate\Support\Facades\Facade::defaultAliases()->merge([])->toArray());
+        return $config;
     }
 
     /*
