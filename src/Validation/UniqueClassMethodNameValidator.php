@@ -11,6 +11,11 @@ use TomasVotruba\PunchCard\Exception\ShouldNotHappenException;
 
 final class UniqueClassMethodNameValidator
 {
+    public function __construct(
+        private readonly NodeFinder $nodeFinder
+    ) {
+    }
+
     /**
      * @param Stmt[] $classStmts
      */
@@ -33,11 +38,8 @@ final class UniqueClassMethodNameValidator
      */
     private function resolveClassMethodNames(array $stmts): array
     {
-        // ensure the class method names are unique
-        $nodeFinder = new NodeFinder();
-
         /** @var ClassMethod[] $classMethods */
-        $classMethods = $nodeFinder->findInstanceOf($stmts, ClassMethod::class);
+        $classMethods = $this->nodeFinder->findInstanceOf($stmts, ClassMethod::class);
 
         $classMethodNames = array_map(
             static fn (ClassMethod $classMethod): string => $classMethod->name->toString(),

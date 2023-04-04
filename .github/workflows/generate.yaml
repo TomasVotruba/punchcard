@@ -30,4 +30,4 @@ jobs:
             -   run: bin/punchcard tmp-laravel/config --output generated
 
             # lint generated configs - must be valid PHP
-            -   run: vendor/bin/parallel-lint generated
+            -   run: vendor/bin/parallel-lint generated --ansi

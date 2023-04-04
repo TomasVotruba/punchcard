@@ -6,6 +6,7 @@ namespace TomasVotruba\PunchCard\Commands;
 
 use Illuminate\Console\Command;
 use Nette\Utils\FileSystem;
+use Symfony\Component\Console\Style\SymfonyStyle;
 use Throwable;
 use TomasVotruba\PunchCard\FluentConfigGenerator;
 use TomasVotruba\PunchCard\ValueObject\ConfigFile;
@@ -32,6 +33,8 @@ final class PunchCardCommand extends Command
 
     public function handle(): int
     {
+        $symfonyStyle = new SymfonyStyle($this->input, $this->output);
+
         /** @var string[] $paths */
         $paths = $this->argument('paths');
 
@@ -45,8 +48,9 @@ final class PunchCardCommand extends Command
             try {
                 $fluentConfigContents = $this->fluentConfigGenerator->generate($configFile);
             } catch (Throwable $throwable) {
-                $errorMessage = sprintf('Not implemented yet for %s: %s', $filePath, $throwable->getMessage());
-                $this->error($errorMessage);
+                $errorMessage = sprintf('Failed for "%s":%s%s', $filePath, PHP_EOL, $throwable->getMessage());
+                $symfonyStyle->error($errorMessage);
+
                 return self::FAILURE;
             }
 
@@ -55,14 +59,14 @@ final class PunchCardCommand extends Command
                 $outputFilePath = $this->resolveOutputFilePath($fluentConfigContents, $outputDirectory);
                 FileSystem::write($outputFilePath, $fluentConfigContents);
 
-                $this->line(sprintf('File was generated to "%s"', $outputFilePath));
+                $symfonyStyle->success(sprintf('File was generated to "%s"', $outputFilePath));
             } else {
                 $this->line(sprintf('Generated config contents: "%s"', PHP_EOL . PHP_EOL . $fluentConfigContents));
             }
         }
 
         $this->newLine();
-        $this->info('Generating finished');
+        $symfonyStyle->success('Generating finished');
 
         return self::SUCCESS;
     }
