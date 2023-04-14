@@ -40,7 +40,7 @@ final class DefaultsClassMethodFactory
 
         $stmts[] = new Return_($configVariable);
 
-        return new ClassMethod('makeWithDefaults', [
+        return new ClassMethod('make', [
             'flags' => Class_::MODIFIER_PUBLIC | Class_::MODIFIER_STATIC,
             'stmts' => $stmts,
             'returnType' => new Name('self'),

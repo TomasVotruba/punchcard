@@ -23,12 +23,15 @@ class ViewConfig implements \Illuminate\Contracts\Support\Arrayable
 
     private ?string $compiled = null;
 
-    public static function make(): self
+    /**
+     * @deprecated Use self::make() with identical behavior
+     */
+    public static function makeWithDefaults(): self
     {
-        return new self();
+        return self::make();
     }
 
-    public static function makeWithDefaults(): self
+    public static function make(): self
     {
         $config = new self();
         $config->paths([

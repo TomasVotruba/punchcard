@@ -69,12 +69,15 @@ class SanctumConfig implements \Illuminate\Contracts\Support\Arrayable
 
     private ?int $expiration = null;
 
-    public static function make(): self
+    /**
+     * @deprecated Use self::make() with identical behavior
+     */
+    public static function makeWithDefaults(): self
     {
-        return new self();
+        return self::make();
     }
 
-    public static function makeWithDefaults(): self
+    public static function make(): self
     {
         $config = new self();
         $config->stateful(explode(',', env('SANCTUM_STATEFUL_DOMAINS', sprintf('%s%s', 'localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,::1', \Sanctum::currentApplicationUrlWithPort()))));

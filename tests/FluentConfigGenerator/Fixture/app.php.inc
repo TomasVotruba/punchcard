@@ -259,12 +259,15 @@ class AppConfig implements \Illuminate\Contracts\Support\Arrayable
      */
     private array $aliases = [];
 
-    public static function make(): self
+    /**
+     * @deprecated Use self::make() with identical behavior
+     */
+    public static function makeWithDefaults(): self
     {
-        return new self();
+        return self::make();
     }
 
-    public static function makeWithDefaults(): self
+    public static function make(): self
     {
         $config = new self();
         $config->name(env('APP_NAME', 'Laravel'));
