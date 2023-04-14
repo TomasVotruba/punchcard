@@ -36,28 +36,7 @@ return CacheConfig::make()
     ->toArray();
 ```
 
-
-## Make use of `makeWithDefaults()` values
-
-Do you want to use default configuration, but don't want to keep your configs huge?
-
-```php
-return AppConfig::make()
-    ->name(env('APP_NAME', 'TomasVotruba'))
-    ->env(env('APP_ENV', 'production'))
-    ->debug((bool) env('APP_DEBUG', false))
-    ->url(env('APP_URL', 'http://localhost'))
-    ->timezone('UTC')
-    ->toArray();
-```
-
-Override just 1 item with a `defaults()` method:
-
-```php
-return AppConfig::makeWithDefaults()
-    ->name(env('APP_NAME', 'TomasVotruba'))
-    ->toArray();
-```
+The default configuration is used by default. You have to set values that are changed.
 
 <br>
 
