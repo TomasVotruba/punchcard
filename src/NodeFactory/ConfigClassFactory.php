@@ -41,12 +41,11 @@ final class ConfigClassFactory
         $properties = $this->createProperties($parameterTypeAndDefaultValues);
         $classMethods = $this->createClassMethods($parameterTypeAndDefaultValues);
 
-        $makeClassMethod = $this->makeClassMethodFactory->create();
-        $defaultsClassMethod = $this->defaultsClassMethodFactory->createDefaultsClassMethod($parameterTypeAndDefaultValues);
+        $makeClassMethod = $this->defaultsClassMethodFactory->createDefaultsClassMethod($parameterTypeAndDefaultValues);
 
         $toArrayClassMethod = $this->toArrayClassMethodFactory->create($parameterTypeAndDefaultValues);
 
-        $classStmts = array_merge($properties, [$makeClassMethod, $defaultsClassMethod], $classMethods, [$toArrayClassMethod]);
+        $classStmts = array_merge($properties, [$makeClassMethod], $classMethods, [$toArrayClassMethod]);
 
         $this->uniqueClassMethodNameValidator->ensureMethodNamesAreUnique($classStmts);
 
