@@ -24,8 +24,8 @@ final class ConfigClassFactory
         private readonly SetterClassMethodFactory $setterClassMethodFactory,
         private readonly DefaultsClassMethodFactory $defaultsClassMethodFactory,
         private readonly PropertyFactory $propertyFactory,
-        private readonly MakeClassMethodFactory $makeClassMethodFactory,
         private readonly UniqueClassMethodNameValidator $uniqueClassMethodNameValidator,
+        private readonly ServiceConfigStmtsFactory $serviceConfigStmtsFactory,
     ) {
     }
 
@@ -38,15 +38,25 @@ final class ConfigClassFactory
 
         $class = $this->createClass($configFile);
 
-        $properties = $this->createProperties($parameterTypeAndDefaultValues);
-        $classMethods = $this->createClassMethods($parameterTypeAndDefaultValues);
+        // special generic config class
+        if ((string) $class->name === 'ServicesConfig') {
+            $makeClassMethod = $this->serviceConfigStmtsFactory->createGenericMakeClassMethod();
 
-        $makeClassMethod = $this->makeClassMethodFactory->create();
-        $defaultsClassMethod = $this->defaultsClassMethodFactory->createDefaultsClassMethod($parameterTypeAndDefaultValues);
+            $parametersProperty = $this->serviceConfigStmtsFactory->createParametersProperty();
+            $servicesClassMethod = $this->serviceConfigStmtsFactory->createServiceClassMethod();
+            $toArrayClassMethod = $this->serviceConfigStmtsFactory->createGenericToArrayClassMethod();
 
-        $toArrayClassMethod = $this->toArrayClassMethodFactory->create($parameterTypeAndDefaultValues);
+            $classStmts = [$parametersProperty, $makeClassMethod, $servicesClassMethod, $toArrayClassMethod];
+        } else {
+            $makeClassMethod = $this->defaultsClassMethodFactory->createDefaultsClassMethod($parameterTypeAndDefaultValues);
 
-        $classStmts = array_merge($properties, [$makeClassMethod, $defaultsClassMethod], $classMethods, [$toArrayClassMethod]);
+            $toArrayClassMethod = $this->toArrayClassMethodFactory->create($parameterTypeAndDefaultValues);
+
+            $properties = $this->createProperties($parameterTypeAndDefaultValues);
+            $classMethods = $this->createClassMethods($parameterTypeAndDefaultValues);
+
+            $classStmts = array_merge($properties, [$makeClassMethod], $classMethods, [$toArrayClassMethod]);
+        }
 
         $this->uniqueClassMethodNameValidator->ensureMethodNamesAreUnique($classStmts);
 

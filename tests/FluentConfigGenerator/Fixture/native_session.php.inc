@@ -241,14 +241,6 @@ class SessionConfig implements \Illuminate\Contracts\Support\Arrayable
 
     private ?string $sameSite = null;
 
-    /**
-     * @deprecated Use self::make() with identical behavior
-     */
-    public static function makeWithDefaults(): self
-    {
-        return self::make();
-    }
-
     public static function make(): self
     {
         $config = new self();
