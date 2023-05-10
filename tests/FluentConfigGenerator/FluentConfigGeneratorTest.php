@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace TomasVotruba\PunchCard\Tests\FluentConfigGenerator;
 
 use Iterator;
-use Nette\Utils\FileSystem;
 use PHPUnit\Framework\Attributes\DataProvider;
 use TomasVotruba\PunchCard\FluentConfigGenerator;
 use TomasVotruba\PunchCard\Tests\AbstractTestCase;
@@ -25,7 +24,8 @@ final class FluentConfigGeneratorTest extends AbstractTestCase
     #[DataProvider('provideData')]
     public function test(string $fixtureFilePath): void
     {
-        $fixtureFileContents = FileSystem::read($fixtureFilePath);
+        /** @var string $fixtureFileContents */
+        $fixtureFileContents = file_get_contents($fixtureFilePath);
 
         [$inputConfigContents, $expectedConfigClassContents] = $this->split($fixtureFileContents);
 
@@ -34,7 +34,7 @@ final class FluentConfigGeneratorTest extends AbstractTestCase
 
         // update tests
         if (getenv('UT')) {
-            FileSystem::write($fixtureFilePath, rtrim($inputConfigContents) . "\n-----\n" . $configClassContents);
+            file_put_contents($fixtureFilePath, rtrim($inputConfigContents) . "\n-----\n" . $configClassContents);
             $expectedConfigClassContents = $configClassContents;
         }
 
