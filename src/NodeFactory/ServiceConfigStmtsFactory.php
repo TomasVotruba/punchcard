@@ -63,8 +63,8 @@ final class ServiceConfigStmtsFactory
 
     public function createGenericMakeClassMethod(): ClassMethod
     {
-        $newSelf = new New_(new Name('self'));
-        $return = new Return_($newSelf);
+        $new = new New_(new Name('self'));
+        $return = new Return_($new);
 
         return new ClassMethod('make', [
             'flags' => Class_::MODIFIER_PUBLIC | Class_::MODIFIER_STATIC,
