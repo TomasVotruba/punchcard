@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace TomasVotruba\PunchCard\Commands;
 
 use Illuminate\Console\Command;
-use Nette\Utils\FileSystem;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Throwable;
 use TomasVotruba\PunchCard\FluentConfigGenerator;
@@ -42,7 +41,9 @@ final class PunchCardCommand extends Command
         $filePaths = $this->normalizeToFiles($paths);
 
         foreach ($filePaths as $filePath) {
-            $fileContents = FileSystem::read($filePath);
+            /** @var string $fileContents */
+            $fileContents = file_get_contents($filePath);
+
             $configFile = new ConfigFile($filePath, $fileContents);
 
             try {
@@ -57,7 +58,7 @@ final class PunchCardCommand extends Command
             $outputDirectory = $this->option('output');
             if (is_string($outputDirectory)) {
                 $outputFilePath = $this->resolveOutputFilePath($fluentConfigContents, $outputDirectory);
-                FileSystem::write($outputFilePath, $fluentConfigContents);
+                file_put_contents($outputFilePath, $fluentConfigContents);
 
                 $symfonyStyle->success(sprintf('File was generated to "%s"', $outputFilePath));
             } else {
