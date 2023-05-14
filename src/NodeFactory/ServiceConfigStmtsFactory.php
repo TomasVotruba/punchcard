@@ -30,7 +30,7 @@ final class ServiceConfigStmtsFactory
 
         $serviceClassMethod = new ClassMethod('service');
         $serviceClassMethod->flags |= Class_::MODIFIER_PUBLIC;
-        $serviceClassMethod->returnType = new Identifier('void');
+        $serviceClassMethod->returnType = new Identifier('self');
         $serviceClassMethod->params[] = new Param($parametersVariable, null, new Identifier('array'));
 
         $thisParametersPropertyFetch = new PropertyFetch(new Variable('this'), 'parameters');
@@ -43,6 +43,7 @@ final class ServiceConfigStmtsFactory
         $arrayMergeFuncCall = new FuncCall(new Name('array_merge'), $args);
 
         $serviceClassMethod->stmts[] = new Expression(new Assign($thisParametersPropertyFetch, $arrayMergeFuncCall));
+        $serviceClassMethod->stmts[] = new Return_(new Variable('this'));
 
         return $serviceClassMethod;
     }
