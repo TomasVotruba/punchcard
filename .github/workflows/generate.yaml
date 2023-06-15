@@ -27,7 +27,7 @@ jobs:
             -   run: composer create-project laravel/laravel tmp-laravel --no-install --no-scripts
 
             # generate all configs
-            -   run: bin/punchcard tmp-laravel/config --output generated
+            -   run: bin/punchcard generate tmp-laravel/config --output generated
 
             # lint generated configs - must be valid PHP
             -   run: vendor/bin/parallel-lint generated
