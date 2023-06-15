@@ -28,7 +28,6 @@ final class ApplicationFactory
         /** @var PunchCardCommand $punchCardCommand */
         $punchCardCommand = $container->make(PunchCardCommand::class);
         $application->add($punchCardCommand);
-        $application->setDefaultCommand($punchCardCommand->getName(), true);
 
         return $application;
     }

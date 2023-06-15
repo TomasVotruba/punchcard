@@ -17,12 +17,12 @@ final class PunchCardCommand extends Command
      * @see https://laravel.com/docs/10.x/artisan#input-arrays
      * @var string
      */
-    public $signature = 'app:generate {paths*} {--output=}';
+    protected $signature = 'generate {paths*} {--output=}';
 
     /**
      * @var string
      */
-    public $description = 'Generate fluent config class from provided directory';
+    protected $description = 'Generate fluent config class from provided directory';
 
     public function __construct(
         private readonly FluentConfigGenerator $fluentConfigGenerator,
