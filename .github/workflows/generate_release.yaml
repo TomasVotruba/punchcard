@@ -42,7 +42,8 @@ jobs:
                 name: "Tag Downgraded Code"
                 run: |
                     # separate a "git add" to add untracked (new) files too
-                    git commit -am "release Generated Configs"
+                    git add .
+                    git commit -m "release Generated Configs" --allow-empty
 
                     # force push tag, so there is only 1 version
                     git tag "${GITHUB_REF#refs/tags/}" --force
